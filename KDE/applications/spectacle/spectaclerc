@@ -1,0 +1,12 @@
+[General]
+autoSaveImage=true
+clipboardGroup=PostScreenshotCopyImage
+
+[ImageSave]
+imageFilenameTemplate=ss_<yyyy>-<MM>-<dd>__<HH>:<mm>:<ss>
+imageSaveLocation=file:///home/ziya/Pictures/SS/
+lastImageSaveLocation=file:///home/ziya/Pictures/SS/ss_2026-01-26__21:53:18.png
+translatedScreenshotsFolder=Screenshots
+
+[VideoSave]
+translatedScreencastsFolder=Screencasts

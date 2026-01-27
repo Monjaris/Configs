@@ -1,0 +1,10 @@
+[Daemon]
+Timeout=15
+
+[Greeter][Wallpaper][kde.wallhaven.wallpaper][General]
+categories=illustration
+
+[Greeter][Wallpaper][org.kde.image][General]
+Image=file:///usr/share/wallpapers/garuda-wallpapers/since-sgs.png
+PreviewImage=file:///usr/share/wallpapers/garuda-wallpapers/since-sgs.png
+SlidePaths=/usr/share/wallpapers/

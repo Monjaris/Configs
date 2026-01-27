@@ -1,0 +1,8 @@
+# ignore hardware-specific and cache stuff
+plasma-org.kde.plasma.desktop-appletsrc
+.local/share/kscreen/
+.config/kscreen*
+**/session/
+**/cache/
+**/thumbnails/
+kwallet*

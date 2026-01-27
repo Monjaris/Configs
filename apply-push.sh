@@ -1,8 +1,33 @@
 #!/bin/bash
+# ==========================================
+# Apply & push configs (VSCode, Zed, Kitty, KDE, etc)
+# Errors are printed in bold red, script continues
+# ==========================================
 
-# === APPLY ===
+# --- COLORS ---
+BOLD_RED="\033[1;31m"
+CLR_RESET="\033[0m"
 
+# --- HELPER FUNCTION ---
+# Run a command, if fails, print line in red, continue
+run() {
+    "$@"
+    local status=$?
+    if [ $status -ne 0 ]; then
+        echo -e "${BOLD_RED}❌ Error at line $LINENO: command failed -> $*${CLR_RESET}"
+    fi
+}
+
+# --- SCRIPT DIR ---
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR" || exit 1
+
+# ==========================================
+# CONFIG FILES
+# ==========================================
 CONFIGD="$HOME/.config"
+
+## PROGRAMS
 VSCODE_SETTINGS="$CONFIGD/Code/User/settings.json"
 VSCODE_KEYMAP="$CONFIGD/Code/User/keybindings.json"
 ZED_SETTINGS="$CONFIGD/zed/settings.json"
@@ -12,51 +37,125 @@ KITTY_KEYMAP="$CONFIGD/kitty/keymap.conf"
 XREMAP_CONFIG="$CONFIGD/xremap/config.yml"
 FASTFETCH_CONFIG="$CONFIGD/fastfetch/config.jsonc"
 
-cp "$VSCODE_SETTINGS"   "./vscode/settings.json"
-cp "$VSCODE_KEYMAP"     "./vscode/keybindings.json"
-cp "$ZED_SETTINGS"      "./zed/settings.json"
-cp "$ZED_KEYMAP"        "./zed/keymap.json"
-cp "$KITTY_SETTINGS"    "./kitty/kitty.conf"
-cp "$KITTY_KEYMAP"      "./kitty/keymap.conf"
-cp "$XREMAP_CONFIG"     "./xremap/config.yml"
-cp "$FASTFETCH_CONFIG"  "./fastfetch/config.jsonc"
+# copy configs
+run cp "$VSCODE_SETTINGS"   "./vscode/settings.json"
+run cp "$VSCODE_KEYMAP"     "./vscode/keybindings.json"
+run cp "$ZED_SETTINGS"      "./zed/settings.json"
+run cp "$ZED_KEYMAP"        "./zed/keymap.json"
+run cp "$KITTY_SETTINGS"    "./kitty/kitty.conf"
+run cp "$KITTY_KEYMAP"      "./kitty/keymap.conf"
+run cp "$XREMAP_CONFIG"     "./xremap/config.yml"
+run cp "$FASTFETCH_CONFIG"  "./fastfetch/config.jsonc"
 
+# ==========================================
+# KDE CONFIGS
+# ==========================================
+KDE_REPO_DIR="$HOME/Documents/configs/KDE"
+mkdir -p "$KDE_REPO_DIR"/{plasma,applications}
 
-# === PUSH ===
+# plasma files
+PLASMA_FILES=(
+    "kdeglobals"
+    "kwinrc"
+    "kglobalshortcutsrc"
+    "kcminputrc"
+    "kxkbrc"
+    "plasmarc"
+    "powermanagementprofilesrc"
+    "kscreenlockerrc"
+)
 
+for f in "${PLASMA_FILES[@]}"; do
+    src="$HOME/.config/$f"
+    if [ -f "$src" ]; then
+        run cp -v -- "$src" "$KDE_REPO_DIR/plasma/$f"
+    fi
+done
+
+# ---- APPLICATION files
+# Konsole profiles
+if [ -d "$HOME/.local/share/konsole" ]; then
+    mkdir -p "$KDE_REPO_DIR/applications/konsole"
+    run cp -av -- "$HOME/.local/share/konsole/"* "$KDE_REPO_DIR/applications/konsole/" 2>/dev/null
+fi
+
+# KWin scripts
+if [ -d "$HOME/.local/share/kwin/scripts" ]; then
+    mkdir -p "$KDE_REPO_DIR/applications/kwin/scripts"
+    run cp -av -- "$HOME/.local/share/kwin/scripts/"* "$KDE_REPO_DIR/applications/kwin/scripts/" 2>/dev/null
+fi
+
+# Autostart
+if [ -d "$HOME/.config/autostart" ]; then
+    mkdir -p "$KDE_REPO_DIR/applications/autostart"
+    run cp -av -- "$HOME/.config/autostart/"* "$KDE_REPO_DIR/applications/autostart/" 2>/dev/null
+fi
+
+# Common app rc files
+declare -A APP_FILES=(
+    [dolphin]="$HOME/.config/dolphinrc"
+    [spectacle]="$HOME/.config/spectaclerc"
+    [krunner]="$HOME/.config/krunnerrc"
+)
+
+for app in "${!APP_FILES[@]}"; do
+    src="${APP_FILES[$app]}"
+    if [ -f "$src" ]; then
+        mkdir -p "$KDE_REPO_DIR/applications/$app"
+        run cp -v -- "$src" "$KDE_REPO_DIR/applications/$app/$(basename "$src")"
+    fi
+done
+
+# ---- .gitignore for KDE
+GITIGNORE="$KDE_REPO_DIR/.gitignore"
+if [ ! -f "$GITIGNORE" ]; then
+    cat > "$GITIGNORE" <<'EOT'
+# ignore hardware-specific and cache stuff
+plasma-org.kde.plasma.desktop-appletsrc
+.local/share/kscreen/
+.config/kscreen*
+**/session/
+**/cache/
+**/thumbnails/
+kwallet*
+EOT
+    echo "[kde-export] created .gitignore"
+fi
+
+# ==========================================
+# GIT PUSH
+# ==========================================
 REPO_URL="https://github.com/Monjaris/My-Configs.git"
 BRANCH="main"
 
-# go to the directory this script runs
-cd "$(dirname "$0")" || exit 1
-
-# init git if not already
+# init git if missing
 if [ ! -d ".git" ]; then
     echo ":: [git] initializing repository"
-    git init
-    git branch -M "$BRANCH"
+    run git init
+    run git branch -M "$BRANCH"
 fi
 
 # add remote if missing
 if ! git remote | grep -q "^origin$"; then
     echo ":: [git] adding origin remote"
-    git remote add origin "$REPO_URL"
+    run git remote add origin "$REPO_URL"
 fi
 
-# stage all tracked + new files
+# stage all files
 echo ":: [git] staging files"
-git add .
+run git add .
 
-# commit only if there are changes
+# commit only if changes exist
 if ! git diff --cached --quiet; then
     COMMIT_MSG="update configs: $(date '+%Y-%m-%d %H:%M')"
     echo "[git] committing"
-    git commit -m "$COMMIT_MSG"
+    run git commit -m "$COMMIT_MSG"
 else
     echo "[git] nothing to commit"
 fi
 
 # push
 echo "[git] pushing to $BRANCH"
-git push -u origin "$BRANCH"
+run git push -u origin "$BRANCH"
 
+echo -e "\n✅ Apply & push script finished."

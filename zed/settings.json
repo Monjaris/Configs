@@ -1,0 +1,76 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "buffer_font_weight": 400.0,
+  "buffer_font_features": { "ligatures": true, "calt": true},
+  "window_decorations": "client",
+  "active_pane_modifiers": {
+    "inactive_opacity": 0.9,
+  },
+  "use_system_prompts": true,
+  "use_system_path_prompts": false,
+  "show_whitespaces": "selection",
+  "format_on_save": "off",
+  "indent_guides": {
+    "background_coloring": "disabled",
+    "coloring": "fixed",
+    "line_width": 3,
+  },
+  "gutter": {
+    "min_line_number_digits": 4,
+    "folds": true,
+    "breakpoints": true,
+    "runnables": true,
+    "line_numbers": true,
+  },
+  "hover_popover_delay": 400,
+  "auto_signature_help": true,
+  "fast_scroll_sensitivity": 4.0,
+  "scroll_sensitivity": 1.4,
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 75,
+    },
+  },
+  "minimum_contrast_for_highlights": 45.0,
+  "rounded_selection": true,
+  "selection_highlight": true,
+  "current_line_highlight": "all",
+  "unnecessary_code_fade": 0.4,
+  "cursor_shape": "bar",
+  "agent_ui_font_size": 17.0,
+  "agent_buffer_font_size": 15.0,
+  "buffer_line_height": {
+    "custom": 1.6,
+  },
+  "buffer_font_family": "Fira Code",
+  "on_last_window_closed": "quit_app",
+  "when_closing_with_no_tabs": "close_window",
+
+  "terminal": {
+    "dock": "right",
+    "max_scroll_history_lines": 1500000,
+    "blinking": "on",
+    "font_family": "Cascadia Code",
+    "font_size": 16.0,
+  },
+
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)",
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 18.4,
+  "theme": {
+    "mode": "dark",
+    "light": "Ayu Light",
+    "dark": "Ayu Dark",
+  },
+}

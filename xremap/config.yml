@@ -1,0 +1,8 @@
+modmap:
+  - name: Numpad 0 to Ctrl+Super+Alt
+    remap:
+      KEY_KP0: [KEY_LEFTCTRL, KEY_LEFTMETA, KEY_LEFTALT]
+
+  - name: Numpad 7 to Escape
+    remap:
+      KEY_KP7: KEY_ESC

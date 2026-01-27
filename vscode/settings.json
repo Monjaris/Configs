@@ -1,0 +1,116 @@
+{
+    
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "jsonc": false
+    },
+    "github.copilot.nextEditSuggestions.enabled": false,
+    
+    
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "**/myconfig.json"
+            ],
+                "url": "./myschema.json"
+            }
+        ],
+
+        "files.exclude": {
+            "**/.git": false    
+        },           
+        "files.associations": {
+            "*.myconfig": "json"  
+        },
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 75,
+
+
+        "terminal.integrated.cursorBlinking": true,
+        "terminal.integrated.cursorWidth": 40,
+        "terminal.integrated.scrollback": 100000000,
+        "terminal.integrated.fontFamily": "Cascadia Mono",
+        "terminal.integrated.fontSize": 15,
+        "terminal.integrated.fontWeight": "bold",
+        "terminal.integrated.fontWeightBold": "900",
+        "terminal.integrated.lineHeight": 1.25,
+        "terminal.integrated.letterSpacing": 2.4,
+        "terminal.integrated.allowMnemonics": false,
+        "terminal.integrated.fontLigatures.enabled": true,
+        "terminal.integrated.fastScrollSensitivity": 4,
+        
+        
+        "explorer.confirmDelete": false,
+        "security.workspace.trust.untrustedFiles": "open",
+        "explorer.confirmDragAndDrop": false,
+        "window.menuBarVisibility": "compact",
+        "window.commandCenter": false,
+        "chat.commandCenter.enabled": false,
+        "debug.onTaskErrors": "abort",
+
+
+
+        "C_Cpp.default.compilerPath": "/usr/bin/g++",
+        "C_Cpp.autocompleteAddParentheses": true,
+        "C_Cpp.inactiveRegionOpacity": 0.6,
+        "C_Cpp.inlayHints.autoDeclarationTypes.enabled": true,
+        "C_Cpp.intelliSenseUpdateDelay": 750,
+        "C_Cpp.renameRequiresIdentifier": false,
+        "C_Cpp.intelliSenseCacheSize": 10240,
+        "C_Cpp.intelliSenseMemoryLimit": 8192,
+
+        "workbench.colorTheme": "One Dark Pro Night Flat",
+        "workbench.activityBar.location": "hidden",
+        "workbench.activityBar.iconClickBehavior": "focus",
+        "workbench.layoutControl.enabled": false,
+
+        "editor.fontFamily": "'Comic Mono', 'Cascadia Mono', 'Jetbrains Mono', monospace",
+        "editor.fontSize": 17,
+        "editor.mouseWheelZoom": true,
+        "editor.accessibilityPageSize": 100,
+        "editor.autoIndentOnPaste": true,
+        "editor.multiCursorPaste": "full",
+        "editor.multiCursorLimit": 25000,
+        "editor.minimap.showSlider": "always",
+        "editor.minimap.size": "fit",
+        "editor.cursorBlinking": "solid",
+        "editor.cursorSmoothCaretAnimation": "on",
+        "editor.acceptSuggestionOnEnter": "off",
+        "editor.fontLigatures": true,
+        "editor.minimap.enabled": false,
+        "editor.cursorStyle": "block",
+        "editor.lineHeight": 1.4,
+        "editor.fontWeight":"500",
+        "editor.renderLineHighlight": "all",
+
+"workbench.colorCustomizations":
+{
+    "editor.background":"#13171b",
+
+    "terminal.background": "#1c161c",
+    "terminal.foreground": "#ffff00",
+    "terminalCursor.foreground": "#d06222",
+    "sideBar.background": "#0f1117",
+    "sideBar.foreground": "#cdd6f4",
+    "sideBar.border": "#1e1e2e",
+    "sideBarSectionHeader.background": "#111827",
+    "sideBarSectionHeader.foreground": "#89b4fa",
+    "sideBarTitle.foreground": "#f9e2af",
+    "[One Dark Pro Night Flat]": {
+        "editor.selectionBackground": "#61c7c960"
+    },
+    "editorCursor.background": "#b700ff",
+    "editorCursor.foreground": "#18ffd1",
+},
+"files.simpleDialog.enable": true,
+"editor.colorDecoratorsActivatedOn": "click",
+"editor.colorDecoratorsLimit": 1000,
+"editor.tokenColorCustomizations": {
+    
+},
+"editor.defaultColorDecorators": "always",
+    
+}

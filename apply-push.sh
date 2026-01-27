@@ -37,6 +37,8 @@ KITTY_KEYMAP="$CONFIGD/kitty/keymap.conf"
 XREMAP_CONFIG="$CONFIGD/xremap/config.yml"
 FASTFETCH_CONFIG="$CONFIGD/fastfetch/config.jsonc"
 LF_CONFIG="$CONFIGD/lf/lfrc"
+MICRO_SETTINGS="$CONFIGD/micro/settings.json"
+MICRO_KEYMAP="$CONFIGD/micro/bindings.json"
 
 # copy configs
 run cp "$VSCODE_SETTINGS"   "./vscode/settings.json"
@@ -48,6 +50,8 @@ run cp "$KITTY_KEYMAP"      "./kitty/keymap.conf"
 run cp "$XREMAP_CONFIG"     "./xremap/config.yml"
 run cp "$FASTFETCH_CONFIG"  "./fastfetch/config.jsonc"
 run cp "$LF_CONFIG" 		"./lf/lfrc"
+run cp "$MICRO_SETTINGS" 	"./micro/settings.json"
+run cp "$MICRO_KEYMAP" 		"./micro/bindings.json"
 
 # ==========================================
 # KDE CONFIGS

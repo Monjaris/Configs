@@ -31,6 +31,9 @@ InactivityDuration=10
 [Effect-kwin4_effect_geometry_change]
 ExcludedWindowClasses=krunner
 
+[Effect-login]
+FadeToBlack=true
+
 [Effect-magiclamp]
 AnimationDuration=300
 
@@ -73,9 +76,6 @@ WobblynessLevel=3
 [Effect-zoom]
 ZoomFactor=1.1
 
-[NightColor]
-Active=true
-
 [Plugins]
 blurEnabled=true
 center-new-windowsEnabled=false
@@ -83,6 +83,7 @@ desktopchangeosdEnabled=true
 diminactiveEnabled=true
 hidecursorEnabled=true
 kwin4_effect_geometry_changeEnabled=true
+loginEnabled=false
 magiclampEnabled=true
 maximizeEnabled=false
 minimizeallEnabled=true
@@ -109,7 +110,13 @@ padding=4
 [Tiling][01aa4a10-be1a-4e53-9a2e-17b5715b99ec][39d521dd-934b-4e47-b8dc-28653a4e4e26]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][59027182-a559-47d2-a5fd-c9512e125b7f][2ad6d513-438e-41ef-825b-6796f0a524ce]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][59027182-a559-47d2-a5fd-c9512e125b7f][39d521dd-934b-4e47-b8dc-28653a4e4e26]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][9a040008-4e2d-4a8e-98e4-b9c8ff242067][2ad6d513-438e-41ef-825b-6796f0a524ce]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][9a040008-4e2d-4a8e-98e4-b9c8ff242067][39d521dd-934b-4e47-b8dc-28653a4e4e26]
@@ -118,10 +125,16 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 [Tiling][ae5ed89b-7313-4006-a912-f77bcbf160e2][39d521dd-934b-4e47-b8dc-28653a4e4e26]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][b61d499c-0562-4006-a27f-a1f3bd20f098][2ad6d513-438e-41ef-825b-6796f0a524ce]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][b61d499c-0562-4006-a27f-a1f3bd20f098][39d521dd-934b-4e47-b8dc-28653a4e4e26]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][c66c2423-9837-4c8c-b587-fbbc618e4000][39d521dd-934b-4e47-b8dc-28653a4e4e26]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][fdfb513c-938b-47f2-9530-727ebdf023a5][2ad6d513-438e-41ef-825b-6796f0a524ce]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][fdfb513c-938b-47f2-9530-727ebdf023a5][39d521dd-934b-4e47-b8dc-28653a4e4e26]
@@ -137,13 +150,11 @@ FocusStealingPreventionLevel=0
 WindowSnapZone=25
 
 [Xwayland]
-Scale=1.1
-XwaylandEavesdrops=All
+Scale=1
 XwaylandEavesdropsMouse=true
-XwaylandEisNoPrompt=true
 
 [org.kde.kdecoration2]
 ButtonsOnLeft=BF
 ButtonsOnRight=IAX
-library=org.kde.breeze
-theme=Breeze
+library=org.kde.kwin.aurorae
+theme=kwin4_decoration_qml_plastik

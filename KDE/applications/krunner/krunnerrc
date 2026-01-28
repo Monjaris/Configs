@@ -3,6 +3,7 @@ FreeFloating=true
 historyBehavior=ImmediateCompletion
 
 [Plugins]
+baloosearchEnabled=false
 krunner_keysEnabled=true
 
 [Plugins][Favorites]

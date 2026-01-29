@@ -1,10 +1,19 @@
 [General]
+ActivateWhenTypingOnDesktop=false
 FreeFloating=true
-historyBehavior=ImmediateCompletion
 
 [Plugins]
-baloosearchEnabled=false
+krunner_katesessionsEnabled=false
 krunner_keysEnabled=true
+krunner_killEnabled=false
+krunner_konsoleprofilesEnabled=false
+krunner_placesrunnerEnabled=false
+krunner_recentdocumentsEnabled=false
+org.kde.activities2Enabled=false
+windowsEnabled=false
 
 [Plugins][Favorites]
-plugins=krunner_sessions,krunner_powerdevil,krunner_services,krunner_systemsettings
+plugins=krunner_shell,krunner_sessions,calculator,krunner_dictionary,unitconverter
+
+[Runners][krunner_dictionary]
+triggerWord=def

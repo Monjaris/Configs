@@ -1,0 +1,46 @@
+{
+  "logo": {
+    "type": "auto",      // Garuda default
+    "padding": {
+      "right": 2
+    },
+    "height": 15         // Slightly shrinks logo
+  },
+
+  "display": {
+    "separator": " : ",
+    "color": {
+      "keys": "magenta",
+      "title": "green"
+    }
+  },
+
+  "modules": [
+    // ── Identity ──
+    "os",
+    "kernel",
+    "host",
+    "shell",
+    "terminal",
+    "uptime",
+
+    // ── Hardware ──
+    "cpu",
+    "gpu",
+    {
+      "type": "memory",
+      "format": "{used} / {total}"
+    },
+    {
+      "type": "disk",
+      "folders": [ "/" ],
+      //"format": "{used} / {total}"
+    },
+
+    // ── Display ──
+    "resolution",
+    "displayserver",
+    "de",
+    "wm"
+  ]
+}

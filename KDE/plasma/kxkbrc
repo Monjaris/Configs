@@ -1,5 +1,6 @@
 [Layout]
 DisplayNames=,
 LayoutList=us,az
+ResetOldOptions=true
 Use=true
 VariantList=,

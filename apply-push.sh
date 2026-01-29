@@ -25,20 +25,20 @@ cd "$SCRIPT_DIR" || exit 1
 # ==========================================
 # CONFIG FILES
 # ==========================================
-CONFIGD="$HOME/.config"
+CONFIGD=$HOME/.config
 
 ## PROGRAMS
-VSCODE_SETTINGS="$CONFIGD/Code/User/settings.json"
-VSCODE_KEYMAP="$CONFIGD/Code/User/keybindings.json"
-ZED_SETTINGS="$CONFIGD/zed/settings.json"
-ZED_KEYMAP="$CONFIGD/zed/keymap.json"
-KITTY_SETTINGS="$CONFIGD/kitty/kitty.conf"
-KITTY_KEYMAP="$CONFIGD/kitty/keymap.conf"
-XREMAP_CONFIG="$CONFIGD/xremap/config.yml"
-FASTFETCH_CONFIG="$CONFIGD/fastfetch/config.jsonc"
-LF_CONFIG="$CONFIGD/lf/lfrc"
-MICRO_SETTINGS="$CONFIGD/micro/settings.json"
-MICRO_KEYMAP="$CONFIGD/micro/bindings.json"
+VSCODE_SETTINGS=$CONFIGD/Code/User/settings.json
+VSCODE_KEYMAP=$CONFIGD/Code/User/keybindings.json
+ZED_SETTINGS=$CONFIGD/zed/settings.json
+ZED_KEYMAP=$CONFIGD/zed/keymap.json
+KITTY_SETTINGS=$CONFIGD/kitty/kitty.conf
+KITTY_KEYMAP=$CONFIGD/kitty/keymap.conf
+XREMAP_CONFIG=$CONFIGD/xremap/config.yml
+FASTFETCH_CONFIG=$CONFIGD/fastfetch/config.jsonc
+LF_CONFIG=$CONFIGD/lf/lfrc
+MICRO_SETTINGS=$CONFIGD/micro/settings.json
+MICRO_KEYMAP=$CONFIGD/micro/bindings.json
 
 # copy configs
 run cp "$VSCODE_SETTINGS"   "./vscode/settings.json"

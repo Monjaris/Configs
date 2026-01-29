@@ -1,15 +1,4 @@
 [Keyboard]
 NumLock=0
-RepeatDelay=215
+RepeatDelay=210
 RepeatRate=35
-
-[Libinput][1267][12926][ELAN06FA:00 04F3:327E Touchpad]
-ClickMethod=2
-DisableWhileTyping=false
-NaturalScroll=true
-PointerAcceleration=0.450
-ScrollFactor=0.75
-
-[Mouse]
-cursorSize=36
-cursorTheme=breeze_cursors

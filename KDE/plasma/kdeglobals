@@ -135,66 +135,13 @@ ForegroundVisited=155,89,182
 [General]
 BrowserApplication=brave-browser.desktop
 ColorSchemeHash=2c3f86428c11011a7c64ee1e7f47c274d498ff10
-TerminalApplication=kitty
-TerminalService=kitty.desktop
-UseSystemBell=true
-XftAntialias=true
-XftHintStyle=hintslight
-XftSubPixel=none
-fixed=Adwaita Sans,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-font=Serif,11,-1,5,400,2,0,0,0,0,0,0,0,0,0,1
-menuFont=Adwaita Sans,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-smallestReadableFont=Adwaita Sans,9,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-toolBarFont=Sans Serif,9.5,-1,5,400,2,0,0,0,0,0,0,0,0,0,1
-
-[Icons]
-Theme=breeze-dark
 
 [KDE]
-AnimationDurationFactor=0.5
 LookAndFeelPackage=org.kde.breezedark.desktop
-ShowDeleteCommand=true
-widgetStyle=Breeze
-
-[KFileDialog Settings]
-Allow Expansion=false
-Automatically select filename extension=true
-Breadcrumb Navigation=false
-Decoration position=2
-Show Full Path=false
-Show Inline Previews=true
-Show Preview=false
-Show Speedbar=true
-Show hidden files=true
-Sort by=Name
-Sort directories first=true
-Sort hidden files last=false
-Sort reversed=false
-Speedbar Width=140
-View Style=Simple
-
-[KShortcutsDialog Settings]
-Dialog Size=1745,1013
-
-[PreviewSettings]
-EnableRemoteFolderThumbnail=false
-MaximumRemoteSize=0
-
-[Shortcuts]
-Close=Ctrl+W
-Help=
-Print=Ctrl+Shift+P
-Redo=Ctrl+Y; Ctrl+Shift+Z
-Reload=Refresh; Ctrl+R; F5
-RenameFile=F2; Alt+R
-Replace=
-TextCompletion=Ctrl+Space
-WhatsThis=
 
 [WM]
 activeBackground=39,44,49
 activeBlend=252,252,252
-activeFont=Comic Mono,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,Bold
 activeForeground=252,252,252
 inactiveBackground=32,36,40
 inactiveBlend=161,169,177

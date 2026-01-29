@@ -41,17 +41,17 @@ MICRO_SETTINGS=$CONFIGD/micro/settings.json
 MICRO_KEYMAP=$CONFIGD/micro/bindings.json
 
 # copy configs
-run cp "$VSCODE_SETTINGS"   "./vscode/settings.json"
-run cp "$VSCODE_KEYMAP"     "./vscode/keybindings.json"
-run cp "$ZED_SETTINGS"      "./zed/settings.json"
-run cp "$ZED_KEYMAP"        "./zed/keymap.json"
-run cp "$KITTY_SETTINGS"    "./kitty/kitty.conf"
-run cp "$KITTY_KEYMAP"      "./kitty/keymap.conf"
-run cp "$XREMAP_CONFIG"     "./xremap/config.yml"
-run cp "$FASTFETCH_CONFIG"  "./fastfetch/config.jsonc"
-run cp "$LF_CONFIG" 		"./lf/lfrc"
-run cp "$MICRO_SETTINGS" 	"./micro/settings.json"
-run cp "$MICRO_KEYMAP" 		"./micro/bindings.json"
+run cp -av -- "$VSCODE_SETTINGS"   "./vscode/settings.json"
+run cp -av -- "$VSCODE_KEYMAP"     "./vscode/keybindings.json"
+run cp -av -- "$ZED_SETTINGS"      "./zed/settings.json"
+run cp -av -- "$ZED_KEYMAP"        "./zed/keymap.json"
+run cp -av -- "$KITTY_SETTINGS"    "./kitty/kitty.conf"
+run cp -av -- "$KITTY_KEYMAP"      "./kitty/keymap.conf"
+run cp -av -- "$XREMAP_CONFIG"     "./xremap/config.yml"
+run cp -av -- "$FASTFETCH_CONFIG"  "./fastfetch/config.jsonc"
+run cp -av -- "$LF_CONFIG" 		"./lf/lfrc"
+run cp -av -- "$MICRO_SETTINGS" 	"./micro/settings.json"
+run cp -av -- "$MICRO_KEYMAP" 		"./micro/bindings.json"
 
 # ==========================================
 # KDE CONFIGS

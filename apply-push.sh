@@ -61,14 +61,7 @@ mkdir -p "$KDE_REPO_DIR"/{plasma,applications}
 
 # plasma files
 PLASMA_FILES=(
-    "kdeglobals"
-    "kwinrc"
-    "kglobalshortcutsrc"
-    "kcminputrc"
-    "kxkbrc"
-    "plasmarc"
-    "powermanagementprofilesrc"
-    "kscreenlockerrc"
+
 )
 
 for f in "${PLASMA_FILES[@]}"; do
@@ -99,9 +92,7 @@ fi
 
 # Common app rc files
 declare -A APP_FILES=(
-    [dolphin]="$HOME/.config/dolphinrc"
-    [spectacle]="$HOME/.config/spectaclerc"
-    [krunner]="$HOME/.config/krunnerrc"
+
 )
 
 for app in "${!APP_FILES[@]}"; do

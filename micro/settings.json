@@ -1,15 +1,15 @@
 {
-    "/etc/*": {
+     "/etc/*": {
         "filetype": "conf"
-    },
-    "/home/*/.config/*": {
+     },
+     "/home/*/.config/*": {
         "filetype": "conf"
-    },
-    "aspell": false,
-    "autosu": true,
-    "colorscheme": "solarized",
-    "lsp.autocompleteDetails": true,
-    "lsp.formatOnSave": false,
-    "mkparents": true,
-    "statusline": false
+     },
+     "aspell": false,
+     "autosu": true,
+     "colorscheme": "simple",
+     "lsp.autocompleteDetails": true,
+     "lsp.formatOnSave": false,
+     "mkparents": true,
+     "statusline": false
 }

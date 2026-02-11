@@ -37,6 +37,7 @@ KITTY_KEYMAP=$CONFIGD/kitty/keymap.conf
 XREMAP_CONFIG=$CONFIGD/xremap/config.yml
 FASTFETCH_CONFIG=$CONFIGD/fastfetch/config.jsonc
 # LF_CONFIG=$CONFIGD/lf/lfrc
+YAZI_CONFIG=$CONFIGD/yazi/yazi.toml
 MICRO_SETTINGS=$CONFIGD/micro/settings.json
 MICRO_KEYMAP=$CONFIGD/micro/bindings.json
 
@@ -50,6 +51,7 @@ run cp -av -- "$KITTY_KEYMAP"      "./kitty/keymap.conf"
 run cp -av -- "$XREMAP_CONFIG"     "./xremap/config.yml"
 run cp -av -- "$FASTFETCH_CONFIG"  "./fastfetch/config.jsonc"
 # run cp -av -- "$LF_CONFIG" 		"./lf/lfrc"
+run cp -av -- "$YAZI_CONFIG"		"./yazi/yazi.toml"
 run cp -av -- "$MICRO_SETTINGS" 	"./micro/settings.json"
 run cp -av -- "$MICRO_KEYMAP" 		"./micro/bindings.json"
 

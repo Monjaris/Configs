@@ -56,7 +56,7 @@
   "terminal": {
     "dock": "right",
     "max_scroll_history_lines": 1500000,
-    "blinking": "on",
+    "blinking": "terminal_controlled",
     "font_family": "Cascadia Code",
     "font_size": 16.0,
   },

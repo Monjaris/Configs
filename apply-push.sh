@@ -28,13 +28,14 @@ cd "$SCRIPT_DIR" || exit 1
 CONFIGD=$HOME/.config
 
 ## PROGRAMS
+# XREMAP_CONFIG=$CONFIGD/xremap/config.yml
+KEYD_CONFIG=/etc/keyd/default.conf
 VSCODE_SETTINGS=$CONFIGD/Code/User/settings.json
 VSCODE_KEYMAP=$CONFIGD/Code/User/keybindings.json
 ZED_SETTINGS=$CONFIGD/zed/settings.json
 ZED_KEYMAP=$CONFIGD/zed/keymap.json
 KITTY_SETTINGS=$CONFIGD/kitty/kitty.conf
 KITTY_KEYMAP=$CONFIGD/kitty/keymap.conf
-XREMAP_CONFIG=$CONFIGD/xremap/config.yml
 FASTFETCH_CONFIG=$CONFIGD/fastfetch/config.jsonc
 # LF_CONFIG=$CONFIGD/lf/lfrc
 YAZI_CONFIG=$CONFIGD/yazi/yazi.toml
@@ -42,13 +43,14 @@ MICRO_SETTINGS=$CONFIGD/micro/settings.json
 MICRO_KEYMAP=$CONFIGD/micro/bindings.json
 
 # copy configs
+# run cp -av -- "$XREMAP_CONFIG"     "./xremap/config.yml"
+run sudo cp -av -- "$KEYD_CONFIG"	"./keyd/default.conf"
 run cp -av -- "$VSCODE_SETTINGS"   "./vscode/settings.json"
 run cp -av -- "$VSCODE_KEYMAP"     "./vscode/keybindings.json"
 run cp -av -- "$ZED_SETTINGS"      "./zed/settings.json"
 run cp -av -- "$ZED_KEYMAP"        "./zed/keymap.json"
 run cp -av -- "$KITTY_SETTINGS"    "./kitty/kitty.conf"
 run cp -av -- "$KITTY_KEYMAP"      "./kitty/keymap.conf"
-run cp -av -- "$XREMAP_CONFIG"     "./xremap/config.yml"
 run cp -av -- "$FASTFETCH_CONFIG"  "./fastfetch/config.jsonc"
 # run cp -av -- "$LF_CONFIG" 		"./lf/lfrc"
 run cp -av -- "$YAZI_CONFIG"		"./yazi/yazi.toml"

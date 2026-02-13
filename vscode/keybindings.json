@@ -106,5 +106,15 @@
         "key": "alt+f8",
         "command": "-editor.action.marker.next",
         "when": "editorFocus"
+    },
+    {
+        "key": "alt+w",
+        "command": "-workbench.action.terminal.toggleFindWholeWord",
+        "when": "terminalFindVisible && terminalHasBeenCreated || terminalFindVisible && terminalProcessSupported"
+    },
+    {
+        "key": "alt+w",
+        "command": "workbench.action.terminal.kill",
+        "when": "terminal.active"
     }
 ]

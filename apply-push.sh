@@ -28,6 +28,7 @@ cd "$SCRIPT_DIR" || exit 1
 CONFIGD=$HOME/.config
 
 ## PROGRAMS
+BASH_CONFIG_DIR=$CONFIGD/bashrc.d
 # XREMAP_CONFIG=$CONFIGD/xremap/config.yml
 KEYD_CONFIG=/etc/keyd/default.conf
 VSCODE_SETTINGS=$CONFIGD/Code/User/settings.json
@@ -43,6 +44,7 @@ MICRO_SETTINGS=$CONFIGD/micro/settings.json
 MICRO_KEYMAP=$CONFIGD/micro/bindings.json
 
 # copy configs
+run cp -rav -- "$BASH_CONFIG_DIR"	"./bashrc.d"
 # run cp -av -- "$XREMAP_CONFIG"     "./xremap/config.yml"
 run sudo cp -av -- "$KEYD_CONFIG"	"./keyd/default.conf"
 run cp -av -- "$VSCODE_SETTINGS"   "./vscode/settings.json"

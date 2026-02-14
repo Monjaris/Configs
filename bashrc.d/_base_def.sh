@@ -32,6 +32,44 @@ alias jerrors="type jerrors; journalctl -p 3 -xb"
 alias journal="type journal; journalctl --no-pager --pager-end -l"
 
 
+# enhanced-prompt-style
+eps () {
+    unset _prompt_timer _prompt_command_ran
+    _prompt_timer_start() {
+        [[ -n "$BASH_COMMAND" && "$BASH_COMMAND" != "_prompt_timer_start" && "$BASH_COMMAND" != "_build_prompt" ]] && {
+            _prompt_timer=$(date +%s.%N); _prompt_command_ran=1;
+        }
+    }
+    _prompt_timer_stop() {
+        local t="0.0"
+        [[ -n "$_prompt_timer" && -n "$_prompt_command_ran" ]] && t=$(awk "BEGIN {printf \"%.1f\", $(date +%s.%N) - $_prompt_timer}")
+        unset _prompt_timer _prompt_command_ran
+        echo "$t"
+    }
+    trap '_prompt_timer_start' DEBUG
+
+    _build_prompt() {
+        local e=$? t=$(_prompt_timer_stop) w=$(tput cols) p="$PWD" h="" r="" v l s
+        if [[ "$p" == "$HOME"* ]]; then
+            h="$HOME/"
+            r="${p#$HOME}"
+            r="${r#/}"
+        else
+            h="$p"
+        fi
+        [[ $e -eq 0 ]] && local i="\[${BGREEN}\]✓\[${CLR0}\]" || local i="\[${BRED}\]✗\[${CLR0}\]"
+        v=${#h}
+        [[ -n "$r" ]] && v=$((v + ${#r}))
+        l="${t}s"
+        s=$((w - v - ${#l} - 3))
+        [[ $s -lt 1 ]] && s=1
+        printf "\n\[${BGREEN}\]%s\[${CLR0}\]\[${BMAGENTA}\]%s\[${CLR0}\]%*s\[${BLUE}\]%s\[${CLR0}\] %s\n\[${UBLACK}\]╰─➤\[${CLR0}\] \[${BBLUE}\]$\[${CLR0}\] " \
+        "$h" "$r" $s "" "$l" "$i"
+    }
+    PROMPT_COMMAND='PS1="$(_build_prompt)"'
+}
+
+
 new () {
 	pkg="$1"
 	echo "Custom PACMAN & PARU wrapper function!"

@@ -37,11 +37,11 @@ shopt -s dotglob       # Include hidden files in glob matches (optional)
 # ============================================
 # Prompt Configuration
 # ============================================
-PS_IDK='\n\[\e[1;32m\]$HOME/\[\e[0m\]\[\e[1;35m\]$(p=${PWD#$HOME}; echo "${p#/}")\[\e[0m\]\n\[\e[1;90m\]╰─➤\[\e[0m\] \[\e[1;36m\]$\[\e[0m\] '
-PS_ALT='\n\[\e[1;95m\]$(if [[ $PWD == $HOME* ]]; then printf "%s/" "$HOME"; else printf "%s" "$PWD"; fi)\[\e[0m\]\[\e[1;32m\]$(if [[ $PWD == $HOME* ]]; then p="${PWD#$HOME}"; p="${p#/}"; printf "%s" "$p"; fi)\[\e[0m\]\n\[\e[1;90m\]╰─➤\[\e[0m\] \[\e[1;36m\]$\[\e[0m\] '
+PS_MIN="\n> "
+PS_SIMPLE="\n$BGREEN\w\n>$CLR0 "
 PS_MAIN='\n \[\e[1;32m\]$(if [[ $PWD == $HOME* ]]; then printf "%s/" "$HOME"; else printf "%s" "$PWD"; fi)\[\e[0m\]\[\e[1;35m\]$(if [[ $PWD == $HOME* ]]; then p="${PWD#$HOME}"; p="${p#/}"; printf "%s" "$p"; fi)\[\e[0m\]\n\[\e[1;90m\] ╰─➤\[\e[0m\] \[\e[1;34m\]$\[\e[0m\] '
 export PS1="$PS_MAIN"
-
+eps  # enhanced-prompt-style: defined in './_base_def.sh', as a function
 
 # ============================================
 # Environment Variables
@@ -56,10 +56,6 @@ export EDITOR=micro
 # zoxide
 if command -v zoxide &> /dev/null; then
     eval "$(zoxide init bash)"
-fi
-# fzf
-if command -v fzf &> /dev/null; then
-    eval "$(fzf --bash)" 2>/dev/null || true
 fi
 # direnv
 if command -v direnv &> /dev/null; then

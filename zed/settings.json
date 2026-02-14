@@ -43,7 +43,7 @@
   "selection_highlight": true,
   "current_line_highlight": "all",
   "unnecessary_code_fade": 0.4,
-  "cursor_shape": "bar",
+  "cursor_shape": "block",
   "agent_ui_font_size": 17.0,
   "agent_buffer_font_size": 15.0,
   "buffer_line_height": {

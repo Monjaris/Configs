@@ -43,6 +43,7 @@ PS_MAIN='\n \[\e[1;32m\]$(if [[ $PWD == $HOME* ]]; then printf "%s/" "$HOME"; el
 export PS1="$PS_MAIN"
 eps  # enhanced-prompt-style: defined in './_base_def.sh', as a function
 
+
 # ============================================
 # Environment Variables
 # ============================================
@@ -53,12 +54,5 @@ export EDITOR=micro
 # ============================================
 # Tool Integrations
 # ============================================
-# zoxide
-if command -v zoxide &> /dev/null; then
-    eval "$(zoxide init bash)"
-fi
-# direnv
-if command -v direnv &> /dev/null; then
-    eval "$(direnv hook bash)"
-fi
+# does not exist yet
 

@@ -38,38 +38,6 @@ what? () {
 }
 
 
-cf () {
-    case "$1" in
-        sh)
-            ed "$HOME/.bashrc"
-            ;;
-        micro)
-            cd "$HOME/.config/micro" && lsa
-            ;;
-        kitty)
-            cd "$HOME/.config/kitty" && lsa
-            ;;
-        code)
-            cd "$HOME/.config/Code/User" && lsa
-            ;;
-        zed)
-            cd "$HOME/.config/zed" && lsa
-            ;;
-        keymap)
-            cd "/etc/keyd" && lsa
-            sudo bat -n --paging=never default.conf
-            ;;
-        -h|--help)
-            echo "Usage: cf [option]"
-            echo "Options: sh, micro, kitty, code, zed, keymap, -h/--help"
-            ;;
-        *)
-            cd "$HOME/.config" && lsa
-            ;;
-    esac
-}
-
-
 zdo () {
     case "$1" in
         f)

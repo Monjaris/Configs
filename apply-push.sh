@@ -38,6 +38,7 @@ ZED_KEYMAP=$CONFIGD/zed/keymap.json
 KITTY_SETTINGS=$CONFIGD/kitty/kitty.conf
 KITTY_KEYMAP=$CONFIGD/kitty/keymap.conf
 FASTFETCH_CONFIG=$CONFIGD/fastfetch/config.jsonc
+FASTFETCH_DEFAULT=$CONFIGD/fastfetch/default.jsonc
 # LF_CONFIG=$CONFIGD/lf/lfrc
 YAZI_CONFIG=$CONFIGD/yazi/yazi.toml
 MICRO_SETTINGS=$CONFIGD/micro/settings.json
@@ -54,6 +55,7 @@ run cp -av -- "$ZED_KEYMAP"        "./zed/keymap.json"
 run cp -av -- "$KITTY_SETTINGS"    "./kitty/kitty.conf"
 run cp -av -- "$KITTY_KEYMAP"      "./kitty/keymap.conf"
 run cp -av -- "$FASTFETCH_CONFIG"  "./fastfetch/config.jsonc"
+run cp -av -- "$FASTFETCH_DEFAULT" "./fastfetch/default.jsonc"
 # run cp -av -- "$LF_CONFIG" 		"./lf/lfrc"
 run cp -av -- "$YAZI_CONFIG"		"./yazi/yazi.toml"
 run cp -av -- "$MICRO_SETTINGS" 	"./micro/settings.json"

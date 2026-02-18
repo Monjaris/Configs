@@ -43,15 +43,6 @@
     },
 
 
-    // Focus terminal when editor is active
-    {
-        "key": "alt+_",
-        "command": "workbench.action.terminal.focus",
-        "when": "editorTextFocus && !terminalFocus"
-    },
-
-
-
     {
         "key": "up",
         "command": "-workbench.action.terminal.hideSuggestWidgetAndNavigateHistory",
@@ -115,6 +106,10 @@
     {
         "key": "alt+w",
         "command": "workbench.action.terminal.kill",
-        "when": "terminal.active"
+        "when": "terminalFocus || editorFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+a",
+        "command": "workbench.action.addRootFolder"
     }
 ]

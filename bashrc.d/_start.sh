@@ -54,5 +54,6 @@ export EDITOR=micro
 # ============================================
 # Tool Integrations
 # ============================================
-# does not exist yet
+# eval "$(thefuck --alias)"
+# eval "$(thefuck --alias)"
 

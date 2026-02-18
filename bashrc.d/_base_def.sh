@@ -5,11 +5,11 @@ alias -- -="cd -"
 alias cls='printf "\033[2J\033[3J\033[1;1H"; zdo f 2 0.05'
 alias ls='ls --color=auto'
 alias lsa='eza --icons -AF'
-alias rm='rm -i'
-alias rmfolder='rmdir --ignore-fail-on-non-empty'
-alias cp='cp -i'
-alias mv='mv -i'
-alias bat='bat -n --no-pager'
+alias rm='rm -vI'
+alias rmfolder='rmdir -v --ignore-fail-on-non-empty'
+alias cp='cp -v --dereference'
+alias mv='mv -iv'
+alias bat='bat --set-terminal-title --no-pager --style=grid '
 alias bashconf='ed $BASH_CONFIG_DIR/_base_def.sh'
 alias resh="echo sourcing '.bashrc'.. && source $HOME/.bashrc"
 alias mk='./build.sh'
@@ -19,9 +19,10 @@ alias xxx='exit'
 
 
 # Useful-Aliases
-alias fuckman="echo removing pacman lock..; sudo rm /var/lib/pacman/db.lck"
-alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
-alias todop='bat $HOME/Desktop/notes/projs.md'
+alias fuckman='echo removing pacman lock..; sudo rm /var/lib/pacman/db.lck'
+alias rmorphs='sudo pacman -Rns $(pacman -Qtdq)'
+alias projs="cd '$HOME/Documents/notes' && bat projs.md"
+alias todos="cd '$HOME/Documents/notes' && bat todos.md"
 alias py='python3'
 alias zed='zeditor'
 alias nano='type nano; micro'
@@ -29,45 +30,63 @@ alias qdbus='type qdbus; qdbus6'
 alias wget='wget -c'
 alias grep='grep --color=auto'
 alias ip='ip -color'
-alias jerrors="type jerrors; journalctl -p 3 -xb --pager-end"
-alias journal="type journal; journalctl --no-pager -l"
+alias jerrors='type jerrors; journalctl -p 3 -xb --pager-end'
+alias journal='type journal; journalctl --no-pager -l'
 
 
 
 # enhanced-prompt-style
-eps () {
-    unset _prompt_timer _prompt_command_ran
-    _prompt_timer_start() {
-        [[ -n "$BASH_COMMAND" && "$BASH_COMMAND" != "_prompt_timer_start" && "$BASH_COMMAND" != "_build_prompt" ]] && {
-            _prompt_timer=$(date +%s.%N); _prompt_command_ran=1;
+eps () 
+{ 
+    unset _prompt_timer _prompt_command_ran _timing_in_progress;
+    
+    function _prompt_timer_start () 
+    { 
+        # Don't start timer if we're already timing the prompt building itself
+        [[ -n "$_timing_in_progress" ]] && return
+        
+        # Start timer for user commands only
+        [[ -n "$BASH_COMMAND" && "$BASH_COMMAND" != "_prompt_timer_start" && "$BASH_COMMAND" != "_build_prompt" ]] && { 
+            _prompt_timer=$(date +%s.%N);
+            _prompt_command_ran=1
         }
-    }
-    _prompt_timer_stop() {
-        local t="0.0"
-        [[ -n "$_prompt_timer" && -n "$_prompt_command_ran" ]] && t=$(awk "BEGIN {printf \"%.1f\", $(date +%s.%N) - $_prompt_timer}")
-        unset _prompt_timer _prompt_command_ran
-        echo "$t"
-    }
-    trap '_prompt_timer_start' DEBUG
-
-    _build_prompt() {
-        local e=$? t=$(_prompt_timer_stop) w=$(tput cols) p="$PWD" h="" r="" v l s
-        if [[ "$p" == "$HOME"* ]]; then
-            h="$HOME/"
-            r="${p#$HOME}"
-            r="${r#/}"
-        else
-            h="$p"
+    };
+    
+    function _prompt_timer_stop () 
+    { 
+        local t="0.0";
+        if [[ -n "$_prompt_timer" && -n "$_prompt_command_ran" ]]; then
+            # Set flag to prevent DEBUG trap from interfering
+            _timing_in_progress=1
+            local end_time=$(date +%s.%N)
+            t=$(awk "BEGIN {printf \"%.3f\", $end_time - $_prompt_timer}")
+            unset _timing_in_progress
         fi
-        [[ $e -eq 0 ]] && local i="\[${BGREEN}\]✓\[${CLR0}\]" || local i="\[${BRED}\]✗\[${CLR0}\]"
-        v=${#h}
-        [[ -n "$r" ]] && v=$((v + ${#r}))
-        l="${t}s"
-        s=$((w - v - ${#l} - 3))
-        [[ $s -lt 1 ]] && s=1
-        printf "\n\[${BGREEN}\]%s\[${CLR0}\]\[${BMAGENTA}\]%s\[${CLR0}\]%*s\[${BLUE}\]%s\[${CLR0}\] %s\n\[${UBLACK}\]╰─➤\[${CLR0}\] \[${BBLUE}\]$\[${CLR0}\] " \
-        "$h" "$r" $s "" "$l" "$i"
-    }
+        unset _prompt_timer _prompt_command_ran;
+        echo "$t"
+    };
+    
+    trap '_prompt_timer_start' DEBUG;
+    
+    function _build_prompt () 
+    { 
+        local e=$? t=$(_prompt_timer_stop) w=$(tput cols) p="$PWD" h="" r="" v l s;
+        if [[ "$p" == "$HOME"* ]]; then
+            h="$HOME/";
+            r="${p#$HOME}";
+            r="${r#/}";
+        else
+            h="$p";
+        fi;
+        [[ $e -eq 0 ]] && local i="\[${BGREEN}\]✓\[${CLR0}\]" || local i="\[${BRED}\]✗\[${CLR0}\]";
+        v=${#h};
+        [[ -n "$r" ]] && v=$((v + ${#r}));
+        l="${t}s";
+        s=$((w - v - ${#l} - 3));
+        [[ $s -lt 1 ]] && s=1;
+        printf "\n\[${BGREEN}\]%s\[${CLR0}\]\[${BMAGENTA}\]%s\[${CLR0}\]%*s\[${BLUE}\]%s\[${CLR0}\] %s\n\[${UBLACK}\]╰─➤\[${CLR0}\] \[${BBLUE}\]$\[${CLR0}\] " "$h" "$r" $s "" "$l" "$i"
+    };
+    
     PROMPT_COMMAND='PS1="$(_build_prompt)"'
 }
 
@@ -76,7 +95,7 @@ new () {
 	pkg="$1"
 	echo "Custom PACMAN & PARU wrapper function!"
 	echo ":: Search!"
-	pacman -Ss "$pkg" | less
+	pacman -Ss "$pkg"
 	echo ":: Install"
 	sudo pacman -S --needed "$pkg"
 }
@@ -128,18 +147,18 @@ ed () {
         if [ -f "$file" ]; then
             # File exists, edit it
             micro "$file"
-            echo -e "\n$GREEN✓ Edited $file in micro\033[0m"
+            echo -e "\n$GREEN ✓ Edited $file in micro\033[0m"
             return 0
         else
             # File doesn't exist, micro will create temp buffer
             micro "$file"
             if [ -f "$file" ]; then
                 # User saved, file now exists
-                echo -e "\n$MAGENTA✓ Created $file in micro\033[0m"
+                echo -e "\n$MAGENTA ✓ Created $file in micro\033[0m"
                 return 0
             else
                 # User didn't save, file still doesn't exist
-                echo -e "\n$YELLOW✓ Temporarily edited $file and deleted\033[0m"
+                echo -e "\n$YELLOW ✓ Temporarily edited $file and deleted\033[0m"
                 return 1
             fi
         fi
@@ -228,7 +247,7 @@ cf () {
         ed)
             cd "$HOME/.config/micro" && lsa
             ;;
-        kitty)
+        term)
             cd "$HOME/.config/kitty" && lsa
             ;;
         code)

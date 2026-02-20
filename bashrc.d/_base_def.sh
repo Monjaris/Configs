@@ -7,7 +7,7 @@ alias ls='ls --color=auto'
 alias lsa='eza --icons -AF'
 alias rm='rm -vI'
 alias rmfolder='rmdir -v --ignore-fail-on-non-empty'
-alias cp='cp -v --dereference'
+alias cp='cp -v'
 alias mv='mv -iv'
 alias bat='bat --set-terminal-title --no-pager --style=grid '
 alias bashconf='ed $BASH_CONFIG_DIR/_base_def.sh'
@@ -258,8 +258,12 @@ cf () {
             ;;
         keyd)
             cd "/etc/keyd" && lsa
-            sudo bat -n --paging=never default.conf
+            sudo bat -n --paging=never "default.conf"
             ;;
+        ff)
+        	cd "$HOME/.config/fastfetch" && lsa
+        	bat "config.jsonc"
+        	;;
         -h|--help)
             echo "Usage: cf [option]"
             echo "Options: sh, micro, kitty, code, zed, keymap, -h/--help"

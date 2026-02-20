@@ -1,10 +1,10 @@
 {
   "logo": {
-    "type": "auto",      // Garuda default
+    "type": "auto",
     "padding": {
       "right": 2
     },
-    "height": 15         // Slightly shrinks logo
+    "height": 15
   },
 
   "display": {

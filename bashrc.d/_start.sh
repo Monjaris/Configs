@@ -16,9 +16,9 @@ add_to_path "$HOME/dev/c++/projs/bin"
 # ============================================
 # History Configuration
 # ============================================
-export HISTSIZE=10000
-export HISTFILESIZE=20000
-export HISTCONTROL=ignoreboth:erasedups  # Ignore duplicates and lines starting with space
+export HISTSIZE=5000
+export HISTFILESIZE=25000
+export HISTCONTROL=
 export HISTTIMEFORMAT="%F %T "  # Add timestamps to history
 shopt -s histappend  # Append to history file, don't overwrite
 

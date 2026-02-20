@@ -21,11 +21,20 @@ run() {
     fi
 }
 
-# like run() but creates destination dir before copying
+# Copy with auto mkdir for destination — grabs last arg as destination path
 rcp() {
-    mkdir -p "$(dirname "$2")"
+    local dest="${@: -1}"
+    mkdir -p "$(dirname "$dest")"
     run command cp "$@"
 }
+
+# Same as above but with sudo for root-owned files
+srcp() {
+    local dest="${@: -1}"
+    mkdir -p "$(dirname "$dest")"
+    run sudo cp "$@"
+}
+
 
 # --- SCRIPT DIR ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -57,8 +66,7 @@ BAT_CONFIG=$CONFIGD/bat/config
 # copy configs
 run command cp -rav -- "$BASH_CONFIG_DIR"   "./bashrc.d/.."
 # rcp -av -- "$XREMAP_CONFIG"               "./xremap/config.yml"
-mkdir -p "./keyd"
-run sudo command cp -av -- "$KEYD_CONFIG"   "./keyd/default.conf"
+srcp -av -- "$KEYD_CONFIG"                 "./keyd/default.conf"
 rcp -av -- "$VSCODE_SETTINGS"              "./vscode/settings.json"
 rcp -av -- "$VSCODE_KEYMAP"               "./vscode/keybindings.json"
 rcp -av -- "$ZED_SETTINGS"                "./zed/settings.json"
@@ -82,7 +90,6 @@ mkdir -p "$KDE_CONF_D"/{plasma,applications}
 
 
 # ---- PLASMA (D.E. config files)
-# Color scheme
 rcp -av -- "$HOME/.local/share/color-schemes/Main.colors" "$KDE_CONF_D/plasma/Main.colors"
 
 
@@ -120,7 +127,6 @@ EOT
     echo "[kde-export] created .gitignore"
 fi
 
-
 # ==========================================
 # GIT PUSH
 # ==========================================
@@ -139,6 +145,9 @@ if ! git remote | grep -q "^origin$"; then
     echo ":: [git] adding origin remote"
     run git remote add origin "$REPO_URL"
 fi
+
+# update remote URL in case it's stale
+run git remote set-url origin "$REPO_URL"
 
 # stage all files
 echo ":: [git] staging files"

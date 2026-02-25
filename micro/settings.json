@@ -7,9 +7,8 @@
     },
     "aspell": false,
     "autosu": true,
-    "colorscheme": "atom-dark",
+    "colorscheme": "simple",
     "lsp.autocompleteDetails": true,
     "lsp.formatOnSave": false,
-    "mkparents": true,
-    "statusline": false
+    "mkparents": true
 }

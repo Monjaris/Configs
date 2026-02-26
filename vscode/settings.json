@@ -26,7 +26,7 @@
             "*.myconfig": "json"  
         },
         "files.autoSave": "afterDelay",
-        "files.autoSaveDelay": 75,
+        "files.autoSaveDelay": 25,
 
 
         "terminal.integrated.cursorBlinking": true,
@@ -53,12 +53,15 @@
 
 
         "C_Cpp.default.compilerPath": "/usr/bin/g++",
+        "C_Cpp.default.cppStandard": "c++20",
         "C_Cpp.autocompleteAddParentheses": true,
         "C_Cpp.inactiveRegionOpacity": 0.6,
-        "C_Cpp.intelliSenseUpdateDelay": 750,
+        "C_Cpp.intelliSenseUpdateDelay": 500,
         "C_Cpp.renameRequiresIdentifier": false,
         "C_Cpp.intelliSenseCacheSize": 10240,
         "C_Cpp.intelliSenseMemoryLimit": 8192,
+        "C_Cpp.default.intelliSenseMode": "linux-gcc-x64",
+
         "workbench.activityBar.location": "hidden",
         "workbench.activityBar.iconClickBehavior": "focus",
 

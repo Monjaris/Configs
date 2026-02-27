@@ -20,13 +20,14 @@ alias xxx='exit'
 
 # Useful-Aliases
 alias fuckman='echo removing pacman lock..; sudo rm /var/lib/pacman/db.lck'
-alias rmorphs='sudo pacman -Rns $(pacman -Qtdq)'
+alias norph='sudo pacman -Rns $(pacman -Qtdq)'
 alias projs="cd '$HOME/Documents/notes' && bat projs.md"
 alias todos="cd '$HOME/Documents/notes' && bat todos.md"
 alias py='python3'
 alias zed='zeditor'
 alias nano='type nano; micro'
 alias qdbus='type qdbus; qdbus6'
+alias seqs='type seqs; bat "$HOME/.config/bashrc.d/_sequences.sh"'
 alias wget='wget -c'
 alias grep='grep --color=auto'
 alias ip='ip -color'
@@ -222,6 +223,11 @@ wtf () {
 
 cf () {
     case "$1" in
+    	app)
+    		cd "$HOME/Documents/configs" && lsa
+    		printf "\n\n%sGIT STATUS:%s\n\n" "$UMAGENTA" "$CLR0"
+    		git status
+    		;;
         bash)
         	case "$2" in
 				def)
@@ -233,7 +239,7 @@ cf () {
 				seq)
 					ed "$BASH_CONFIG_DIR/_sequences.sh"
 					;;
-				funcs)
+				fn|func)
 					ed "$BASH_CONFIG_DIR/functions.sh"
 					;;
 				rc)
@@ -264,6 +270,11 @@ cf () {
         	cd "$HOME/.config/fastfetch" && lsa
         	bat "config.jsonc"
         	;;
+        yazi)
+        	cd "$HOME/.config/yazi" && lsa
+        	bat "yazi.toml"
+        	;;
+
         -h|--help)
             echo "Usage: cf [option]"
             echo "Options: sh, micro, kitty, code, zed, keymap, -h/--help"

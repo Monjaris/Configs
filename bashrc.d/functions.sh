@@ -1,3 +1,8 @@
+# [ Bash functions configuration file ]
+# [ FMT ]  Put atleast 5 lines between functions!
+# [ FMT-EXCEPT ]  They are grouped or one-liner
+
+
 what? () {
     local color="167"
     local image="eyes"
@@ -36,6 +41,24 @@ what? () {
     fortune | cowsay -f "$image"
     tput sgr0
 }
+
+
+
+
+
+center_text() {
+    local text="$1"
+    local term_width
+    term_width=$(tput cols)                 # terminal width in columns
+    local text_len=${#text}                 # length of string
+    local padding=$(( (term_width - text_len) / 2 ))
+    # if negative, just zero
+    (( padding < 0 )) && padding=0
+    printf "%*s%s\n" "$padding" "" "$text"  # pad + text
+}
+
+
+
 
 
 zdo () {
@@ -206,6 +229,9 @@ zdo () {
 }
 
 
+
+
+
 ihav() {
     tput sgr0
     tput setaf 6
@@ -336,6 +362,9 @@ ihav() {
 }
 
 
+
+
+
 cxx() {
     local run_after=false
     local use_bin_folder=false
@@ -419,6 +448,9 @@ cxx() {
         "./$output_name"
     fi
 }
+
+
+
 
 
 sin() {

@@ -29,7 +29,7 @@ rcp() {
 }
 
 # Same as above but with sudo for root-owned files
-srcp() {
+su_rcp() {
     local dest="${@: -1}"
     mkdir -p "$(dirname "$dest")"
     run sudo cp "$@"
@@ -66,7 +66,7 @@ BAT_CONFIG=$CONFIGD/bat/config
 # copy configs
 run command cp -rav -- "$BASH_CONFIG_DIR"   "./bashrc.d/.."
 # rcp -av -- "$XREMAP_CONFIG"               "./xremap/config.yml"
-srcp -av -- "$KEYD_CONFIG"                 "./keyd/default.conf"
+su_rcp -av -- "$KEYD_CONFIG"                 "./keyd/default.conf"
 rcp -av -- "$VSCODE_SETTINGS"              "./vscode/settings.json"
 rcp -av -- "$VSCODE_KEYMAP"               "./vscode/keybindings.json"
 rcp -av -- "$ZED_SETTINGS"                "./zed/settings.json"

@@ -5,7 +5,10 @@
     "/home/*/.config/*": {
         "filetype": "conf"
     },
+    "aspell": false,
     "autosu": true,
-    "colorscheme": "geany",
+    "colorscheme": "simple",
+    "lsp.autocompleteDetails": true,
+    "lsp.formatOnSave": false,
     "mkparents": true
 }

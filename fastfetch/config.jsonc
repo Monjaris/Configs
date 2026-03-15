@@ -1,46 +1,147 @@
 {
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
   "logo": {
-    "type": "auto",
-    "padding": {
-      "right": 2
+    "source": "garuda_medium",
+    "color": {
+      "1": "red",
+      "2": "cyan"
     },
-    "height": 15
+    "padding": {
+      "right": 3
+    }
   },
 
   "display": {
-    "separator": " : ",
-    "color": {
-      "keys": "magenta",
-      "title": "green"
+    "separator": " ->  ",
+    "color": "cyan",
+    "brightColor": false,
+    "size": {
+      "binaryPrefix": "si"
     }
   },
 
   "modules": [
-    // ── Identity ──
-    "os",
-    "kernel",
-    "host",
-    "shell",
-    "terminal",
-    "uptime",
-
-    // ── Hardware ──
-    "cpu",
-    "gpu",
+    {
+      "type": "custom",
+      "format": ""
+    },
+    {
+      "type": "title",
+      "format": "{user-name}@{host-name}",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "separator",
+      "string": "─",
+      "length": 32,
+      "color": {
+        "fg": "cyan"
+      }
+    },
+    {
+      "type": "os",
+      "key": "OS",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "kernel",
+      "key": "Kernel",
+      "keyColor": "blue",
+      "format": "{release}"
+    },
+    {
+      "type": "uptime",
+      "key": "Uptime",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "packages",
+      "key": "Package",
+      "keyColor": "blue"
+    },
+    {
+      "type": "shell",
+      "key": "Shell",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "custom",
+      "format": ""
+    },
+    {
+      "type": "de",
+      "key": "DE",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "wm",
+      "key": "WM",
+      "keyColor": "blue"
+    },
+    {
+      "type": "terminal",
+      "key": "Term",
+      "keyColor": "blue"
+    },
+    {
+      "type": "font",
+      "key": "Font",
+      "keyColor": "cyan",
+      "format": "{name} {size}",
+      // "contexts": ["qt"].
+    },
+    {
+      "type": "theme",
+      "key": "Theme",
+      "keyColor": "blue",
+      "format": "{name}",
+      "contexts": ["qt"]
+    },
+    {
+      "type": "custom",
+      "format": ""
+    },
+    {
+      "type": "command",
+      "key": "CPU",
+      "keyColor": "cyan",
+      "shell": "bash",
+      "text": "model=$(grep -m1 'model name' /proc/cpuinfo | sed 's/.*Core(TM) //; s/ @.*//'); cores=$(grep -c '^processor' /proc/cpuinfo); phys=$(grep 'cpu cores' /proc/cpuinfo | head -1 | awk '{print $NF}'); mhz=$(lscpu | awk '/^CPU max MHz/{printf \"%.2f GHz\", $NF/1000}'); echo \"$model (${phys}c/${cores}t) @ $mhz\""
+    },
+    {
+      "type": "gpu",
+      "key": "GPU",
+      "keyColor": "blue",
+      "format": "{name}"
+    },
     {
       "type": "memory",
-      "format": "{used} / {total}"
+      "key": "Mem",
+      "keyColor": "cyan",
+      "format": "{used} / {total} ({percentage})"
     },
     {
-      "type": "disk",
-      "folders": [ "/" ],
-      //"format": "{used} / {total}"
+      "type": "swap",
+      "key": "Swap",
+      "keyColor": "blue",
+      "format": "{used} / {total} ({percentage})"
     },
-
-    // ── Display ──
-    "resolution",
-    "displayserver",
-    "de",
-    "wm"
+    {
+      "type": "btrfs",
+      "key": "Disk",
+      "keyColor": "cyan",
+      "format": "{used} / {total} btrfs ({used-percentage})"
+    },
+    {
+      "type": "display",
+      "key": "Display",
+      "keyColor": "blue",
+      "format": "{width}x{height} @ {refresh-rate}Hz"
+    },
+    {
+      "type": "custom",
+      "format": ""
+    }
   ]
 }

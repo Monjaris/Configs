@@ -4,6 +4,7 @@ alias ...='cd ../..'
 alias -- -="cd -"
 alias cls='printf "\033[2J\033[3J\033[1;1H"; zdo f 2 0.05'
 alias ls='ls --color=auto'
+alias l='eza --icons -F'
 alias lsa='eza --icons -AF'
 alias rm='rm -vI'
 alias rmfolder='rmdir -v --ignore-fail-on-non-empty'
@@ -14,13 +15,12 @@ alias bashconf='ed $BASH_CONFIG_DIR/_base_def.sh'
 alias resh="echo sourcing '.bashrc'.. && source $HOME/.bashrc"
 alias mk='./build.sh'
 alias term='f(){ kitty bash -ic "$*; exec bash"; }; f; unset -f f'
-alias tr='trans -b :"az" '
 alias xxx='exit'
 
 
 # Useful-Aliases
 alias fuckman='echo removing pacman lock..; sudo rm /var/lib/pacman/db.lck'
-alias norph='sudo pacman -Rns $(pacman -Qtdq)'
+alias rmorphans='sudo pacman -Rns $(pacman -Qtdq)'
 alias projs="cd '$HOME/Documents/notes' && bat projs.md"
 alias todos="cd '$HOME/Documents/notes' && bat todos.md"
 alias py='python3'
@@ -37,7 +37,7 @@ alias journal='type journal; journalctl --no-pager -l'
 
 
 # enhanced-prompt-style
-eps () 
+eps ()
 { 
     unset _prompt_timer _prompt_command_ran _timing_in_progress;
     
@@ -93,19 +93,19 @@ eps ()
 
 
 new () {
-	pkg="$1"
-	echo "Custom PACMAN & PARU wrapper function!"
+	local pkg="$@"
+	echo "Pacman install wrapper"
 	echo ":: Search!"
 	pacman -Ss "$pkg"
+	sleep 1
 	echo ":: Install"
 	sudo pacman -S --needed "$pkg"
 }
 
 aunew () {
 	sfc 5;
-    echo " [ ARCH-USER NEW ] "
+    echo " AUR package manager wrapper"
     echo "Install packages with *PARU* from aur"
-    echo -e "Installation skipped if package is up to date!\n\n"
     rfc;
     for pkg in "$@"; do
         # check if package is already installed
@@ -120,6 +120,15 @@ aunew () {
             rfc
         fi
     done
+}
+
+pacrem () {
+	local pkg="$@"
+	echo "Pacman remove wrapper"
+	echo ":: Search!"
+	pacman -Qs "$pkg"
+	echo ":: Remove"
+	sudo pacman -Rns "$pkg"
 }
 
 

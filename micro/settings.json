@@ -10,5 +10,7 @@
     "colorscheme": "simple",
     "lsp.autocompleteDetails": true,
     "lsp.formatOnSave": false,
-    "mkparents": true
+    "mkparents": true,
+    "splitright": false,
+    "statusline": false
 }

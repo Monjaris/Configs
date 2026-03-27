@@ -69,5 +69,11 @@ export EDITOR=micro
 # ============================================
 # Tool Integrations
 # ============================================
-# eval "$(thefuck --alias)"
+
+# BLE.SH
+# if [[ -z ${BLE_VERSION-} ]]; then
+    # source /usr/share/blesh/ble.sh --noattach
+    # [[ ${BLE_VERSION-} ]] && ble-attach
+# fi
+
 

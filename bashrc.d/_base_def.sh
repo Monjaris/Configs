@@ -283,6 +283,10 @@ cf () {
         	cd "$HOME/.config/yazi" && lsa
         	bat "yazi.toml"
         	;;
+        lsp)
+        	cd "$HOME/.config/clangd" && lsa
+			bat "config.yaml"
+        	;;
 
         -h|--help)
             echo "Usage: cf [option]"

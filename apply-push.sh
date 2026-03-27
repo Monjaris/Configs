@@ -7,6 +7,10 @@
 set -o pipefail
 shopt -s nullglob
 
+# ask for sudo upfront
+sudo -v
+# kill su previlage on exit
+trap 'sudo -k' EXIT
 
 # --- COLORS ---
 _BOLD_RED="\033[1;31m"

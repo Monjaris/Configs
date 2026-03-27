@@ -4,12 +4,13 @@
 # Installation script is in the same directory (install.sh)
 # ==========================================
 
+set -o pipefail
+shopt -s nullglob
+
+
 # --- COLORS ---
 _BOLD_RED="\033[1;31m"
 _RESET="\033[0m"
-
-# printf "$_BOLD_RED\nFIX FIRST!!!\n"
-# exit
 
 # --- HELPER FUNCTION ---
 # Run a command, if fails, print line in red, continue
@@ -17,20 +18,20 @@ run() {
     "$@"
     local status=$?
     if [ $status -ne 0 ]; then
-        echo -e "${_BOLD_RED}❌ Error at line $LINENO: command failed -> $*${_RESET}"
+    	echo -e "${_BOLD_RED}❌ Error at line ${BASH_LINENO[0]}: command failed -> $*${_RESET}"
     fi
 }
 
 # Copy with auto mkdir for destination — grabs last arg as destination path
 rcp() {
-    local dest="${@: -1}"
+    local dest="${!#}"
     mkdir -p "$(dirname "$dest")"
     run command cp "$@"
 }
 
 # Same as above but with sudo for root-owned files
 su_rcp() {
-    local dest="${@: -1}"
+    local dest="${!#}"
     mkdir -p "$(dirname "$dest")"
     run sudo cp "$@"
 }
@@ -98,11 +99,6 @@ rcp -av -- "$HOME/.local/share/color-schemes/Main.colors" "$KDE_CONF_D/plasma/Ma
 if [ -d "$HOME/.local/share/konsole" ]; then
     mkdir -p "$KDE_CONF_D/applications/konsole"
     run command cp -av -- "$HOME/.local/share/konsole/"* "$KDE_CONF_D/applications/konsole/" 2>/dev/null
-fi
-# KWin scripts
-if [ -d "$HOME/.local/share/kwin/scripts" ]; then
-    mkdir -p "$KDE_CONF_D/applications/kwin/scripts"
-    run command cp -av -- "$HOME/.local/share/kwin/scripts/"* "$KDE_CONF_D/applications/kwin/scripts/" 2>/dev/null
 fi
 # Autostart
 if [ -d "$HOME/.config/autostart" ]; then

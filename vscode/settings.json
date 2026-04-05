@@ -1,50 +1,15 @@
 {
-    ///  Copilot
-    "github.copilot.enable": {
-        "*": false,
-        "plaintext": false,
-        "markdown": false,
-        "scminput": false,
-        "jsonc": false
-    },
-    "github.copilot.nextEditSuggestions.enabled": false,
-
-
-    ///  📂 Files & JSON
-    "files.exclude": { "**/.git": false },
-    "files.associations": { "*.myconfig": "json" },
-    "files.autoSave": "afterDelay",
-    "files.autoSaveDelay": 25,
-    "files.simpleDialog.enable": true,
-
-    "json.schemas": [
-        {
-            "fileMatch": ["**/myconfig.json"],
-            "url": "./myschema.json"
-        }
-    ],
-
-
-    ///  🖥️ Terminal
-    "terminal.integrated.fontFamily": "Cascadia Code NF",
-    "terminal.integrated.fontLigatures.enabled": true,
-    "terminal.integrated.fontSize": 15,
-    "terminal.integrated.fontWeight": "500",
-    "terminal.integrated.fontWeightBold": "600",
-    "terminal.integrated.cursorBlinking": true,
-    "terminal.integrated.cursorWidth": 100,
-    "terminal.integrated.lineHeight": 1.2,
-    "terminal.integrated.letterSpacing": 1,
-    "terminal.integrated.scrollback": 5000000,
-    "terminal.integrated.fastScrollSensitivity": 4,
-    "terminal.integrated.allowMnemonics": false,
-    "terminal.integrated.enablePersistentSessions": false,
-    "terminal.integrated.hideOnStartup": "always",
-
+    ///  Window
+    "window.commandCenter": false,
+    "window.zoomLevel": 0.90,
+    "window.zoomPerWindow": false,
+    "window.customMenuBarAltFocus": false,
+    "window.enableMenuBarMnemonics": false,
+    "window.autoDetectColorScheme": true,
 
     ///  Editor
-    "editor.fontFamily": "JetBrains Mono",
-    "editor.fontSize": 16.8,
+    "editor.fontFamily": "JetBrainsMono Nerd Font Mono",
+    "editor.fontSize": 17.8,
     "editor.fontWeight": "500",
     "editor.lineHeight": 1.4,
     "editor.cursorStyle": "block",
@@ -58,8 +23,37 @@
     "editor.renderLineHighlight": "all",
     "editor.minimap.enabled": false,
     "editor.colorDecoratorsActivatedOn": "click",
-    "editor.colorDecoratorsLimit": 1440,
+    "editor.colorDecoratorsLimit": 1500,
     "editor.defaultColorDecorators": "always",
+
+    ///  Workbench
+    "workbench.activityBar.location": "hidden",
+    "workbench.activityBar.iconClickBehavior": "focus",
+    "workbench.layoutControl.enabled": false,
+
+    ///  Files
+    "files.exclude": { "**/.git": false },
+    "files.associations": { "*.myconfig": "json"},
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 25,
+    "files.simpleDialog.enable": true,
+
+
+    ///  Terminal
+    "terminal.integrated.fontFamily": "Cascadia Code NF",
+    "terminal.integrated.fontLigatures.enabled": true,
+    "terminal.integrated.fontSize": 15,
+    "terminal.integrated.fontWeight": "500",
+    "terminal.integrated.fontWeightBold": "600",
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorWidth": 4.5,
+    "terminal.integrated.lineHeight": 1.2,
+    "terminal.integrated.letterSpacing": 1,
+    "terminal.integrated.scrollback": 1000000,
+    "terminal.integrated.fastScrollSensitivity": 3,
+    "terminal.integrated.allowMnemonics": false,
+    "terminal.integrated.enablePersistentSessions": false,
+    "terminal.integrated.hideOnStartup": "always",
 
 
     ///  C/C++
@@ -75,11 +69,9 @@
     "C_Cpp.renameRequiresIdentifier": false,
     "cmake.configureOnOpen": false,
 
-    "workbench.activityBar.location": "hidden",
-    "workbench.activityBar.iconClickBehavior": "focus",
-    "workbench.layoutControl.enabled": false,
-    "window.commandCenter": false,
-    "chat.commandCenter.enabled": false,
+
+    ///  Misc
+    "telemetry.telemetryLevel": "off",
     "extensions.ignoreRecommendations": true,
     "explorer.confirmDelete": false,
     "explorer.compactFolders": false,
@@ -87,52 +79,9 @@
     "security.workspace.trust.untrustedFiles": "open",
     "debug.onTaskErrors": "abort",
     "debug.terminal.clearBeforeReusing": true,
-
-
-    ///  Colors
-    "workbench.colorCustomizations": {
-        "terminal.background": "#1c161c",
-        "terminal.foreground": "#ffff00",
-        "terminalCursor.foreground": "#d06222",
-
-        "sideBar.background": "#0f1117",
-        "sideBar.foreground": "#cdd6f4",
-        "sideBar.border": "#1e1e2e",
-        "sideBarSectionHeader.background": "#111827",
-        "sideBarSectionHeader.foreground": "#89b4fa",
-        "sideBarTitle.foreground": "#f9e2af",
-
-        "editorCursor.background": "#b700ff",
-        "editorCursor.foreground": "#18ffd1ce",
-
-        "[One Dark Pro Night Flat]": {
-            "editor.background": "#13161b",
-            "editor.selectionBackground": "#61c7c960"
-        }
-    },
-
-
-    ///  Syntax override: Italic types
-    "editor.tokenColorCustomizations": {
-        "[One Dark Pro Night Flat]": {
-            "textMateRules": [
-                {
-                    "scope": [
-                        // "storage.type",
-                        "entity.name.type",
-                    ],
-                    "settings": {
-                        "fontStyle": "italic"
-                    },
-                },
-            ]
-        }
-    },
-
-    "window.zoomPerWindow": false,
-    "window.customMenuBarAltFocus": false,
-    "window.enableMenuBarMnemonics": false,
-    "window.menuBarVisibility": "hidden",
-    "workbench.colorTheme": "One Dark Pro Simpler",
-    "window.zoomLevel": 1
+    "workbench.editor.empty.hint": "hidden",
+    "workbench.preferredDarkColorTheme": "One Dark Pro Clean",
+    "window.newWindowDimensions": "fullscreen",
+    "terminal.integrated.cursorStyle": "line",
+    "window.restoreFullscreen": true,
 }

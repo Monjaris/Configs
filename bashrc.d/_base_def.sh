@@ -7,7 +7,6 @@ alias ls='ls --color=auto'
 alias l='eza --icons -F'
 alias lsa='eza --icons -AF'
 alias rm='rm -vI'
-alias rmfolder='rmdir -v --ignore-fail-on-non-empty'
 alias cp='cp -v'
 alias mv='mv -iv'
 alias bat='bat --set-terminal-title --no-pager --style=grid '
@@ -15,6 +14,7 @@ alias bashconf='ed $BASH_CONFIG_DIR/_base_def.sh'
 alias resh="echo sourcing '.bashrc'.. && source $HOME/.bashrc"
 alias mk='./build.sh'
 alias term='f(){ kitty bash -ic "$*; exec bash"; }; f; unset -f f'
+alias yat='systemctl sleep || systemctl suspend'
 alias xxx='exit'
 
 
@@ -35,60 +35,42 @@ alias jerrors='type jerrors; journalctl -p 3 -xb --pager-end'
 alias journal='type journal; journalctl --no-pager -l'
 
 
+rmfolder () {
+    local folder="$1"
+    local name
+    local trashinfo
 
-# enhanced-prompt-style
-eps ()
-{ 
-    unset _prompt_timer _prompt_command_ran _timing_in_progress;
-    
-    function _prompt_timer_start () 
-    { 
-        # Don't start timer if we're already timing the prompt building itself
-        [[ -n "$_timing_in_progress" ]] && return
-        
-        # Start timer for user commands only
-        [[ -n "$BASH_COMMAND" && "$BASH_COMMAND" != "_prompt_timer_start" && "$BASH_COMMAND" != "_build_prompt" ]] && { 
-            _prompt_timer=$(date +%s.%N);
-            _prompt_command_ran=1
-        }
-    };
-    
-    function _prompt_timer_stop () 
-    { 
-        local t="0.0";
-        if [[ -n "$_prompt_timer" && -n "$_prompt_command_ran" ]]; then
-            # Set flag to prevent DEBUG trap from interfering
-            _timing_in_progress=1
-            local end_time=$(date +%s.%N)
-            t=$(awk "BEGIN {printf \"%.3f\", $end_time - $_prompt_timer}")
-            unset _timing_in_progress
-        fi
-        unset _prompt_timer _prompt_command_ran;
-        echo "$t"
-    };
-    
-    trap '_prompt_timer_start' DEBUG;
-    
-    function _build_prompt () 
-    { 
-        local e=$? t=$(_prompt_timer_stop) w=$(tput cols) p="$PWD" h="" r="" v l s;
-        if [[ "$p" == "$HOME"* ]]; then
-            h="$HOME/";
-            r="${p#$HOME}";
-            r="${r#/}";
-        else
-            h="$p";
-        fi;
-        [[ $e -eq 0 ]] && local i="\[${BGREEN}\]✓\[${CLR0}\]" || local i="\[${BRED}\]✗\[${CLR0}\]";
-        v=${#h};
-        [[ -n "$r" ]] && v=$((v + ${#r}));
-        l="${t}s";
-        s=$((w - v - ${#l} - 3));
-        [[ $s -lt 1 ]] && s=1;
-        printf "\n\[${BGREEN}\]%s\[${CLR0}\]\[${BMAGENTA}\]%s\[${CLR0}\]%*s\[${BLUE}\]%s\[${CLR0}\] %s\n\[${UBLACK}\]╰─➤\[${CLR0}\] \[${BBLUE}\]$\[${CLR0}\] " "$h" "$r" $s "" "$l" "$i"
-    };
-    
-    PROMPT_COMMAND='PS1="$(_build_prompt)"'
+    # validate arg
+    if [[ -z "$folder" ]]; then
+        printf "rmfolder: no argument given\n" >&2
+        return 1
+    fi
+
+    if [[ ! -e "$folder" ]]; then
+        printf "rmfolder: '%s': no such file or directory\n" "$folder" >&2
+        return 1
+    fi
+
+    name="$(basename "$folder")"
+    trashinfo="$HOME/.local/share/Trash/info/${name}.trashinfo"
+
+    mkdir -p "$HOME/.local/share/Trash/files"
+    mkdir -p "$HOME/.local/share/Trash/info"
+
+    # write trashinfo
+    printf "[Trash Info]\nPath=%s\nDeletionDate=%s\n" \
+        "$(realpath "$folder")" \
+        "$(date +%Y-%m-%dT%H:%M:%S)" \
+        > "$trashinfo"
+
+    mv "$folder" "$HOME/.local/share/Trash/files/"
+    local code="$?"
+
+    if [[ "$code" -ne 0 ]]; then
+        rm -f "$trashinfo"  # clean up trashinfo if mv failed
+        printf "rmfolder: mv failed (exit %d)\n" "$code" >&2
+        return "$code"
+    fi
 }
 
 
@@ -103,21 +85,21 @@ new () {
 }
 
 aunew () {
-	sfc 5;
+	tput setaf 5;
     echo " AUR package manager wrapper"
     echo "Install packages with *PARU* from aur"
-    rfc;
+    tput sgr;
     for pkg in "$@"; do
         # check if package is already installed
         if pacman -Qi "$pkg" &>/dev/null; then
-        	sfc 4
+        	tput setaf 4
             echo "✅ $pkg is already installed, skipping."
-            rfc
+            tput sgr
         else
-        	sfc 2
+        	tput setaf 2
             echo "⬇️ Installing $pkg..."
             paru -S "$pkg"
-            rfc
+            tput sgr
         fi
     done
 }
@@ -137,7 +119,7 @@ ed () {
     local file="$1"; local temp_buffer="unsaved"
     if [ $# -eq 0 ]; then
         # 0 args: edit temporary buffer
-        micro "$temp_buffer"
+        fresh "$temp_buffer"
         if [ -f "$temp_buffer" ]; then
             # User saved the temp buffer, prompt for filename
             echo -n "Press Enter to save as newfile_$(date +%b_%H:%M) or type filename: "
@@ -156,15 +138,15 @@ ed () {
         # 1 arg: edit specific file
         if [ -f "$file" ]; then
             # File exists, edit it
-            micro "$file"
-            echo -e "\n$GREEN ✓ Edited $file in micro\033[0m"
+            fresh "$file"
+            echo -e "\n$GREEN ✓ Edited $file in $EDITOR\033[0m"
             return 0
         else
             # File doesn't exist, micro will create temp buffer
-            micro "$file"
+            fresh "$file"
             if [ -f "$file" ]; then
                 # User saved, file now exists
-                echo -e "\n$MAGENTA ✓ Created $file in micro\033[0m"
+                echo -e "\n$MAGENTA ✓ Created $file in $EDITOR\033[0m"
                 return 0
             else
                 # User didn't save, file still doesn't exist

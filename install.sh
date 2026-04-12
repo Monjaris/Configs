@@ -45,7 +45,8 @@ read -rp "$(echo -e "${_GREEN}:: ${_RESET}Install Dependencies? [Y/n] ")" preins
 if [[ "$preinstall_deps" =~ ^[Yy]$|^$ ]]; then
     sudo pacman -S --needed \
         bash bat yazi micro keyd \
-        kitty konsole code zed
+        kitty konsole code code-martkeplace
+        zed
 fi
 
 # ==========================================

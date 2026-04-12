@@ -20,14 +20,14 @@ run() {
 }
 
 # Copy with auto mkdir for destination
-rcp() {
+cpx() {
     local dest="${@: -1}"
     mkdir -p "$(dirname "$dest")"
     run command cp "$@"
 }
 
 # Same but with sudo
-srcp() {
+scpx() {
     local dest="${@: -1}"
     sudo mkdir -p "$(dirname "$dest")"
     run sudo cp "$@"
@@ -39,28 +39,43 @@ cd "$SCRIPT_DIR" || exit 1
 
 echo -e "${_GREEN}:: Installing configs from repo to system...${_RESET}"
 
+preinstall_deps="N"
+read -rp "$(echo -e "${_GREEN}:: ${_RESET}Install Dependencies? [Y/n] ")" preinstall_deps
+
+if [[ "$preinstall_deps" =~ ^[Yy]$|^$ ]]; then
+    sudo pacman -S --needed \
+        bash bat yazi micro keyd \
+        kitty konsole code zed
+fi
+
 # ==========================================
 # CONFIG FILES
 # ==========================================
 CONFIGD=$HOME/.config
 
+# create folders which may have not be there already
+mkdir -p "$CONFIGD/.bashrc.d"
+mkdir -p "$CONFIGD/fastfetch"
+mkdir -p "$CONFIGD/yazi"
+mkdir -p "$CONFIGD/bat"
+
 # copy configs from repo -> system
 run command cp -rav -- "./bashrc.d"                  "$CONFIGD/bashrc.d/.."
-# rcp -av -- "./xremap/config.yml"                   "$CONFIGD/xremap/config.yml"
-srcp -av -- "./keyd/default.conf"                    "/etc/keyd/default.conf"
-rcp -av -- "./vscode/settings.json"                  "$CONFIGD/Code/User/settings.json"
-rcp -av -- "./vscode/keybindings.json"               "$CONFIGD/Code/User/keybindings.json"
-rcp -av -- "./zed/settings.json"                     "$CONFIGD/zed/settings.json"
-rcp -av -- "./zed/keymap.json"                       "$CONFIGD/zed/keymap.json"
-rcp -av -- "./kitty/kitty.conf"                      "$CONFIGD/kitty/kitty.conf"
-rcp -av -- "./kitty/keymap.conf"                     "$CONFIGD/kitty/keymap.conf"
-rcp -av -- "./fastfetch/config.jsonc"                "$CONFIGD/fastfetch/config.jsonc"
-rcp -av -- "./fastfetch/default.jsonc"               "$CONFIGD/fastfetch/default.jsonc"
-# rcp -av -- "./lf/lfrc"                             "$CONFIGD/lf/lfrc"
-rcp -av -- "./yazi/yazi.toml"                        "$CONFIGD/yazi/yazi.toml"
-rcp -av -- "./micro/settings.json"                   "$CONFIGD/micro/settings.json"
-rcp -av -- "./micro/bindings.json"                   "$CONFIGD/micro/bindings.json"
-rcp -av -- "./bat/config"                            "$CONFIGD/bat/config"
+# cpx -av -- "./xremap/config.yml"                   "$CONFIGD/xremap/config.yml"
+scpx -av -- "./keyd/default.conf"                    "/etc/keyd/default.conf"
+cpx -av -- "./vscode/settings.json"                  "$CONFIGD/Code/User/settings.json"
+cpx -av -- "./vscode/keybindings.json"               "$CONFIGD/Code/User/keybindings.json"
+cpx -av -- "./zed/settings.json"                     "$CONFIGD/zed/settings.json"
+cpx -av -- "./zed/keymap.json"                       "$CONFIGD/zed/keymap.json"
+cpx -av -- "./kitty/kitty.conf"                      "$CONFIGD/kitty/kitty.conf"
+cpx -av -- "./kitty/keymap.conf"                     "$CONFIGD/kitty/keymap.conf"
+cpx -av -- "./fastfetch/config.jsonc"                "$CONFIGD/fastfetch/config.jsonc"
+cpx -av -- "./fastfetch/default.jsonc"               "$CONFIGD/fastfetch/default.jsonc"
+# cpx -av -- "./lf/lfrc"                             "$CONFIGD/lf/lfrc"
+cpx -av -- "./yazi/yazi.toml"                        "$CONFIGD/yazi/yazi.toml"
+cpx -av -- "./micro/settings.json"                   "$CONFIGD/micro/settings.json"
+cpx -av -- "./micro/bindings.json"                   "$CONFIGD/micro/bindings.json"
+cpx -av -- "./bat/config"                            "$CONFIGD/bat/config"
 
 
 # ==========================================
@@ -69,7 +84,7 @@ rcp -av -- "./bat/config"                            "$CONFIGD/bat/config"
 KDE_CONF_D="$SCRIPT_DIR/KDE"
 
 # ---- PLASMA
-rcp -av -- "$KDE_CONF_D/plasma/Main.colors"          "$HOME/.local/share/color-schemes/Main.colors"
+cpx -av -- "$KDE_CONF_D/plasma/Main.colors"          "$HOME/.local/share/color-schemes/Main.colors"
 
 # ---- APPLICATIONS
 # Konsole profiles

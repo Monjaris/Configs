@@ -19,11 +19,7 @@ _RESET="\033[0m"
 # --- HELPER FUNCTION ---
 # Run a command, if fails, print line in red, continue
 run() {
-    "$@"
-    local status=$?
-    if [ $status -ne 0 ]; then
-    	echo -e "${_BOLD_RED}❌ Error at line ${BASH_LINENO[0]}: command failed -> $*${_RESET}"
-    fi
+    "$@" || echo -e "${_BOLD_RED}Error at line ${BASH_LINENO[0]}: $*${_RESET}"
 }
 
 # Copy with auto mkdir for destination — grabs last arg as destination path

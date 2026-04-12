@@ -15,7 +15,7 @@ run() {
     "$@"
     local status=$?
     if [ $status -ne 0 ]; then
-        echo -e "${_BOLD_RED}❌ Error at line $LINENO: command failed -> $*${_RESET}"
+        echo -e "${_BOLD_RED}❌ Error at line ${BASH_LINENO[0]}: command failed -> $*${_RESET}"
     fi
 }
 

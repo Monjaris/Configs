@@ -42,8 +42,9 @@ scpx() {
 }
 
 prompt() {
-    local out="$1"
-    read -rp "$(echo -e "${_GREEN}:: ${_RESET}Install Dependencies? [Y/n] ")" "$out"
+    local ask="$1"
+    local out="$2"
+    read -rp "$(echo -e "${_GREEN}:: ${_RESET}${ask} [Y/n]")" "$out"
 }
 # NOTE: must be a plain variable (not alias) to expand correctly in =~
 validator_regex='^[Yy]$|^$'
@@ -52,12 +53,12 @@ validator_regex='^[Yy]$|^$'
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR" || exit 1
 
+
 echo -e "${_GREEN}:: Installing configs from repo to system...${_RESET}"
-
 preinstall_deps=""
-prompt preinstall_deps
+prompt "Install Dependencies?" preinstall_deps
 
-# NOTE: RHS of =~ must be unquoted to be treated as a regex
+# preinstall dependencies
 if [[ "$preinstall_deps" =~ $validator_regex ]]; then
     sudo pacman -S --needed \
         bash bat eza yazi micro keyd \
@@ -139,9 +140,21 @@ if [ -d "$KDE_CONF_D/applications/haruna" ]; then
 fi
 
 # Krita
-[ -f "$KDE_CONF_D/applications/krita/kritarc" ]          && cpx -av -- "$KDE_CONF_D/applications/krita/kritarc"          "$CONFIGD/kritarc"
-[ -f "$KDE_CONF_D/applications/krita/kritashortcutsrc" ] && cpx -av -- "$KDE_CONF_D/applications/krita/kritashortcutsrc" "$CONFIGD/kritashortcutsrc"
+[ -f "$KDE_CONF_D/applications/krita/kritarc" ] && \
+    cpx -av -- "$KDE_CONF_D/applications/krita/kritarc" "$CONFIGD/kritarc"
+[ -f "$KDE_CONF_D/applications/krita/kritashortcutsrc" ] && \
+    cpx -av -- "$KDE_CONF_D/applications/krita/kritashortcutsrc" "$CONFIGD/kritashortcutsrc"
 
 
-echo -e "\n${_GREEN}Installation finished.${_RESET}"
-echo "You may need to restart some applications for changes to take effect."
+echo -e "\n${_GREEN}Installation finished!${_RESET}"
+postinstall_exec=""
+prompt "Run postinstall?" postinstall
+# postinstall execution
+if [[ "$postinstall" =~ $validator_regex ]]; then
+    systemctl enable --now keyd # enable keyd
+    fc-cache -fv # for fonts to refresh
+    echo "\n${_GREEN}Optional post-install execution finished!${_RESET}"
+fi
+
+echo "\n\n${_GREEN} \
+    Your system is ready to reflect configurations, immediate reboot is optionally better" \

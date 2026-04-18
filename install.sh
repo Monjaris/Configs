@@ -44,10 +44,22 @@ scpx() {
 prompt() {
     local ask="$1"
     local out="$2"
-    read -rp "$(echo -e "${_GREEN}:: ${_RESET}${ask} [Y/n]")" "$out"
+    read -rp "$(echo -e "${_GREEN}:: ${_RESET}${ask} [Y/n] ")" "$out"
 }
-# NOTE: must be a plain variable (not alias) to expand correctly in =~
 validator_regex='^[Yy]$|^$'
+
+print_dots() {
+    local iterations=3
+    local delay=0.3
+    local post_delay=0.5
+
+    for ((i=0; i<iterations; i++)); do
+        printf "."
+        sleep $delay
+    done
+    sleep $post_delay
+    printf "\r\033[K" # \033[K = ANSI clear to end of line
+}
 
 # --- SCRIPT DIR ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -148,13 +160,13 @@ fi
 
 echo -e "\n${_GREEN}Installation finished!${_RESET}"
 postinstall_exec=""
-prompt "Run postinstall?" postinstall
+prompt "Run postinstall?" postinstall_exec
 # postinstall execution
-if [[ "$postinstall" =~ $validator_regex ]]; then
+if [[ "$postinstall_exec" =~ $validator_regex ]]; then
     systemctl enable --now keyd # enable keyd
     fc-cache -fv # for fonts to refresh
-    echo -e "\n${_GREEN}Optional post-install execution finished!${_RESET}"
+    echo -e "${_GREEN}Optional post-install execution finished!${_RESET}"
 fi
 
-echo -e "\n\n${_GREEN} \
-    Your system is ready to reflect configurations, immediate reboot is optionally better"
+echo -e "\n\n"; print_dots
+echo -e "\033[0;36mYour system is ready to reflect configurations. Immediate reboot is optionally better!${_RESET}\n\n"

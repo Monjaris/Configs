@@ -83,6 +83,12 @@ rcp -av -- "$BAT_CONFIG"                       "./bat/config"
 rcp -av -- "$BRAVE_PREFS"                      "./brave/Default/Preferences"
 rcp -av -- "$CLANGD_CONFIG"                    "./clangd/config.yaml"
 
+# Autostart
+if [ -d "$CONFIGD/autostart" ]; then
+    mkdir -p "./autostart"
+    run command cp -av -- "$CONFIGD/autostart/"* "./autostart/" 2>/dev/null
+fi
+
 
 # ==========================================
 # KDE CONFIGS
@@ -101,8 +107,8 @@ mkdir -p \
 
 # ---- PLASMA
 rcp -av -- "$HOME/.local/share/color-schemes/Main.colors" "$KDE_CONF_D/plasma/Main.colors"
-# rcp -av -- "$CONFIGD/kglobalshortcutsrc"                  "$KDE_CONF_D/plasma/kglobalshortcutsrc"
-# rcp -av -- "$CONFIGD/khotkeysrc"                          "$KDE_CONF_D/plasma/khotkeysrc"
+rcp -av -- "$CONFIGD/kglobalshortcutsrc"                  "$KDE_CONF_D/plasma/kglobalshortcutsrc"
+rcp -av -- "$CONFIGD/khotkeysrc"                          "$KDE_CONF_D/plasma/khotkeysrc"
 
 # ---- APPLICATIONS
 # Konsole profiles
@@ -113,11 +119,6 @@ fi
 # KWin scripts
 if [ -d "$HOME/.local/share/kwin/scripts" ]; then
     run command cp -av -- "$HOME/.local/share/kwin/scripts/"* "$KDE_CONF_D/applications/kwin/scripts/" 2>/dev/null
-fi
-
-# Autostart
-if [ -d "$CONFIGD/autostart" ]; then
-    run command cp -av -- "$CONFIGD/autostart/"* "$KDE_CONF_D/applications/autostart/" 2>/dev/null
 fi
 
 # Dolphin

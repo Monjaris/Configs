@@ -61,7 +61,7 @@ if [[ "$preinstall_deps" =~ $validator_regex ]]; then
         bash bat eza yazi micro keyd \
         kitty konsole code code-marketplace zed
     paru -S --needed \
-        ttf-jetbrains-mono
+        ttf-jetbrains-mono otf-jetbrains-mono
 fi
 
 # ==========================================
@@ -91,12 +91,6 @@ cpx -av -- "./bat/config"                            "$CONFIGD/bat/config"
 cpx -av -- "./brave/Default/Preferences"             "$CONFIGD/BraveSoftware/Brave-Browser/Default/Preferences"
 cpx -av -- "./clangd/config.yaml"                    "$CONFIGD/clangd/config.yaml"
 
-# Autostart
-if [ -d "./autostart" ]; then
-    mkdir -p "$CONFIGD/autostart"
-    run command cp -av -- "./autostart/"* "$CONFIGD/autostart/" 2>/dev/null
-fi
-
 
 # ==========================================
 # KDE CONFIGS
@@ -121,6 +115,12 @@ if [ -d "$KDE_CONF_D/applications/kwin/scripts" ]; then
     run command cp -av -- "$KDE_CONF_D/applications/kwin/scripts/"* "$HOME/.local/share/kwin/scripts/" 2>/dev/null
 fi
 
+# Autostart
+if [ -d "$KDE_CONF_D/applications/autostart" ]; then
+    mkdir -p "$CONFIGD/autostart"
+    run command cp -av -- "$KDE_CONF_D/applications/autostart/"* "$CONFIGD/autostart/" 2>/dev/null
+fi
+
 # Dolphin
 if [ -f "$KDE_CONF_D/applications/dolphin/dolphinrc" ]; then
     cpx -av -- "$KDE_CONF_D/applications/dolphin/dolphinrc" "$CONFIGD/dolphinrc"
@@ -137,11 +137,9 @@ if [ -d "$KDE_CONF_D/applications/haruna" ]; then
 fi
 
 # Krita
-if [ -f "$KDE_CONF_D/applications/krita/kritarc" ]; then
-    cpx -av -- "$KDE_CONF_D/applications/krita/kritarc" "$CONFIGD/kritarc"
-    cpx -av -- "$KDE_CONF_D/applications/krita/kritashortcutsrc" "$CONFIGD/kritashortcutsrc"
-fi
+[ -f "$KDE_CONF_D/applications/krita/kritarc" ]          && cpx -av -- "$KDE_CONF_D/applications/krita/kritarc"          "$CONFIGD/kritarc"
+[ -f "$KDE_CONF_D/applications/krita/kritashortcutsrc" ] && cpx -av -- "$KDE_CONF_D/applications/krita/kritashortcutsrc" "$CONFIGD/kritashortcutsrc"
 
 
-echo -e "\n${_GREEN}Installation finished.${_RESET}"
+echo -e "\n${_GREEN}✅ Installation finished.${_RESET}"
 echo "You may need to restart some applications for changes to take effect."

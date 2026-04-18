@@ -7,8 +7,20 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "vertical_scroll_margin": 6.0,
+  "colorize_brackets": true,
+  "disable_ai": true,
+  "ui_font_family": "Inter Variable",
+  "auto_update": false,
+  "telemetry": {
+    "diagnostics": true,
+    "metrics": false
+  },
+  "session": {
+    "trust_all_worktrees": true
+  },
   "vim_mode": false,
-  "buffer_font_weight": 400.0,
+  "buffer_font_weight": 500.0,
   "buffer_font_features": { "ligatures": true, "calt": true},
   "window_decorations": "client",
   "active_pane_modifiers": {
@@ -42,19 +54,20 @@
   "minimum_contrast_for_highlights": 45.0,
   "rounded_selection": true,
   "selection_highlight": true,
-  "current_line_highlight": "all",
+  "current_line_highlight": "none",
   "unnecessary_code_fade": 0.4,
   "cursor_shape": "block",
   "agent_ui_font_size": 17.0,
   "agent_buffer_font_size": 15.0,
   "buffer_line_height": {
-    "custom": 1.6,
+    "custom": 1.5,
   },
-  "buffer_font_family": "Fira Code",
-  "on_last_window_closed": "quit_app",
-  "when_closing_with_no_tabs": "close_window",
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "on_last_window_closed": "platform_default",
+  "when_closing_with_no_tabs": "platform_default",
 
   "terminal": {
+    "minimum_contrast": 50.0,
     "dock": "right",
     "max_scroll_history_lines": 1500000,
     "blinking": "terminal_controlled",
@@ -67,11 +80,11 @@
     "light": "Zed (Default)",
     "dark": "Zed (Default)",
   },
-  "ui_font_size": 16,
+  "ui_font_size": 16.0,
   "buffer_font_size": 18.4,
   "theme": {
     "mode": "dark",
     "light": "Ayu Light",
-    "dark": "Ayu Dark",
+    "dark": "One Dark Pro Clean",
   },
 }

@@ -23,5 +23,34 @@
     "bindings": {
       "alt-/": ["terminal::SendText", "./build.sh\n"]
     }
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "alt-l": "pane::ActivateNextItem"
+    }
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-pagedown": "pane::ActivateNextItem"
+    }
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "alt-k": "pane::ActivatePreviousItem"
+    }
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-pageup": "pane::ActivatePreviousItem"
+    }
+  },
+  {
+    "bindings": {
+      "alt-o": "pane::CloseActiveItem"
+    }
   }
 ]

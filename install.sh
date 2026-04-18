@@ -61,7 +61,7 @@ if [[ "$preinstall_deps" =~ $validator_regex ]]; then
         bash bat eza yazi micro keyd \
         kitty konsole code code-marketplace zed
     paru -S --needed \
-        ttf-jetbrains-mono otf-jetbrains-mono
+        ttf-jetbrains-mono
 fi
 
 # ==========================================

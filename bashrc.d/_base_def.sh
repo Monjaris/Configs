@@ -213,7 +213,7 @@ cf () {
 				def)
 					ed "$BASH_CONFIG_DIR/_base_def.sh"
 					;;
-				init)
+				ini|init)
 					ed "$BASH_CONFIG_DIR/_start.sh"
 					;;
 				seq)
@@ -222,7 +222,7 @@ cf () {
 				fn|func)
 					ed "$BASH_CONFIG_DIR/functions.sh"
 					;;
-				rc)
+				.)
             		ed "$HOME/.bashrc"
             		;;
             	*)
@@ -254,11 +254,20 @@ cf () {
         	cd "$HOME/.config/yazi" && lsa
         	bat "yazi.toml"
         	;;
-        lsp)
+        clangd)
         	cd "$HOME/.config/clangd" && lsa
 			bat "config.yaml"
         	;;
-
+#
+        -u|--update)
+            echo "Updating configurations and pushing to the repo"
+            $HOME/Documents/configs/update.sh
+            ;;
+        -i|--install)
+            echo "Updating configurations and pushing to the repo"
+            $HOME/Documents/configs/install.sh
+            ;;
+#
         -h|--help)
             echo "Usage: cf [option]"
             echo "Options: sh, micro, kitty, code, zed, keymap, -h/--help"

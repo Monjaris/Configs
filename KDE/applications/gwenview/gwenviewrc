@@ -10,26 +10,26 @@ ThumbnailSplitterSizes=718,205
 MenuBar=Disabled
 
 [Recent Files]
-File1[$e]=$HOME/Pictures/Screenshots/ss-26.04.12_13:12.png
-File10[$e]=$HOME/Pictures/bg/pexels-sanat-anghan-25736600-6785277.jpg
-File2[$e]=$HOME/Pictures/Screenshots/ss-26.04.13_20:35.png
-File3[$e]=$HOME/Pictures/Screenshots/ss-26.04.15_22:26.png
-File4[$e]=$HOME/Pictures/Screenshots/f248879976.png
-File5[$e]=$HOME/Pictures/Screenshots/ss-26.04.15_22:28.png
-File6[$e]=$HOME/Pictures/Screenshots/ss-26.04.15_23:59.png
-File7[$e]=$HOME/dev/repos/raylib/examples/shapes/screenshot000.png
-File8[$e]=$HOME/dev/repos/raylib/examples/shapes/shapes_collision_ellipses.png
-File9[$e]=$HOME/Pictures/bg/pexels-roacunha-2531709.jpg
-Name1[$e]=ss-26.04.12_13:12.png
-Name10[$e]=pexels-sanat-anghan-25736600-6785277.jpg
-Name2[$e]=ss-26.04.13_20:35.png
-Name3[$e]=ss-26.04.15_22:26.png
-Name4[$e]=f248879976.png
-Name5[$e]=ss-26.04.15_22:28.png
-Name6[$e]=ss-26.04.15_23:59.png
-Name7[$e]=screenshot000.png
-Name8[$e]=shapes_collision_ellipses.png
-Name9[$e]=pexels-roacunha-2531709.jpg
+File1[$e]=$HOME/Pictures/Screenshots/ss-26.04.13_20:35.png
+File10[$e]=$HOME/Downloads/7d563b5d-5b69-4e16-b875-2a6ac7b96eff.webp
+File2[$e]=$HOME/Pictures/Screenshots/ss-26.04.15_22:26.png
+File3[$e]=$HOME/Pictures/Screenshots/f248879976.png
+File4[$e]=$HOME/Pictures/Screenshots/ss-26.04.15_22:28.png
+File5[$e]=$HOME/Pictures/Screenshots/ss-26.04.15_23:59.png
+File6[$e]=$HOME/dev/repos/raylib/examples/shapes/screenshot000.png
+File7[$e]=$HOME/dev/repos/raylib/examples/shapes/shapes_collision_ellipses.png
+File8[$e]=$HOME/Pictures/bg/pexels-roacunha-2531709.jpg
+File9[$e]=$HOME/Pictures/bg/pexels-sanat-anghan-25736600-6785277.jpg
+Name1[$e]=ss-26.04.13_20:35.png
+Name10[$e]=7d563b5d-5b69-4e16-b875-2a6ac7b96eff.webp
+Name2[$e]=ss-26.04.15_22:26.png
+Name3[$e]=f248879976.png
+Name4[$e]=ss-26.04.15_22:28.png
+Name5[$e]=ss-26.04.15_23:59.png
+Name6[$e]=screenshot000.png
+Name7[$e]=shapes_collision_ellipses.png
+Name8[$e]=pexels-roacunha-2531709.jpg
+Name9[$e]=pexels-sanat-anghan-25736600-6785277.jpg
 
 [SideBar]
 InformationSplitterSizes=218,257

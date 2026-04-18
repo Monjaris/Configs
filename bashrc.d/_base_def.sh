@@ -17,7 +17,6 @@ alias term='f(){ kitty bash -ic "$*; exec bash"; }; f; unset -f f'
 alias yat='systemctl sleep || systemctl suspend'
 alias xxx='exit'
 
-
 # Useful-Aliases
 alias fuckman='echo removing pacman lock..; sudo rm /var/lib/pacman/db.lck'
 alias rmorphans='sudo pacman -Rns $(pacman -Qtdq)'
@@ -34,6 +33,10 @@ alias ip='ip -color'
 alias jerrors='type jerrors; journalctl -p 3 -xb --pager-end'
 alias journal='type journal; journalctl --no-pager -l'
 
+
+silent () {
+    bash -c "$*" >/dev/null 2>&1 || true
+}
 
 rmfolder () {
     local folder="$1"
@@ -160,6 +163,38 @@ run () {
     bash --login -i -c "$@" &>/dev/null &
     disown
     exit
+}
+
+
+# Translate text
+trl () {
+    local engine="google"; local flags=""; 
+    local src="en"; local dest="az"; local text=""
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -e)
+                engine="$2"; shift 2
+                ;;
+            -s|-src)
+                src="$2"; shift 2
+                ;;
+            -d|-dest)
+                dest="$2"; shift 2
+                ;;
+            -r)
+                temp=$src; src=$dest; dest=$temp; shift
+                ;;
+            --)
+                shift; flags="$@"; break
+                ;;
+            *)
+                text="$1"; shift
+                ;;
+        esac
+    done
+    #
+    [[ -z "$text" ]] && return 1
+    trans -e "$engine" "$src:$dest" "$text" "$flags"
 }
 
 # Package/Command info

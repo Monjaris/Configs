@@ -18,6 +18,8 @@ _GREEN="\033[0;32m"
 _RESET="\033[0m"
 
 # --- HELPER FUNCTIONS ---
+alias ABONDONED='echo "[ABONDONED]:  " &&'
+
 run() {
     "$@"
     local status=$?
@@ -61,7 +63,7 @@ if [[ "$preinstall_deps" =~ $validator_regex ]]; then
         bash bat eza yazi micro keyd \
         kitty konsole code code-marketplace zed
     paru -S --needed \
-        ttf-jetbrains-mono otf-jetbrains-mono
+        ttf-jetbrains-mono
 fi
 
 # ==========================================
@@ -73,17 +75,17 @@ mkdir -p "$CONFIGD/bashrc.d"
 
 # copy configs from repo -> system
 run command cp -rav -- "./bashrc.d"                  "$CONFIGD/bashrc.d/.."
-# cpx -av -- "./xremap/config.yml"                   "$CONFIGD/xremap/config.yml"
+# ABONDONED cpx -av -- "./xremap/config.yml"                   "$CONFIGD/xremap/config.yml"
 scpx -av -- "./keyd/default.conf"                    "/etc/keyd/default.conf"
-cpx -av -- "./vscode/settings.json"                  "$CONFIGD/Code - OSS/User/settings.json"
-cpx -av -- "./vscode/keybindings.json"               "$CONFIGD/Code - OSS/User/keybindings.json"
+cpx -av -- "./vscode/settings.json"                  "$CONFIGD/$VSC_D/User/settings.json"
+cpx -av -- "./vscode/keybindings.json"               "$CONFIGD/$VSC_D/User/keybindings.json"
 cpx -av -- "./zed/settings.json"                     "$CONFIGD/zed/settings.json"
 cpx -av -- "./zed/keymap.json"                       "$CONFIGD/zed/keymap.json"
 cpx -av -- "./kitty/kitty.conf"                      "$CONFIGD/kitty/kitty.conf"
 cpx -av -- "./kitty/keymap.conf"                     "$CONFIGD/kitty/keymap.conf"
 cpx -av -- "./fastfetch/config.jsonc"                "$CONFIGD/fastfetch/config.jsonc"
 cpx -av -- "./fastfetch/default.jsonc"               "$CONFIGD/fastfetch/default.jsonc"
-# cpx -av -- "./lf/lfrc"                             "$CONFIGD/lf/lfrc"
+# ABONDONED cpx -av -- "./lf/lfrc"                             "$CONFIGD/lf/lfrc"
 cpx -av -- "./yazi/yazi.toml"                        "$CONFIGD/yazi/yazi.toml"
 cpx -av -- "./micro/settings.json"                   "$CONFIGD/micro/settings.json"
 cpx -av -- "./micro/bindings.json"                   "$CONFIGD/micro/bindings.json"
@@ -141,5 +143,5 @@ fi
 [ -f "$KDE_CONF_D/applications/krita/kritashortcutsrc" ] && cpx -av -- "$KDE_CONF_D/applications/krita/kritashortcutsrc" "$CONFIGD/kritashortcutsrc"
 
 
-echo -e "\n${_GREEN}✅ Installation finished.${_RESET}"
+echo -e "\n${_GREEN}Installation finished.${_RESET}"
 echo "You may need to restart some applications for changes to take effect."

@@ -17,6 +17,8 @@ _BOLD_RED="\033[1;31m"
 _RESET="\033[0m"
 
 # --- HELPER FUNCTIONS ---
+alias ABONDONED='echo "[ABONDONED]:  " &&'
+
 run() {
     "$@" || echo -e "${_BOLD_RED}Error at line ${BASH_LINENO[0]}: $*${_RESET}"
 }
@@ -46,7 +48,7 @@ cd "$SCRIPT_DIR" || exit 1
 CONFIGD=$HOME/.config
 
 BASH_CONFIG_DIR=$CONFIGD/bashrc.d
-# XREMAP_CONFIG=$CONFIGD/xremap/config.yml
+XREMAP_CONFIG=$CONFIGD/xremap/config.yml # abondoned
 KEYD_CONFIG=/etc/keyd/default.conf
 VSCODE_SETTINGS="$CONFIGD/Code - OSS/User/settings.json"
 VSCODE_KEYMAP="$CONFIGD/Code - OSS/User/keybindings.json"
@@ -56,7 +58,7 @@ KITTY_SETTINGS=$CONFIGD/kitty/kitty.conf
 KITTY_KEYMAP=$CONFIGD/kitty/keymap.conf
 FASTFETCH_CONFIG=$CONFIGD/fastfetch/config.jsonc
 FASTFETCH_DEFAULT=$CONFIGD/fastfetch/default.jsonc
-# LF_CONFIG=$CONFIGD/lf/lfrc
+LF_CONFIG=$CONFIGD/lf/lfrc # abondoned
 YAZI_CONFIG=$CONFIGD/yazi/yazi.toml
 MICRO_SETTINGS=$CONFIGD/micro/settings.json
 MICRO_KEYMAP=$CONFIGD/micro/bindings.json
@@ -65,7 +67,7 @@ BRAVE_PREFS=$CONFIGD/BraveSoftware/Brave-Browser/Default/Preferences
 CLANGD_CONFIG=$CONFIGD/clangd/config.yaml
 
 run command cp -rav -- "$BASH_CONFIG_DIR"      "./bashrc.d/.."
-# rcp -av -- "$XREMAP_CONFIG"                  "./xremap/config.yml"
+ABONDONED rcp -av -- "$XREMAP_CONFIG"                  "./xremap/config.yml"
 su_rcp -av -- "$KEYD_CONFIG"                   "./keyd/default.conf"
 rcp -av -- "$VSCODE_SETTINGS"                  "./vscode/settings.json"
 rcp -av -- "$VSCODE_KEYMAP"                    "./vscode/keybindings.json"
@@ -75,7 +77,7 @@ rcp -av -- "$KITTY_SETTINGS"                   "./kitty/kitty.conf"
 rcp -av -- "$KITTY_KEYMAP"                     "./kitty/keymap.conf"
 rcp -av -- "$FASTFETCH_CONFIG"                 "./fastfetch/config.jsonc"
 rcp -av -- "$FASTFETCH_DEFAULT"                "./fastfetch/default.jsonc"
-# rcp -av -- "$LF_CONFIG"                      "./lf/lfrc"
+ABONDONED rcp -av -- "$LF_CONFIG"                      "./lf/lfrc"
 rcp -av -- "$YAZI_CONFIG"                      "./yazi/yazi.toml"
 rcp -av -- "$MICRO_SETTINGS"                   "./micro/settings.json"
 rcp -av -- "$MICRO_KEYMAP"                     "./micro/bindings.json"

@@ -1,0 +1,25 @@
+# Inline hints
+InlayHints:
+  ParameterNames: No
+  DeducedTypes: No
+  Designators: No
+
+
+# Diagnostics
+Diagnostics:
+  Suppress:
+    - unused-includes
+    - unused-variable
+  UnusedIncludes: None
+
+  ClangTidy:
+    Remove: [modernize-use-trailing-return-type]
+
+# AutoCompletion
+Completion:
+  AllScopes: Yes
+  HeaderInsertion: Never
+
+# Hover action
+Hover:
+  ShowAKA: Yes

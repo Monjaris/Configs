@@ -33,6 +33,12 @@ scpx() {
     run sudo cp "$@"
 }
 
+prompt() {
+    local out="$1"
+    read -rp "$(echo -e "${_GREEN}:: ${_RESET}Install Dependencies? [Y/n] ")" "$out"
+}
+alias validator_regex='^[Yy]$|^$'
+
 # --- SCRIPT DIR ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR" || exit 1
@@ -40,13 +46,17 @@ cd "$SCRIPT_DIR" || exit 1
 echo -e "${_GREEN}:: Installing configs from repo to system...${_RESET}"
 
 preinstall_deps="N"
-read -rp "$(echo -e "${_GREEN}:: ${_RESET}Install Dependencies? [Y/n] ")" preinstall_deps
+prompt "$preinstall_deps"
 
-if [[ "$preinstall_deps" =~ ^[Yy]$|^$ ]]; then
+if [[ "$preinstall_deps" =~ "$validator_regex" ]]; then
     sudo pacman -S --needed \
-        bash bat yazi micro keyd \
-        kitty konsole code code-martkeplace
-        zed
+        bash bat eza yazi micro keyd \
+        kitty konsole code code-martkeplace zed
+
+    # Install fonts
+    paru -S --needed ttf-jetbrains-mono otf-jetbrains-mono \
+        sudo pacman -S --needed ttf-jetbrains-mono \
+        echo -e "${_BOLD_RED}Fonts not found in repos, skipping...${_RESET}"
 fi
 
 # ==========================================
@@ -56,9 +66,9 @@ CONFIGD=$HOME/.config
 
 # create folders which may have not be there already
 mkdir -p "$CONFIGD/.bashrc.d"
-mkdir -p "$CONFIGD/fastfetch"
-mkdir -p "$CONFIGD/yazi"
-mkdir -p "$CONFIGD/bat"
+# mkdir -p "$CONFIGD/fastfetch"
+# mkdir -p "$CONFIGD/yazi"
+# mkdir -p "$CONFIGD/bat"
 
 # copy configs from repo -> system
 run command cp -rav -- "./bashrc.d"                  "$CONFIGD/bashrc.d/.."
@@ -77,6 +87,7 @@ cpx -av -- "./yazi/yazi.toml"                        "$CONFIGD/yazi/yazi.toml"
 cpx -av -- "./micro/settings.json"                   "$CONFIGD/micro/settings.json"
 cpx -av -- "./micro/bindings.json"                   "$CONFIGD/micro/bindings.json"
 cpx -av -- "./bat/config"                            "$CONFIGD/bat/config"
+cpx -av -- "./brave/Default/Preferences"              "$CONFIGD/BraveSoftware/Brave-Browser"
 
 
 # ==========================================

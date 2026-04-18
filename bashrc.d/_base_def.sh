@@ -74,42 +74,31 @@ rmfolder () {
 }
 
 
+# === PACKAGE MANAGER HELPERS ===
 new () {
-	local pkg="$@"
-	echo "Pacman install wrapper"
-	echo ":: Search!"
-	pacman -Ss "$pkg"
-	sleep 1
-	echo ":: Install"
-	sudo pacman -S --needed "$pkg"
+	printf "${UBLUE}:: pacman${CLR0} — install new packages\n\n"
+	printf "${BWHITE}:: Search${CLR0}\n"
+	for pkg in "$@"; do
+		pacman -Ss "$pkg"
+	done
+	printf "${BWHITE}:: Install${CLR0}\n"
+	sudo pacman -S --needed "$@"
 }
-
+#
 aunew () {
-	tput setaf 5;
-    echo " AUR package manager wrapper"
-    echo "Install packages with *PARU* from aur"
-    tput sgr;
-    for pkg in "$@"; do
-        # check if package is already installed
-        if pacman -Qi "$pkg" &>/dev/null; then
-        	tput setaf 4
-            echo "✅ $pkg is already installed, skipping."
-            tput sgr
-        else
-        	tput setaf 2
-            echo "⬇️ Installing $pkg..."
-            paru -S "$pkg"
-            tput sgr
-        fi
-    done
+	printf "${UYELLOW}:: paru${CLR0} — install new packages from AUR\n\n"
+	for pkg in "$@"; do
+		printf "${BWHITE}:: Install${CLR0} ${BYELLOW}%s${CLR0}\n" "$pkg"
+		paru -S --needed "$pkg"
+	done
 }
-
+#
 pacrem () {
 	local pkg="$@"
-	echo "Pacman remove wrapper"
-	echo ":: Search!"
+	printf "${UBLUE}:: pacman${CLR0} — remove packages\n\n"
+	printf "${BWHITE}:: Search${CLR0}\n"
 	pacman -Qs "$pkg"
-	echo ":: Remove"
+	printf "${BWHITE}:: Remove${CLR0}\n"
 	sudo pacman -Rns "$pkg"
 }
 

@@ -63,65 +63,76 @@ YAZI_CONFIG=$CONFIGD/yazi/yazi.toml
 MICRO_SETTINGS=$CONFIGD/micro/settings.json
 MICRO_KEYMAP=$CONFIGD/micro/bindings.json
 BAT_CONFIG=$CONFIGD/bat/config
+BRAVE_CONFIG=$CONFIGD/BraveSoftware/Brave-Browser
+CLANGD_CONFIG=$CONFIGD/clangd/config.yaml
 
-# copy configs
-run command cp -rav -- "$BASH_CONFIG_DIR"   "./bashrc.d/.."
-# rcp -av -- "$XREMAP_CONFIG"               "./xremap/config.yml"
-su_rcp -av -- "$KEYD_CONFIG"                 "./keyd/default.conf"
-rcp -av -- "$VSCODE_SETTINGS"              "./vscode/settings.json"
-rcp -av -- "$VSCODE_KEYMAP"               "./vscode/keybindings.json"
-rcp -av -- "$ZED_SETTINGS"                "./zed/settings.json"
-rcp -av -- "$ZED_KEYMAP"                  "./zed/keymap.json"
-rcp -av -- "$KITTY_SETTINGS"              "./kitty/kitty.conf"
-rcp -av -- "$KITTY_KEYMAP"               "./kitty/keymap.conf"
-rcp -av -- "$FASTFETCH_CONFIG"            "./fastfetch/config.jsonc"
-rcp -av -- "$FASTFETCH_DEFAULT"           "./fastfetch/default.jsonc"
-# rcp -av -- "$LF_CONFIG"                  "./lf/lfrc"
-rcp -av -- "$YAZI_CONFIG"                 "./yazi/yazi.toml"
-rcp -av -- "$MICRO_SETTINGS"              "./micro/settings.json"
-rcp -av -- "$MICRO_KEYMAP"               "./micro/bindings.json"
-rcp -av -- "$BAT_CONFIG"                  "./bat/config"
+# COPY CONFIGS IN
+# autostart
+if [ -d "$HOME/.config/autostart" ]; then
+    mkdir -p "$KDE_CONF_D/applications/autostart"
+    run command cp -av -- "$HOME/.config/autostart/"* "$KDE_CONF_D/applications/autostart/" 2>/dev/null
+fi
+run command cp -rav -- "$BASH_CONFIG_DIR"      "./bashrc.d/.."
+# rcp -av -- "$XREMAP_CONFIG"                  "./xremap/config.yml"
+su_rcp -av -- "$KEYD_CONFIG"                   "./keyd/default.conf"
+rcp -av -- "$VSCODE_SETTINGS"                  "./vscode/settings.json"
+rcp -av -- "$VSCODE_KEYMAP"                    "./vscode/keybindings.json"
+rcp -av -- "$ZED_SETTINGS"                     "./zed/settings.json"
+rcp -av -- "$ZED_KEYMAP"                       "./zed/keymap.json"
+rcp -av -- "$KITTY_SETTINGS"                   "./kitty/kitty.conf"
+rcp -av -- "$KITTY_KEYMAP"                     "./kitty/keymap.conf"
+rcp -av -- "$FASTFETCH_CONFIG"                 "./fastfetch/config.jsonc"
+rcp -av -- "$FASTFETCH_DEFAULT"                "./fastfetch/default.jsonc"
+# rcp -av -- "$LF_CONFIG"                      "./lf/lfrc"
+rcp -av -- "$YAZI_CONFIG"                      "./yazi/yazi.toml"
+rcp -av -- "$MICRO_SETTINGS"                   "./micro/settings.json"
+rcp -av -- "$MICRO_KEYMAP"                     "./micro/bindings.json"
+rcp -av -- "$BAT_CONFIG"                       "./bat/config"
+rcp -av -- "$BRAVE_CONFIG/Default/Preferences" "./brave/Default/Preferences"
+rcp -av -- "$CLANGD_CONFIG"                   "./clangd/config.yaml"
 
 
 # ==========================================
-# KDE CONFIGS
+# DE CONFIGS
 # ==========================================
 KDE_CONF_D="$HOME/Documents/configs/KDE"
-mkdir -p "$KDE_CONF_D"/{plasma,applications}
+mkdir -p "$KDE_CONF_D"/{ \
+    plasma, konsole, dolphin, gwenview, haruna, krita \
+}
 
 
 # ---- PLASMA (D.E. config files)
 rcp -av -- "$HOME/.local/share/color-schemes/Main.colors" "$KDE_CONF_D/plasma/Main.colors"
+# global keyboard shortcuts copying
 
 
-# ---- APPLICATIONs
+# ---- APPLICATIONS
 # Konsole profiles
 if [ -d "$HOME/.local/share/konsole" ]; then
     mkdir -p "$KDE_CONF_D/applications/konsole"
     run command cp -av -- "$HOME/.local/share/konsole/"* "$KDE_CONF_D/applications/konsole/" 2>/dev/null
 fi
-# Autostart
-if [ -d "$HOME/.config/autostart" ]; then
-    mkdir -p "$KDE_CONF_D/applications/autostart"
-    run command cp -av -- "$HOME/.config/autostart/"* "$KDE_CONF_D/applications/autostart/" 2>/dev/null
-fi
 
 
-# ---- .gitignore for KDE
-GITIGNORE="$KDE_CONF_D/.gitignore"
-if [ ! -f "$GITIGNORE" ]; then
-    cat > "$GITIGNORE" <<'EOT'
-# ignore hardware-specific and cache stuff
-plasma-org.kde.plasma.desktop-appletsrc
-.local/share/kscreen/
-.config/kscreen*
-**/session/
-**/cache/
-**/thumbnails/
-kwallet*
-EOT
-    echo "[kde-export] created .gitignore"
-fi
+# are the lines below even needed?
+# # ---- .gitignore for KDE
+# GITIGNORE="$KDE_CONF_D/.gitignore"
+# if [ ! -f "$GITIGNORE" ]; then
+#     cat > "$GITIGNORE" <<'EOT'
+# # ignore hardware-specific and cache stuff
+# plasma-org.kde.plasma.desktop-appletsrc
+# .local/share/kscreen/
+# .config/kscreen*
+# **/session/
+# **/cache/
+# **/thumbnails/
+# kwallet*
+# EOT
+#     echo "[kde-export] created .gitignore"
+# fi
+
+
+
 
 # ==========================================
 # GIT PUSH

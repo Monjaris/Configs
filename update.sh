@@ -28,11 +28,12 @@ rcp() {
     run command cp "$@"
 }
 
-# Same but with sudo for root-owned files
+# Same but with sudo for root-owned files — chowns dest back so git can stage it
 su_rcp() {
     local dest="${@: -1}"
     mkdir -p "$(dirname "$dest")"
     run sudo cp "$@"
+    run sudo chown "$USER:$USER" "$dest"
 }
 
 # --- SCRIPT DIR ---
@@ -82,12 +83,6 @@ rcp -av -- "$BAT_CONFIG"                       "./bat/config"
 rcp -av -- "$BRAVE_PREFS"                      "./brave/Default/Preferences"
 rcp -av -- "$CLANGD_CONFIG"                    "./clangd/config.yaml"
 
-# Autostart
-if [ -d "$CONFIGD/autostart" ]; then
-    mkdir -p "./autostart"
-    run command cp -av -- "$CONFIGD/autostart/"* "./autostart/" 2>/dev/null
-fi
-
 
 # ==========================================
 # KDE CONFIGS
@@ -95,7 +90,14 @@ fi
 # NOTE: KDE_CONF_D must be defined before any block that uses it
 KDE_CONF_D="$SCRIPT_DIR/KDE"
 
-mkdir -p "$KDE_CONF_D"/{plasma,applications/{konsole,kwin/scripts,dolphin,gwenview,haruna,krita}}
+mkdir -p \
+    "$KDE_CONF_D/plasma" \
+    "$KDE_CONF_D/applications/konsole" \
+    "$KDE_CONF_D/applications/kwin/scripts" \
+    "$KDE_CONF_D/applications/dolphin" \
+    "$KDE_CONF_D/applications/gwenview" \
+    "$KDE_CONF_D/applications/haruna" \
+    "$KDE_CONF_D/applications/krita"
 
 # ---- PLASMA
 rcp -av -- "$HOME/.local/share/color-schemes/Main.colors" "$KDE_CONF_D/plasma/Main.colors"
@@ -111,6 +113,11 @@ fi
 # KWin scripts
 if [ -d "$HOME/.local/share/kwin/scripts" ]; then
     run command cp -av -- "$HOME/.local/share/kwin/scripts/"* "$KDE_CONF_D/applications/kwin/scripts/" 2>/dev/null
+fi
+
+# Autostart
+if [ -d "$CONFIGD/autostart" ]; then
+    run command cp -av -- "$CONFIGD/autostart/"* "$KDE_CONF_D/applications/autostart/" 2>/dev/null
 fi
 
 # Dolphin

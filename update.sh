@@ -1,7 +1,7 @@
 #!/bin/bash
 # ==========================================
-# My personal configuration enviroment repo's applying and pushing script
-# Installation script is in the same directory (install.sh)
+# My personal configuration environment repo's update script
+# Copies configs FROM system TO this repo, then git pushes
 # ==========================================
 
 set -o pipefail
@@ -9,33 +9,31 @@ shopt -s nullglob
 
 # ask for sudo upfront
 sudo -v
-# kill su previlage on exit
+# kill su privilege on exit
 trap 'sudo -k' EXIT
 
 # --- COLORS ---
 _BOLD_RED="\033[1;31m"
 _RESET="\033[0m"
 
-# --- HELPER FUNCTION ---
-# Run a command, if fails, print line in red, continue
+# --- HELPER FUNCTIONS ---
 run() {
     "$@" || echo -e "${_BOLD_RED}Error at line ${BASH_LINENO[0]}: $*${_RESET}"
 }
 
-# Copy with auto mkdir for destination — grabs last arg as destination path
+# Copy with auto mkdir for destination
 rcp() {
-    local dest="${!#}"
+    local dest="${@: -1}"
     mkdir -p "$(dirname "$dest")"
     run command cp "$@"
 }
 
-# Same as above but with sudo for root-owned files
+# Same but with sudo for root-owned files
 su_rcp() {
-    local dest="${!#}"
+    local dest="${@: -1}"
     mkdir -p "$(dirname "$dest")"
     run sudo cp "$@"
 }
-
 
 # --- SCRIPT DIR ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -46,7 +44,6 @@ cd "$SCRIPT_DIR" || exit 1
 # ==========================================
 CONFIGD=$HOME/.config
 
-## PROGRAMS
 BASH_CONFIG_DIR=$CONFIGD/bashrc.d
 # XREMAP_CONFIG=$CONFIGD/xremap/config.yml
 KEYD_CONFIG=/etc/keyd/default.conf
@@ -63,15 +60,9 @@ YAZI_CONFIG=$CONFIGD/yazi/yazi.toml
 MICRO_SETTINGS=$CONFIGD/micro/settings.json
 MICRO_KEYMAP=$CONFIGD/micro/bindings.json
 BAT_CONFIG=$CONFIGD/bat/config
-BRAVE_CONFIG=$CONFIGD/BraveSoftware/Brave-Browser
+BRAVE_PREFS=$CONFIGD/BraveSoftware/Brave-Browser/Default/Preferences
 CLANGD_CONFIG=$CONFIGD/clangd/config.yaml
 
-# COPY CONFIGS IN
-# autostart
-if [ -d "$HOME/.config/autostart" ]; then
-    mkdir -p "$KDE_CONF_D/applications/autostart"
-    run command cp -av -- "$HOME/.config/autostart/"* "$KDE_CONF_D/applications/autostart/" 2>/dev/null
-fi
 run command cp -rav -- "$BASH_CONFIG_DIR"      "./bashrc.d/.."
 # rcp -av -- "$XREMAP_CONFIG"                  "./xremap/config.yml"
 su_rcp -av -- "$KEYD_CONFIG"                   "./keyd/default.conf"
@@ -88,50 +79,53 @@ rcp -av -- "$YAZI_CONFIG"                      "./yazi/yazi.toml"
 rcp -av -- "$MICRO_SETTINGS"                   "./micro/settings.json"
 rcp -av -- "$MICRO_KEYMAP"                     "./micro/bindings.json"
 rcp -av -- "$BAT_CONFIG"                       "./bat/config"
-rcp -av -- "$BRAVE_CONFIG/Default/Preferences" "./brave/Default/Preferences"
-rcp -av -- "$CLANGD_CONFIG"                   "./clangd/config.yaml"
+rcp -av -- "$BRAVE_PREFS"                      "./brave/Default/Preferences"
+rcp -av -- "$CLANGD_CONFIG"                    "./clangd/config.yaml"
+
+# Autostart
+if [ -d "$CONFIGD/autostart" ]; then
+    mkdir -p "./autostart"
+    run command cp -av -- "$CONFIGD/autostart/"* "./autostart/" 2>/dev/null
+fi
 
 
 # ==========================================
-# DE CONFIGS
+# KDE CONFIGS
 # ==========================================
-KDE_CONF_D="$HOME/Documents/configs/KDE"
-mkdir -p "$KDE_CONF_D"/{ \
-    plasma, konsole, dolphin, gwenview, haruna, krita \
-}
+# NOTE: KDE_CONF_D must be defined before any block that uses it
+KDE_CONF_D="$SCRIPT_DIR/KDE"
 
+mkdir -p "$KDE_CONF_D"/{plasma,applications/{konsole,kwin/scripts,dolphin,gwenview,haruna,krita}}
 
-# ---- PLASMA (D.E. config files)
+# ---- PLASMA
 rcp -av -- "$HOME/.local/share/color-schemes/Main.colors" "$KDE_CONF_D/plasma/Main.colors"
-# global keyboard shortcuts copying
-
+rcp -av -- "$CONFIGD/kglobalshortcutsrc"                  "$KDE_CONF_D/plasma/kglobalshortcutsrc"
+rcp -av -- "$CONFIGD/khotkeysrc"                          "$KDE_CONF_D/plasma/khotkeysrc"
 
 # ---- APPLICATIONS
 # Konsole profiles
 if [ -d "$HOME/.local/share/konsole" ]; then
-    mkdir -p "$KDE_CONF_D/applications/konsole"
     run command cp -av -- "$HOME/.local/share/konsole/"* "$KDE_CONF_D/applications/konsole/" 2>/dev/null
 fi
 
+# KWin scripts
+if [ -d "$HOME/.local/share/kwin/scripts" ]; then
+    run command cp -av -- "$HOME/.local/share/kwin/scripts/"* "$KDE_CONF_D/applications/kwin/scripts/" 2>/dev/null
+fi
 
-# are the lines below even needed?
-# # ---- .gitignore for KDE
-# GITIGNORE="$KDE_CONF_D/.gitignore"
-# if [ ! -f "$GITIGNORE" ]; then
-#     cat > "$GITIGNORE" <<'EOT'
-# # ignore hardware-specific and cache stuff
-# plasma-org.kde.plasma.desktop-appletsrc
-# .local/share/kscreen/
-# .config/kscreen*
-# **/session/
-# **/cache/
-# **/thumbnails/
-# kwallet*
-# EOT
-#     echo "[kde-export] created .gitignore"
-# fi
+# Dolphin
+[ -f "$CONFIGD/dolphinrc" ] && rcp -av -- "$CONFIGD/dolphinrc" "$KDE_CONF_D/applications/dolphin/dolphinrc"
 
+# Gwenview
+[ -f "$CONFIGD/gwenviewrc" ] && rcp -av -- "$CONFIGD/gwenviewrc" "$KDE_CONF_D/applications/gwenview/gwenviewrc"
 
+# Haruna
+if [ -d "$CONFIGD/haruna" ]; then
+    run command cp -av -- "$CONFIGD/haruna/"* "$KDE_CONF_D/applications/haruna/" 2>/dev/null
+fi
+
+# Krita
+[ -f "$CONFIGD/kritarc" ] && rcp -av -- "$CONFIGD/kritarc" "$KDE_CONF_D/applications/krita/kritarc"
 
 
 # ==========================================
@@ -163,14 +157,14 @@ run git add .
 # commit only if changes exist
 if ! git diff --cached --quiet; then
     COMMIT_MSG="update configs: $(date '+%Y-%m-%d %H:%M')"
-    echo "[git] committing"
+    echo ":: [git] committing"
     run git commit -m "$COMMIT_MSG"
 else
-    echo "[git] nothing to commit"
+    echo ":: [git] nothing to commit"
 fi
 
 # push
-echo "[git] pushing to $BRANCH"
+echo ":: [git] pushing to $BRANCH"
 run git push -u origin "$BRANCH"
 
-echo -e "\n✅ Apply & push script finished."
+echo -e "\nUpdate & push finished."

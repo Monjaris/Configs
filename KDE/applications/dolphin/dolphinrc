@@ -1,0 +1,59 @@
+MenuBar=Disabled
+
+[ContentDisplay]
+DirectorySizeMode=ContentSize
+ElidingMode=Right
+RecursiveDirectorySizeLimit=20
+UsePermissionsFormat=CombinedFormat
+
+[ContextMenu]
+ShowCopyMoveMenu=true
+
+[ExtractDialog]
+1670x1043 screen: Height=522
+1670x1043 screen: Width=1113
+DirHistory[$e]=$HOME/dev/tools/zenitc/
+
+[General]
+BrowseThroughArchives=true
+DoubleClickViewAction=open_terminal
+EditableUrl=true
+GlobalViewProps=false
+ShowFullPath=true
+ShowFullPathInTitlebar=true
+ShowToolTips=true
+SortingChoice=CaseSensitiveSorting
+UseTabForSwitchingSplitView=true
+Version=202
+ViewPropsTimestamp=2026,1,29,21,11,35.778
+
+[IconsMode]
+IconSize=48
+MaximumTextLines=1
+PreviewSize=80
+UseSystemFont=false
+
+[InformationPanel]
+dateFormat=ShortFormat
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[MainWindow]
+MenuBar=Disabled
+
+[Notification Messages]
+warnAboutRisksBeforeActingAsAdmin=false
+
+[PreviewSettings]
+Plugins=appimagethumbnail,audiothumbnail,glycin-heif,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,glycin-image-rs,jpegthumbnail,glycin-jxl,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,glycin-svg,svgthumbnail
+
+[Search]
+Location=Everywhere
+
+[kuick-copy]
+Paths[$e]=/run/media/ziya/Ventoy
+
+[kuick-move]
+Paths[$e]=/run/media/ziya/Ventoy

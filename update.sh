@@ -107,8 +107,8 @@ mkdir -p \
 
 # ---- PLASMA
 rcp -av -- "$HOME/.local/share/color-schemes/Main.colors" "$KDE_CONF_D/plasma/Main.colors"
-rcp -av -- "$CONFIGD/kglobalshortcutsrc"                  "$KDE_CONF_D/plasma/kglobalshortcutsrc"
-rcp -av -- "$CONFIGD/khotkeysrc"                          "$KDE_CONF_D/plasma/khotkeysrc"
+# rcp -av -- "$CONFIGD/kglobalshortcutsrc"                  "$KDE_CONF_D/plasma/kglobalshortcutsrc"
+# rcp -av -- "$CONFIGD/khotkeysrc"                          "$KDE_CONF_D/plasma/khotkeysrc"
 
 # ---- APPLICATIONS
 # Konsole profiles

@@ -153,8 +153,8 @@ prompt "Run postinstall?" postinstall
 if [[ "$postinstall" =~ $validator_regex ]]; then
     systemctl enable --now keyd # enable keyd
     fc-cache -fv # for fonts to refresh
-    echo "\n${_GREEN}Optional post-install execution finished!${_RESET}"
+    echo -e "\n${_GREEN}Optional post-install execution finished!${_RESET}"
 fi
 
-echo "\n\n${_GREEN} \
-    Your system is ready to reflect configurations, immediate reboot is optionally better" \
+echo -e "\n\n${_GREEN} \
+    Your system is ready to reflect configurations, immediate reboot is optionally better"

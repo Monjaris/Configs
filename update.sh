@@ -93,7 +93,7 @@ fi
 
 
 # ==========================================
-# KDE CONFIGS
+# DE CONFIGS
 # ==========================================
 # NOTE: KDE_CONF_D must be defined before any block that uses it
 KDE_CONF_D="$SCRIPT_DIR/KDE"

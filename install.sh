@@ -95,7 +95,7 @@ cpx -av -- "./clangd/config.yaml"                    "$CONFIGD/clangd/config.yam
 
 
 # ==========================================
-# KDE CONFIGS
+# DE CONFIGS
 # ==========================================
 KDE_CONF_D="$SCRIPT_DIR/KDE"
 

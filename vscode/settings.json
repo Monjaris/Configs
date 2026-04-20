@@ -8,7 +8,7 @@
 
     ///  Editor
     "editor.fontFamily": "JetBrainsMono Nerd Font Mono",
-    "editor.fontSize": 17.4,
+    "editor.fontSize": 17.2,
     "editor.fontWeight": "500",
     "editor.lineHeight": 1.4,
     "editor.cursorBlinking": "solid",
@@ -92,4 +92,5 @@
         "scminput": false
     },
     "claudeCode.preferredLocation": "panel",
+    "window.zoomLevel": 1,
 }

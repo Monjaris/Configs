@@ -50,8 +50,8 @@ validator_regex='^[Yy]$|^$'
 
 print_dots() {
     local iterations=3
-    local delay=0.3
-    local post_delay=0.5
+    local delay=0.25
+    local post_delay=0.35
 
     for ((i=0; i<iterations; i++)); do
         printf "."
@@ -73,10 +73,12 @@ prompt "Install Dependencies?" preinstall_deps
 # preinstall dependencies
 if [[ "$preinstall_deps" =~ $validator_regex ]]; then
     sudo pacman -S --needed \
-        bash bat eza yazi micro keyd \
-        kitty konsole code code-marketplace zed
+        bash git paru \
+        bat eza yazi micro keyd \
+        kitty konsole code zed
     paru -S --needed \
-        ttf-jetbrains-mono
+        ttf-jetbrains-mono ttf-fira-code ttf-comic-mono-git ttf-comic-neue
+        inter-font adobe-source-code-pro-fonts
 fi
 
 # ==========================================
@@ -124,12 +126,6 @@ if [ -d "$KDE_CONF_D/applications/konsole" ]; then
     run command cp -av -- "$KDE_CONF_D/applications/konsole/"* "$HOME/.local/share/konsole/" 2>/dev/null
 fi
 
-# KWin scripts
-if [ -d "$KDE_CONF_D/applications/kwin/scripts" ]; then
-    mkdir -p "$HOME/.local/share/kwin/scripts"
-    run command cp -av -- "$KDE_CONF_D/applications/kwin/scripts/"* "$HOME/.local/share/kwin/scripts/" 2>/dev/null
-fi
-
 # Autostart
 if [ -d "$KDE_CONF_D/applications/autostart" ]; then
     mkdir -p "$CONFIGD/autostart"
@@ -148,6 +144,7 @@ fi
 
 # Haruna
 if [ -d "$KDE_CONF_D/applications/haruna" ]; then
+    mkdir -p "$CONFIGD/haruna"
     run command cp -av -- "$KDE_CONF_D/applications/haruna/"* "$CONFIGD/haruna/" 2>/dev/null
 fi
 

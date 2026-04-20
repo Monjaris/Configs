@@ -7,6 +7,28 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "semantic_tokens": "off",
+  "completion_menu_scrollbar": "system",
+  "languages": {
+    "C++": {
+      "prettier": {
+        "parser": ""
+      },
+      "inlay_hints": {
+        "show_background": false,
+        "enabled": false
+      },
+      "completions": {
+        "words_min_length": 1,
+        "words": "enabled"
+      },
+      "show_whitespaces": "trailing",
+      "indent_guides": {
+        "background_coloring": "disabled",
+        "coloring": "fixed"
+      }
+    }
+  },
   "vim": {
     "toggle_relative_line_numbers": false
   },

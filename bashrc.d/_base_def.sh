@@ -90,9 +90,9 @@ new () {
 #
 aunew () {
 	printf "${UYELLOW}:: paru${CLR0} — install new packages from AUR\n\n"
+    printf "${BWHITE}:: Install${CLR0} ${BYELLOW}%s${CLR0}\n" "$pkg"
 	for pkg in "$@"; do
-		printf "${BWHITE}:: Install${CLR0} ${BYELLOW}%s${CLR0}\n" "$pkg"
-		paru -S --needed "$pkg"
+        paru -S --needed "$@"
 	done
 }
 #

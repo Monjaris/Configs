@@ -18,7 +18,6 @@
     }
   },
   {
-    "context": "Pane",
     "bindings": {
       "alt-l": "pane::ActivateNextItem"
     }
@@ -30,7 +29,6 @@
     }
   },
   {
-    "context": "Pane",
     "bindings": {
       "alt-k": "pane::ActivatePreviousItem"
     }
@@ -94,6 +92,16 @@
         "terminal::SendText",
         "\u001b."
       ]
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-shift-q": "zed::Quit"
+    }
+  },
+  {
+    "unbind": {
+      "ctrl-q": "zed::Quit"
     }
   }
 ]

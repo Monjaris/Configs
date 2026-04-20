@@ -1,0 +1,22 @@
+[Keyboard]
+NumLock=0
+RepeatDelay=225
+RepeatRate=32
+
+[Libinput][1267][12926][ELAN06FA:00 04F3:327E Mouse]
+Enabled=true
+NaturalScroll=true
+PointerAcceleration=0.400
+
+[Libinput][1267][12926][ELAN06FA:00 04F3:327E Touchpad]
+DisableWhileTyping=false
+NaturalScroll=true
+PointerAcceleration=0.400
+
+[Libinput][7247][52][SIGMACHIP Usb Mouse]
+Enabled=true
+NaturalScroll=true
+PointerAcceleration=0.200
+
+[Mouse]
+cursorSize=30

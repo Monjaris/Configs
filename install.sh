@@ -116,20 +116,21 @@ KDE_CONF_D="$SCRIPT_DIR/KDE"
 
 # ---- PLASMA
 cpx -av -- "$KDE_CONF_D/plasma/Main.colors"          "$HOME/.local/share/color-schemes/Main.colors"
-# cpx -av -- "$KDE_CONF_D/plasma/kglobalshortcutsrc"   "$CONFIGD/kglobalshortcutsrc"
-# cpx -av -- "$KDE_CONF_D/plasma/khotkeysrc"           "$CONFIGD/khotkeysrc"
+cpx -av -- "$KDE_CONF_D/plasma/kglobalshortcutsrc"   "$CONFIGD/kglobalshortcutsrc-nofmt"
+cpx -av -- "$KDE_CONF_D/plasma/kcminputrc"           "$CONFIGD/kcminputrc"
+cpx -av -- "$KDE_CONF_D/plasma/kdeglobals"           "$CONFIGD/kdeglobals"
 
 # ---- APPLICATIONS
 # Konsole profiles
 if [ -d "$KDE_CONF_D/applications/konsole" ]; then
     mkdir -p "$HOME/.local/share/konsole"
-    run command cp -av -- "$KDE_CONF_D/applications/konsole/"* "$HOME/.local/share/konsole/" 2>/dev/null
+    run command cp -av -- "$KDE_CONF_D/applications/konsole/"* "$HOME/.local/share/konsole/"
 fi
 
 # Autostart
 if [ -d "$KDE_CONF_D/applications/autostart" ]; then
     mkdir -p "$CONFIGD/autostart"
-    run command cp -av -- "$KDE_CONF_D/applications/autostart/"* "$CONFIGD/autostart/" 2>/dev/null
+    run command cp -av -- "$KDE_CONF_D/applications/autostart/"* "$CONFIGD/autostart/"
 fi
 
 # Dolphin
@@ -145,7 +146,7 @@ fi
 # Haruna
 if [ -d "$KDE_CONF_D/applications/haruna" ]; then
     mkdir -p "$CONFIGD/haruna"
-    run command cp -av -- "$KDE_CONF_D/applications/haruna/"* "$CONFIGD/haruna/" 2>/dev/null
+    run command cp -av -- "$KDE_CONF_D/applications/haruna/"* "$CONFIGD/haruna/"
 fi
 
 # Krita

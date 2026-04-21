@@ -72,18 +72,29 @@ prompt "Install Dependencies?" preinstall_deps
 
 # preinstall dependencies
 if [[ "$preinstall_deps" =~ $validator_regex ]]; then
-    # preinstall prominent packages
     sudo pacman -S --needed git base-devel
-    # install paru
-    cd ./MISC; \
-        git clone https://aur.archlinux.org/paru-bin.git && cd paru-bin && makepkg -si
-    cd ../.. && rm -rf ./MISC/paru-bin
+    # install yay via chaotic-aur if not already present
+    if ! command -v yay &>/dev/null; then
+        sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+        sudo pacman-key --lsign-key 3056513887B78AEB
+        sudo pacman -U --noconfirm \
+            'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
+        sudo pacman -U --noconfirm \
+            'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+        # append chaotic-aur to pacman.conf if not already there
+        if ! grep -q '\[chaotic-aur\]' /etc/pacman.conf; then
+            printf '\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist\n' \
+                | sudo tee -a /etc/pacman.conf
+        fi
+        sudo pacman -Sy
+        sudo pacman -S --needed yay
+    fi
     # install other packages
     sudo pacman -S --needed \
         bat eza yazi micro keyd \
         kitty konsole code zed
     # install the ones from AUR
-    paru -S --needed \
+    yay -S --needed \
         ttf-jetbrains-mono ttf-fira-code ttf-comic-mono-git ttf-comic-neue \
         inter-font adobe-source-code-pro-fonts
 fi

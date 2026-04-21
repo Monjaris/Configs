@@ -89,10 +89,10 @@ new () {
 }
 #
 aunew () {
-	printf "${UYELLOW}:: yay${CLR0} — install new packages from AUR\n\n"
+	printf "${UYELLOW}:: paru${CLR0} — install new packages from AUR\n\n"
     printf "${BWHITE}:: Install${CLR0} ${BYELLOW}%s${CLR0}\n" "$pkg"
 	for pkg in "$@"; do
-        yay -S --needed "$@"
+        paru -S --needed "$@"
 	done
 }
 #
@@ -208,8 +208,8 @@ wtf () {
         return 1
     fi
 
-    if ! command -v yay &>/dev/null; then
-        echo "⚠️  yay not found" >&2
+    if ! command -v paru &>/dev/null; then
+        echo "⚠️  paru not found" >&2
         return 1
     fi
 
@@ -231,7 +231,7 @@ wtf () {
 
     # Full info if requested
     if [[ "$verbose" == "?" ]]; then
-        yay -Si "$pkg_or_cmd"
+        paru -Si "$pkg_or_cmd"
     fi
 }
 

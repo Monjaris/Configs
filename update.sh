@@ -69,29 +69,29 @@ BRAVE_PREFS=$CONFIGD/BraveSoftware/Brave-Browser/Default/Preferences
 CLANGD_CONFIG=$CONFIGD/clangd/config.yaml
 
 run command cp -rav -- "$BASH_CONFIG_DIR"      "./bashrc.d/.."
-ABONDONED rcp -av -- "$XREMAP_CONFIG"                  "./xremap/config.yml"
-su_rcp -av -- "$KEYD_CONFIG"                   "./keyd/default.conf"
-rcp -av -- "$VSCODE_SETTINGS"                  "./vscode/settings.json"
-rcp -av -- "$VSCODE_KEYMAP"                    "./vscode/keybindings.json"
-rcp -av -- "$ZED_SETTINGS"                     "./zed/settings.json"
-rcp -av -- "$ZED_KEYMAP"                       "./zed/keymap.json"
+ABONDONED rcp -avu -- "$XREMAP_CONFIG"                  "./xremap/config.yml"
+su_rcp -avu -- "$KEYD_CONFIG"                   "./keyd/default.conf"
+rcp -avu -- "$VSCODE_SETTINGS"                  "./vscode/settings.json"
+rcp -avu -- "$VSCODE_KEYMAP"                    "./vscode/keybindings.json"
+rcp -avu -- "$ZED_SETTINGS"                     "./zed/settings.json"
+rcp -avu -- "$ZED_KEYMAP"                       "./zed/keymap.json"
 run command cp -rav -- "$ZED_THEME_D"          "./zed/extensions/one-dark-pro-clean/.."
-rcp -av -- "$KITTY_SETTINGS"                   "./kitty/kitty.conf"
-rcp -av -- "$KITTY_KEYMAP"                     "./kitty/keymap.conf"
-rcp -av -- "$FASTFETCH_CONFIG"                 "./fastfetch/config.jsonc"
-rcp -av -- "$FASTFETCH_DEFAULT"                "./fastfetch/default.jsonc"
-ABONDONED rcp -av -- "$LF_CONFIG"                      "./lf/lfrc"
-rcp -av -- "$YAZI_CONFIG"                      "./yazi/yazi.toml"
-rcp -av -- "$MICRO_SETTINGS"                   "./micro/settings.json"
-rcp -av -- "$MICRO_KEYMAP"                     "./micro/bindings.json"
-rcp -av -- "$BAT_CONFIG"                       "./bat/config"
-rcp -av -- "$BRAVE_PREFS"                      "./brave/Default/Preferences"
-rcp -av -- "$CLANGD_CONFIG"                    "./clangd/config.yaml"
+rcp -avu -- "$KITTY_SETTINGS"                   "./kitty/kitty.conf"
+rcp -avu -- "$KITTY_KEYMAP"                     "./kitty/keymap.conf"
+rcp -avu -- "$FASTFETCH_CONFIG"                 "./fastfetch/config.jsonc"
+rcp -avu -- "$FASTFETCH_DEFAULT"                "./fastfetch/default.jsonc"
+ABONDONED rcp -avu -- "$LF_CONFIG"                      "./lf/lfrc"
+rcp -avu -- "$YAZI_CONFIG"                      "./yazi/yazi.toml"
+rcp -avu -- "$MICRO_SETTINGS"                   "./micro/settings.json"
+rcp -avu -- "$MICRO_KEYMAP"                     "./micro/bindings.json"
+rcp -avu -- "$BAT_CONFIG"                       "./bat/config"
+rcp -avu -- "$BRAVE_PREFS"                      "./brave/Default/Preferences"
+rcp -avu -- "$CLANGD_CONFIG"                    "./clangd/config.yaml"
 
 # Autostart
 if [ -d "$CONFIGD/autostart" ]; then
     mkdir -p "./autostart"
-    run command cp -av -- "$CONFIGD/autostart/"* "./autostart/" 2>/dev/null
+    run command cp -avu -- "$CONFIGD/autostart/"* "./autostart/"
 fi
 
 
@@ -111,39 +111,42 @@ mkdir -p \
     "$KDE_CONF_D/applications/krita"
 
 # ---- PLASMA
-rcp -av -- "$HOME/.local/share/color-schemes/Main.colors" "$KDE_CONF_D/plasma/Main.colors"
-rcp -av -- "$CONFIGD/xsettingsd/xsettingsd.conf"          "$KDE_CONF_D/plasma/xsettingsd.conf"
-rcp -av -- "$CONFIGD/kglobalshortcutsrc"                  "$KDE_CONF_D/plasma/kglobalshortcutsrc"
-rcp -av -- "$CONFIGD/kcminputrc"                          "$KDE_CONF_D/plasma/kcminputrc"
-rcp -av -- "$CONFIGD/kdeglobals"                          "$KDE_CONF_D/plasma/kdeglobals"
-rcp -av -- "$CONFIGD/krunnerrc"                           "$KDE_CONF_D/plasma/krunnerrc"
-rcp -av -- "$CONFIGD/breezerc"                            "$KDE_CONF_D/plasma/breezerc"
-rcp -av -- "$CONFIGD/kwinrc"                              "$KDE_CONF_D/plasma/kwinrc"
+rcp -avu -- "$HOME/.local/share/color-schemes/Main.colors" "$KDE_CONF_D/plasma/Main.colors"
+rcp -avu -- "$CONFIGD/xsettingsd/xsettingsd.conf"          "$KDE_CONF_D/plasma/xsettingsd.conf"
+rcp -avu -- "$CONFIGD/kglobalshortcutsrc"                  "$KDE_CONF_D/plasma/kglobalshortcutsrc"
+rcp -avu -- "$CONFIGD/kcminputrc"                          "$KDE_CONF_D/plasma/kcminputrc"
+rcp -avu -- "$CONFIGD/kdeglobals"                          "$KDE_CONF_D/plasma/kdeglobals"
+rcp -avu -- "$CONFIGD/krunnerrc"                           "$KDE_CONF_D/plasma/krunnerrc"
+rcp -avu -- "$CONFIGD/breezerc"                            "$KDE_CONF_D/plasma/breezerc"
+rcp -avu -- "$CONFIGD/kwinrc"                              "$KDE_CONF_D/plasma/kwinrc"
 
 # ---- APPLICATIONS
 # Konsole profiles
 if [ -d "$HOME/.local/share/konsole" ]; then
-    run command cp -av -- "$HOME/.local/share/konsole/"* "$KDE_CONF_D/applications/konsole/"
+    run command cp -avu -- "$HOME/.local/share/konsole/"* "$KDE_CONF_D/applications/konsole/"
 fi
 
 # KWin scripts
 if [ -d "$HOME/.local/share/kwin/scripts" ]; then
-    run command cp -av -- "$HOME/.local/share/kwin/scripts/"* "$KDE_CONF_D/applications/kwin/scripts/"
+    run command cp -avu -- "$HOME/.local/share/kwin/scripts/"* "$KDE_CONF_D/applications/kwin/scripts/"
 fi
 
 # Dolphin
-[ -f "$CONFIGD/dolphinrc" ] && rcp -av -- "$CONFIGD/dolphinrc" "$KDE_CONF_D/applications/dolphin/dolphinrc"
+[ -f "$CONFIGD/dolphinrc" ] && rcp -avu -- "$CONFIGD/dolphinrc" "$KDE_CONF_D/applications/dolphin/dolphinrc"
 
 # Gwenview
-[ -f "$CONFIGD/gwenviewrc" ] && rcp -av -- "$CONFIGD/gwenviewrc" "$KDE_CONF_D/applications/gwenview/gwenviewrc"
+[ -f "$CONFIGD/gwenviewrc" ] && rcp -avu -- "$CONFIGD/gwenviewrc" "$KDE_CONF_D/applications/gwenview/gwenviewrc"
 
 # Haruna
 if [ -d "$CONFIGD/haruna" ]; then
-    run command cp -av -- "$CONFIGD/haruna/"* "$KDE_CONF_D/applications/haruna/"
+    run command cp -avu -- "$CONFIGD/haruna/"* "$KDE_CONF_D/applications/haruna/"
 fi
 
 # Krita
-[ -f "$CONFIGD/kritarc" ] && rcp -av -- "$CONFIGD/kritarc" "$KDE_CONF_D/applications/krita/kritarc"
+[ -f "$CONFIGD/kritarc" ] && rcp -avu -- "$CONFIGD/kritarc" "$KDE_CONF_D/applications/krita/kritarc"
+
+
+
 
 
 # ==========================================

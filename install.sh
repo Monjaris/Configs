@@ -82,9 +82,12 @@ if [[ "$preinstall_deps" =~ $validator_regex ]]; then
         sudo pacman -U --noconfirm \
             'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
         # append chaotic-aur to pacman.conf if not already there
-        if ! grep -q '\[chaotic-aur\]' /etc/pacman.conf; then
-            printf '\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist\n' \
-                | sudo tee -a /etc/pacman.conf
+        if ! grep -q '^\[chaotic-aur\]' /etc/pacman.conf; then
+            sudo tee -a /etc/pacman.conf > /dev/null <<'EOF'
+
+[chaotic-aur]
+Include = /etc/pacman.d/chaotic-mirrorlist
+EOF
         fi
         sudo pacman -Sy
         sudo pacman -S --needed yay

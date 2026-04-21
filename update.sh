@@ -120,12 +120,12 @@ rcp -av -- "$CONFIGD/kwinrc"                              "$KDE_CONF_D/plasma/kw
 # ---- APPLICATIONS
 # Konsole profiles
 if [ -d "$HOME/.local/share/konsole" ]; then
-    run command cp -av -- "$HOME/.local/share/konsole/"* "$KDE_CONF_D/applications/konsole/" 2>/dev/null
+    run command cp -av -- "$HOME/.local/share/konsole/"* "$KDE_CONF_D/applications/konsole/"
 fi
 
 # KWin scripts
 if [ -d "$HOME/.local/share/kwin/scripts" ]; then
-    run command cp -av -- "$HOME/.local/share/kwin/scripts/"* "$KDE_CONF_D/applications/kwin/scripts/" 2>/dev/null
+    run command cp -av -- "$HOME/.local/share/kwin/scripts/"* "$KDE_CONF_D/applications/kwin/scripts/"
 fi
 
 # Dolphin
@@ -136,7 +136,7 @@ fi
 
 # Haruna
 if [ -d "$CONFIGD/haruna" ]; then
-    run command cp -av -- "$CONFIGD/haruna/"* "$KDE_CONF_D/applications/haruna/" 2>/dev/null
+    run command cp -av -- "$CONFIGD/haruna/"* "$KDE_CONF_D/applications/haruna/"
 fi
 
 # Krita

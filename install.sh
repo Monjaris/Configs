@@ -116,12 +116,12 @@ fi
 CONFIGD=$HOME/.config
 
 mkdir -p "$CONFIGD/bashrc.d"
-run command cp -rav -- "./bashrc.d" "$CONFIGD/bashrc.d"
+run command cp -rav -- "./bashrc.d" "$CONFIGD/"
 # Confirm & apply bash config
 let_override_bashrc=""
 prompt "Let override user bash config(~/.bashrc) ?" let_override_bashrc
 [[ "$let_override_bashrc" =~ $validator_regex ]] && \
-    run command cp -rav -- "./MISC/.bashrc" "$HOME/.bashrc"
+    run command cp -av -- "./MISC/.bashrc" "$HOME/.bashrc"
 
 # ABONDONED cpx -av -- "./xremap/config.yml"                  "$CONFIGD/xremap/config.yml"
 scpx -av -- "./keyd/default.conf"                    "/etc/keyd/default.conf"

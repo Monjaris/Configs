@@ -46,14 +46,16 @@ cd "$SCRIPT_DIR" || exit 1
 # CONFIG FILES
 # ==========================================
 CONFIGD=$HOME/.config
+VSC="Code - OSS"
 
 BASH_CONFIG_DIR=$CONFIGD/bashrc.d
 XREMAP_CONFIG=$CONFIGD/xremap/config.yml # abondoned
 KEYD_CONFIG=/etc/keyd/default.conf
-VSCODE_SETTINGS="$CONFIGD/Code - OSS/User/settings.json"
-VSCODE_KEYMAP="$CONFIGD/Code - OSS/User/keybindings.json"
+VSCODE_SETTINGS="$CONFIGD/$VSC/User/settings.json"
+VSCODE_KEYMAP="$CONFIGD/$VSC/User/keybindings.json"
 ZED_SETTINGS=$CONFIGD/zed/settings.json
 ZED_KEYMAP=$CONFIGD/zed/keymap.json
+ZED_THEME_D=$CONFIGD/zed/extensions/one-dark-pro-clean
 KITTY_SETTINGS=$CONFIGD/kitty/kitty.conf
 KITTY_KEYMAP=$CONFIGD/kitty/keymap.conf
 FASTFETCH_CONFIG=$CONFIGD/fastfetch/config.jsonc
@@ -73,6 +75,7 @@ rcp -av -- "$VSCODE_SETTINGS"                  "./vscode/settings.json"
 rcp -av -- "$VSCODE_KEYMAP"                    "./vscode/keybindings.json"
 rcp -av -- "$ZED_SETTINGS"                     "./zed/settings.json"
 rcp -av -- "$ZED_KEYMAP"                       "./zed/keymap.json"
+run command cp -rav -- "$ZED_THEME_D"          "./zed/extensions/one-dark-pro-clean/.."
 rcp -av -- "$KITTY_SETTINGS"                   "./kitty/kitty.conf"
 rcp -av -- "$KITTY_KEYMAP"                     "./kitty/keymap.conf"
 rcp -av -- "$FASTFETCH_CONFIG"                 "./fastfetch/config.jsonc"

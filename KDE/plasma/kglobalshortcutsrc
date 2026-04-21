@@ -334,7 +334,6 @@ activate widget 26=Meta+M,none,Activate Media Player Widget
 activate widget 30=Meta+O,none,Activate Application Dashboard Widget
 activate widget 7=,none,Activate System Tray Widget
 activate widget 9=Meta+V,none,Activate Clipboard Widget
-activate widget 91=Meta+Alt+Space,none,Activate KDE control station Widget
 activate widget 94=,none,Activate Plasma Drawer Widget
 activate widget 98=,none,Activate Menu 11 Enhanced Widget
 clear-history=none,,Clear Clipboard History

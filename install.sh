@@ -123,12 +123,13 @@ prompt "Let override user bash config(~/.bashrc) ?" let_override_bashrc
 [[ "$let_override_bashrc" =~ $validator_regex ]] && \
     run command cp -rav -- "./MISC/.bashrc" "$HOME/.bashrc"
 
-# ABONDONED cpx -av -- "./xremap/config.yml"                   "$CONFIGD/xremap/config.yml"
+# ABONDONED cpx -av -- "./xremap/config.yml"                  "$CONFIGD/xremap/config.yml"
 scpx -av -- "./keyd/default.conf"                    "/etc/keyd/default.conf"
 VSC="Code - OSS"; cpx -av -- "./vscode/settings.json" "$CONFIGD/$VSC/User/settings.json"
 cpx -av -- "./vscode/keybindings.json"                "$CONFIGD/$VSC/User/keybindings.json"
 cpx -av -- "./zed/settings.json"                      "$CONFIGD/zed/settings.json"
 cpx -av -- "./zed/keymap.json"                        "$CONFIGD/zed/keymap.json"
+cpx -rav -- "./zed/extensions/one-dark-pro-clean"      "$CONFIGD/zed/extensions/one-dark-pro-clean"
 cpx -av -- "./kitty/kitty.conf"                       "$CONFIGD/kitty/kitty.conf"
 cpx -av -- "./kitty/keymap.conf"                      "$CONFIGD/kitty/keymap.conf"
 cpx -av -- "./fastfetch/config.jsonc"                 "$CONFIGD/fastfetch/config.jsonc"

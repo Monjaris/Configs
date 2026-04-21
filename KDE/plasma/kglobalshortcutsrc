@@ -358,7 +358,7 @@ toggle do not disturb=none,,Toggle do not disturb
 _launch=Meta+B
 new-private-window=Meta+Shift+B
 
-[services][kitty.desktop]
+[services][net.local.kitty.desktop]
 _launch=Meta+X
 
 [services][net.local.systemctl.desktop]

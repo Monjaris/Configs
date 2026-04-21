@@ -109,9 +109,13 @@ mkdir -p \
 
 # ---- PLASMA
 rcp -av -- "$HOME/.local/share/color-schemes/Main.colors" "$KDE_CONF_D/plasma/Main.colors"
+rcp -av -- "$CONFIGD/xsettingsd/xsettingsd.conf"          "$KDE_CONF_D/plasma/xsettingsd.conf"
 rcp -av -- "$CONFIGD/kglobalshortcutsrc"                  "$KDE_CONF_D/plasma/kglobalshortcutsrc"
 rcp -av -- "$CONFIGD/kcminputrc"                          "$KDE_CONF_D/plasma/kcminputrc"
 rcp -av -- "$CONFIGD/kdeglobals"                          "$KDE_CONF_D/plasma/kdeglobals"
+rcp -av -- "$CONFIGD/krunnerrc"                           "$KDE_CONF_D/plasma/krunnerrc"
+rcp -av -- "$CONFIGD/breezerc"                            "$KDE_CONF_D/plasma/breezerc"
+rcp -av -- "$CONFIGD/kwinrc"                              "$KDE_CONF_D/plasma/kwinrc"
 
 # ---- APPLICATIONS
 # Konsole profiles

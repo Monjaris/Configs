@@ -72,34 +72,47 @@ prompt "Install Dependencies?" preinstall_deps
 
 # preinstall dependencies
 if [[ "$preinstall_deps" =~ $validator_regex ]]; then
+    # preinstall prominent packages
+    sudo pacman -S --needed git base-devel
+    # install paru
+    cd ./MISC; \
+        git clone https://aur.archlinux.org/paru-bin.git && cd paru-bin && makepkg -si
+    cd ../.. && rm -rf ./MISC/paru-bin
+    # install other packages
     sudo pacman -S --needed \
-        bash git paru \
         bat eza yazi micro keyd \
         kitty konsole code zed
+    # install the ones from AUR
     paru -S --needed \
-        ttf-jetbrains-mono ttf-fira-code ttf-comic-mono-git ttf-comic-neue
+        ttf-jetbrains-mono ttf-fira-code ttf-comic-mono-git ttf-comic-neue \
         inter-font adobe-source-code-pro-fonts
 fi
 
 # ==========================================
 # CONFIG FILES
 # ==========================================
+# copy configs from repo -> system
+
 CONFIGD=$HOME/.config
 
 mkdir -p "$CONFIGD/bashrc.d"
+run command cp -rav -- "./bashrc.d" "$CONFIGD/bashrc.d"
+# Confirm & apply bash config
+let_override_bashrc=""
+prompt "Let override user bash config(~/.bashrc) ?" let_override_bashrc
+[[ "$let_override_bashrc" =~ $validator_regex ]] && \
+    run command cp -rav -- "./MISC/.bashrc" "$HOME/.bashrc"
 
-# copy configs from repo -> system
-run command cp -rav -- "./bashrc.d"                  "$CONFIGD/bashrc.d/.."
 # ABONDONED cpx -av -- "./xremap/config.yml"                   "$CONFIGD/xremap/config.yml"
 scpx -av -- "./keyd/default.conf"                    "/etc/keyd/default.conf"
-cpx -av -- "./vscode/settings.json"                  "$CONFIGD/$VSC_D/User/settings.json"
-cpx -av -- "./vscode/keybindings.json"               "$CONFIGD/$VSC_D/User/keybindings.json"
-cpx -av -- "./zed/settings.json"                     "$CONFIGD/zed/settings.json"
-cpx -av -- "./zed/keymap.json"                       "$CONFIGD/zed/keymap.json"
-cpx -av -- "./kitty/kitty.conf"                      "$CONFIGD/kitty/kitty.conf"
-cpx -av -- "./kitty/keymap.conf"                     "$CONFIGD/kitty/keymap.conf"
-cpx -av -- "./fastfetch/config.jsonc"                "$CONFIGD/fastfetch/config.jsonc"
-cpx -av -- "./fastfetch/default.jsonc"               "$CONFIGD/fastfetch/default.jsonc"
+VSC="Code - OSS"; cpx -av -- "./vscode/settings.json" "$CONFIGD/$VSC/User/settings.json"
+cpx -av -- "./vscode/keybindings.json"                "$CONFIGD/$VSC/User/keybindings.json"
+cpx -av -- "./zed/settings.json"                      "$CONFIGD/zed/settings.json"
+cpx -av -- "./zed/keymap.json"                        "$CONFIGD/zed/keymap.json"
+cpx -av -- "./kitty/kitty.conf"                       "$CONFIGD/kitty/kitty.conf"
+cpx -av -- "./kitty/keymap.conf"                      "$CONFIGD/kitty/keymap.conf"
+cpx -av -- "./fastfetch/config.jsonc"                 "$CONFIGD/fastfetch/config.jsonc"
+cpx -av -- "./fastfetch/default.jsonc"                "$CONFIGD/fastfetch/default.jsonc"
 # ABONDONED cpx -av -- "./lf/lfrc"                             "$CONFIGD/lf/lfrc"
 cpx -av -- "./yazi/yazi.toml"                        "$CONFIGD/yazi/yazi.toml"
 cpx -av -- "./micro/settings.json"                   "$CONFIGD/micro/settings.json"
@@ -116,9 +129,13 @@ KDE_CONF_D="$SCRIPT_DIR/KDE"
 
 # ---- PLASMA
 cpx -av -- "$KDE_CONF_D/plasma/Main.colors"          "$HOME/.local/share/color-schemes/Main.colors"
-cpx -av -- "$KDE_CONF_D/plasma/kglobalshortcutsrc"   "$CONFIGD/kglobalshortcutsrc-nofmt"
+cpx -av -- "$KDE_CONF_D/plasma/xsettingsd.conf"    "$CONFIGD/xsettingsd/xsettingsd.conf"
+cpx -av -- "$KDE_CONF_D/plasma/kglobalshortcutsrc"   "$CONFIGD/kglobalshortcutsrc"
 cpx -av -- "$KDE_CONF_D/plasma/kcminputrc"           "$CONFIGD/kcminputrc"
 cpx -av -- "$KDE_CONF_D/plasma/kdeglobals"           "$CONFIGD/kdeglobals"
+cpx -av -- "$KDE_CONF_D/plasma/krunnerrc"            "$CONFIGD/krunnerrc"
+cpx -av -- "$KDE_CONF_D/plasma/breezerc"             "$CONFIGD/breezerc"
+cpx -av -- "$KDE_CONF_D/plasma/kwinrc"               "$CONFIGD/kwinrc"
 
 # ---- APPLICATIONS
 # Konsole profiles

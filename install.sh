@@ -48,6 +48,12 @@ prompt() {
 }
 validator_regex='^[Yy]$|^$'
 
+enable_service() {
+    local service="$1"
+    echo "Enabling service: $service..."
+    systemctl is-enabled --quiet "$service" || sudo systemctl enable --now "$service"
+}
+
 print_dots() {
     local iterations=3
     local delay=0.25
@@ -192,7 +198,7 @@ postinstall_exec=""
 prompt "Run postinstall?" postinstall_exec
 # postinstall execution
 if [[ "$postinstall_exec" =~ $validator_regex ]]; then
-    systemctl enable --now keyd # enable keyd
+    enable_service keyd
     fc-cache -fv # for fonts to refresh
     echo -e "${_GREEN}Optional post-install execution finished!${_RESET}"
 fi

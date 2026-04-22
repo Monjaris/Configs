@@ -202,7 +202,7 @@ prompt "Run postinstall?" postinstall_exec
 if [[ "$postinstall_exec" =~ $validator_regex ]]; then
     enable_service keyd
     fc-cache -fv # for fonts to refresh
-    echo -e "${_GREEN}Optional post-install execution finished!${_RESET}"
+    echo -e "${_GREEN}Optional post-install execution finished!${_RESET}\n"
 fi
 
 update_system=""
@@ -210,7 +210,7 @@ prompt "Update system?" update_system
 # update system too
 if [[ "$update_system" =~ $validator_regex ]]; then
     sudo pacman -Syu
-    echo "Refreshed databases and updated system!"
+    echo -e "${_GREEN}Refreshed databases and updated system!${_RESET}"
 fi
 
 echo -e "\n\n"; print_dots

@@ -47,6 +47,7 @@ cd "$SCRIPT_DIR" || exit 1
 # ==========================================
 CONFIGD=$HOME/.config
 VSC="Code - OSS"
+AUR_H="yay"
 
 BASH_CONFIG_DIR=$CONFIGD/bashrc.d
 XREMAP_CONFIG=$CONFIGD/xremap/config.yml # abondoned
@@ -58,6 +59,7 @@ ZED_KEYMAP=$CONFIGD/zed/keymap.json
 ZED_THEME_D=$CONFIGD/zed/extensions/one-dark-pro-clean
 KITTY_SETTINGS=$CONFIGD/kitty/kitty.conf
 KITTY_KEYMAP=$CONFIGD/kitty/keymap.conf
+AUR_HELPER=$CONFIGD/$AUR_H/config.json
 FASTFETCH_CONFIG=$CONFIGD/fastfetch/config.jsonc
 FASTFETCH_DEFAULT=$CONFIGD/fastfetch/default.jsonc
 LF_CONFIG=$CONFIGD/lf/lfrc # abondoned
@@ -78,6 +80,7 @@ rcp -avu -- "$ZED_KEYMAP"                       "./zed/keymap.json"
 run command cp -rav -- "$ZED_THEME_D"          "./zed/extensions/one-dark-pro-clean/.."
 rcp -avu -- "$KITTY_SETTINGS"                   "./kitty/kitty.conf"
 rcp -avu -- "$KITTY_KEYMAP"                     "./kitty/keymap.conf"
+rcp -avu -- "$AUR_HELPER"                     "./$AUR_H/config.json"
 rcp -avu -- "$FASTFETCH_CONFIG"                 "./fastfetch/config.jsonc"
 rcp -avu -- "$FASTFETCH_DEFAULT"                "./fastfetch/default.jsonc"
 ABONDONED rcp -avu -- "$LF_CONFIG"                      "./lf/lfrc"

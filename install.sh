@@ -205,5 +205,13 @@ if [[ "$postinstall_exec" =~ $validator_regex ]]; then
     echo -e "${_GREEN}Optional post-install execution finished!${_RESET}"
 fi
 
+update_system=""
+prompt "Update system?" update_system
+# update system too
+if [[ "$update_system" =~ $validator_regex ]]; then
+    sudo pacman -Syu
+    echo "Refreshed databases and updated system!"
+fi
+
 echo -e "\n\n"; print_dots
 echo -e "\033[0;36mYour system is ready to reflect configurations. Immediate reboot is optionally better!${_RESET}\n\n"

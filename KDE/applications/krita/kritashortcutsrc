@@ -1,0 +1,14 @@
+[Shortcuts]
+Activate Next Tab[$d]
+Activate Previous Tab[$d]
+Close[$d]
+Cut[$d]
+Help[$d]
+Redo[$d]
+RenameFile[$d]
+ShowHideHiddenFiles[$d]
+TextCompletion[$d]
+WhatsThis[$d]
+ZoomIn[$d]
+edit_redo=Ctrl+Y
+softProof=none

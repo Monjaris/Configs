@@ -7,6 +7,7 @@
 set -o pipefail
 shopt -s nullglob
 
+
 # ask for sudo upfront
 sudo -v
 # kill su privilege on exit
@@ -17,7 +18,6 @@ _BOLD_RED="\033[1;31m"
 _RESET="\033[0m"
 
 # --- HELPER FUNCTIONS ---
-alias ABONDONED='echo "[ABONDONED]:  " &&'
 
 run() {
     "$@" || echo -e "${_BOLD_RED}Error at line ${BASH_LINENO[0]}: $*${_RESET}"
@@ -71,7 +71,7 @@ BRAVE_PREFS=$CONFIGD/BraveSoftware/Brave-Browser/Default/Preferences
 CLANGD_CONFIG=$CONFIGD/clangd/config.yaml
 
 run command cp -rav -- "$BASH_CONFIG_DIR"      "./bashrc.d/.."
-ABONDONED rcp -avu -- "$XREMAP_CONFIG"                  "./xremap/config.yml"
+# ABONDONED rcp -avu -- "$XREMAP_CONFIG"                  "./xremap/config.yml"
 su_rcp -avu -- "$KEYD_CONFIG"                   "./keyd/default.conf"
 rcp -avu -- "$VSCODE_SETTINGS"                  "./vscode/settings.json"
 rcp -avu -- "$VSCODE_KEYMAP"                    "./vscode/keybindings.json"
@@ -83,7 +83,7 @@ rcp -avu -- "$KITTY_KEYMAP"                     "./kitty/keymap.conf"
 rcp -avu -- "$AUR_HELPER"                     "./$AUR_H/config.json"
 rcp -avu -- "$FASTFETCH_CONFIG"                 "./fastfetch/config.jsonc"
 rcp -avu -- "$FASTFETCH_DEFAULT"                "./fastfetch/default.jsonc"
-ABONDONED rcp -avu -- "$LF_CONFIG"                      "./lf/lfrc"
+# ABONDONED rcp -avu -- "$LF_CONFIG"                      "./lf/lfrc"
 rcp -avu -- "$YAZI_CONFIG"                      "./yazi/yazi.toml"
 rcp -avu -- "$MICRO_SETTINGS"                   "./micro/settings.json"
 rcp -avu -- "$MICRO_KEYMAP"                     "./micro/bindings.json"
@@ -93,8 +93,8 @@ rcp -avu -- "$CLANGD_CONFIG"                    "./clangd/config.yaml"
 
 # Autostart
 if [ -d "$CONFIGD/autostart" ]; then
-    mkdir -p "./autostart"
-    run command cp -avu -- "$CONFIGD/autostart/"* "./autostart/"
+    mkdir -p "./KDE/applications/autostart"
+    run command cp -avu -- "$CONFIGD/autostart/"* "./KDE/applications/autostart/"
 fi
 
 
@@ -146,8 +146,8 @@ if [ -d "$CONFIGD/haruna" ]; then
 fi
 
 # Krita
-[ -f "$CONFIGD/kritarc" ] && rcp -avu -- "$CONFIGD/kritarc" "$KDE_CONF_D/applications/krita/kritarc"
-
+[ -f "$CONFIGD/kritarc" ]           && rcp -avu -- "$CONFIGD/kritarc"           "$KDE_CONF_D/applications/krita/kritarc"
+[ -f "$CONFIGD/kritashortcutsrc" ]  && rcp -avu -- "$CONFIGD/kritashortcutsrc"  "$KDE_CONF_D/applications/krita/kritashortcutsrc"
 
 
 

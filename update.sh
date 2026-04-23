@@ -70,14 +70,19 @@ BAT_CONFIG=$CONFIGD/bat/config
 BRAVE_PREFS=$CONFIGD/BraveSoftware/Brave-Browser/Default/Preferences
 CLANGD_CONFIG=$CONFIGD/clangd/config.yaml
 
-run command cp -rav -- "$BASH_CONFIG_DIR"      "./bashrc.d/.."
+ENVD="environment"
+run command cp -avu -- "$HOME/bin/"*             "./$ENVD/bin/"
+run command cp -avu -- "$CONFIGD/autostart/"*    "./$ENVD/autostart/"
+run command cp -avu -- "$BASH_CONFIG_DIR/"*      "./$ENVD/bashrc.d/"
+
+
 # ABONDONED rcp -avu -- "$XREMAP_CONFIG"                  "./xremap/config.yml"
 su_rcp -avu -- "$KEYD_CONFIG"                   "./keyd/default.conf"
 rcp -avu -- "$VSCODE_SETTINGS"                  "./vscode/settings.json"
 rcp -avu -- "$VSCODE_KEYMAP"                    "./vscode/keybindings.json"
 rcp -avu -- "$ZED_SETTINGS"                     "./zed/settings.json"
 rcp -avu -- "$ZED_KEYMAP"                       "./zed/keymap.json"
-run command cp -rav -- "$ZED_THEME_D"          "./zed/extensions/one-dark-pro-clean/.."
+run command cp -rav -- "$ZED_THEME_D"           "./zed/extensions/"
 rcp -avu -- "$KITTY_SETTINGS"                   "./kitty/kitty.conf"
 rcp -avu -- "$KITTY_KEYMAP"                     "./kitty/keymap.conf"
 rcp -avu -- "$AUR_HELPER"                     "./$AUR_H/config.json"
@@ -90,12 +95,6 @@ rcp -avu -- "$MICRO_KEYMAP"                     "./micro/bindings.json"
 rcp -avu -- "$BAT_CONFIG"                       "./bat/config"
 rcp -avu -- "$BRAVE_PREFS"                      "./brave/Default/Preferences"
 rcp -avu -- "$CLANGD_CONFIG"                    "./clangd/config.yaml"
-
-# Autostart
-if [ -d "$CONFIGD/autostart" ]; then
-    mkdir -p "./KDE/applications/autostart"
-    run command cp -avu -- "$CONFIGD/autostart/"* "./KDE/applications/autostart/"
-fi
 
 
 # ==========================================

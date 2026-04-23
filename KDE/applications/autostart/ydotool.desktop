@@ -1,8 +1,0 @@
-#!/usr/bin/env xdg-open
-[Desktop Entry]
-Name=ydotool-daemon
-Exec=ydotoold
-Icon=
-Path=
-Terminal=False
-Type=Application

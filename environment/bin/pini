@@ -1,0 +1,26 @@
+#!/bin/bash
+
+DIR="$(pwd)"
+TEMPL_D="/home/ziya/Templates"
+
+printf "$RED:: Initializing project root\n"
+
+###
+
+mkdir -p src
+
+[[ -f CMakeLists.txt ]] ||\
+    cp "$TEMPL_D/CMakeLists.txt" CMakeLists.txt
+
+[[ -f build.sh ]] ||\
+    cp "$TEMPL_D/build.sh" build.sh
+
+[[ -f src/main.cpp ]] ||\
+    cp "$TEMPL_D/main.cpp" src/main.cpp
+
+[[ -f src/core.h ]] ||\
+    cp "$TEMPL_D/core.h" src/core.h
+
+###
+
+printf "$RED:: Project initialization is done\n"

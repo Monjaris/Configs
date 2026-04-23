@@ -1,0 +1,120 @@
+#!/usr/bin/env bash
+
+DEV_ROOT="$HOME/dev"
+RECENTS_FILE="${XDG_DATA_HOME:-$HOME/.local/share}/vscode-launcher/recents"
+MAX_RECENTS=10
+
+# ── setup ────────────────────────────────────────────────────────────────────
+
+mkdir -p "$(dirname "$RECENTS_FILE")"
+[[ -f "$RECENTS_FILE" ]] || touch "$RECENTS_FILE"
+
+# ── helpers ──────────────────────────────────────────────────────────────────
+
+add_recent() {
+    local entry="$1"
+    local tmp
+    tmp=$(grep -Fxv "$entry" "$RECENTS_FILE")
+    { echo "$entry"; echo "$tmp"; } | head -n "$MAX_RECENTS" > "$RECENTS_FILE"
+}
+
+build_list() {
+    local recents=()
+    while IFS= read -r line; do
+        [[ -d "$DEV_ROOT/$line" ]] && recents+=("$line")
+    done < "$RECENTS_FILE"
+
+    local all_dirs=()
+    while IFS= read -r dir; do
+        rel="${dir#"$DEV_ROOT/"}"
+        [[ -z "$rel" ]] && continue
+        all_dirs+=("$rel")
+    done < <(find "$DEV_ROOT" -mindepth 1 -type d | sort)
+
+    # recents first, tagged — then everything else deduped
+    for r in "${recents[@]}"; do
+        echo "★ $r"
+    done
+    for d in "${all_dirs[@]}"; do
+        local is_recent=0
+        for r in "${recents[@]}"; do
+            [[ "$d" == "$r" ]] && is_recent=1 && break
+        done
+        [[ $is_recent -eq 0 ]] && echo "  $d"
+    done
+}
+
+open_in_code() {
+    local rel="$1"
+    local full="$DEV_ROOT/$rel"
+    if [[ ! -d "$full" ]]; then
+        yad --error \
+            --title "Not Found" \
+            --text "<b>'$rel'</b> no longer exists." \
+            --button "OK:0" --width 300
+        return 1
+    fi
+    add_recent "$rel"
+    code "$full" &
+}
+
+create_and_open() {
+    local folder_name
+    folder_name=$(yad --entry \
+        --title "New Project" \
+        --text "Folder path relative to <b>~/dev</b>:" \
+        --width 400 \
+        --button "Cancel:1" \
+        --button "Create:0")
+
+    [[ $? -ne 0 || -z "$folder_name" ]] && return
+
+    folder_name="${folder_name#"${folder_name%%[![:space:]]*}"}"  # ltrim
+    folder_name="${folder_name%"${folder_name##*[![:space:]]}"}"  # rtrim
+
+    local full="$DEV_ROOT/$folder_name"
+
+    if [[ -d "$full" ]]; then
+        yad --error \
+            --title "Already Exists" \
+            --text "<b>'$folder_name'</b> already exists." \
+            --button "OK:0" --width 300
+        return
+    fi
+
+    mkdir -p "$full"
+    add_recent "$folder_name"
+    code "$full" &
+}
+
+# ── main ─────────────────────────────────────────────────────────────────────
+
+while true; do
+    choice=$(build_list | fzf \
+        --prompt "  project > " \
+        --header $'ENTER open  |  CTRL-N new  |  ESC quit\n'"  root: $DEV_ROOT" \
+        --header-lines 2 \
+        --ansi \
+        --layout reverse \
+        --border rounded \
+        --color "header:italic:bold,prompt:bold,pointer:bright-yellow,hl:bright-yellow,hl+:bright-yellow" \
+        --bind "ctrl-n:execute(echo __new__)+abort" \
+        --expect ctrl-n \
+        --height 60%)
+
+    exit_code=$?
+    first_line=$(echo "$choice" | head -n1)
+    second_line=$(echo "$choice" | tail -n1 | sed 's/^[[:space:]★]*//')
+
+    # ctrl-n or __new__ sentinel
+    if [[ "$first_line" == "ctrl-n" || "$second_line" == "__new__" ]]; then
+        create_and_open
+        continue
+    fi
+
+    # ESC or no selection
+    [[ $exit_code -ne 0 || -z "$second_line" ]] && break
+
+    open_in_code "$second_line"
+    break
+done

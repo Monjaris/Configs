@@ -190,6 +190,7 @@ DocumentBack=Ctrl+Alt+Left
 DocumentForward=Ctrl+Alt+Right
 Help=
 Redo=Ctrl+Shift+Z; Ctrl+Y
+Reload=Ctrl+Alt+R; Refresh
 RenameFile=Alt+R; F2
 ShowHideHiddenFiles=Ctrl+H
 TextCompletion=Ctrl+E; Ctrl+Space

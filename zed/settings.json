@@ -7,6 +7,24 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "cli_default_open_behavior": "existing_window",
+  "project_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "git_panel": {
+    "dock": "left"
+  },
   "semantic_tokens": "off",
   "completion_menu_scrollbar": "system",
   "languages": {
@@ -63,7 +81,7 @@
   },
   "gutter": {
     "min_line_number_digits": 4,
-    "folds": true,
+    "folds": false,
     "breakpoints": true,
     "runnables": true,
     "line_numbers": true,

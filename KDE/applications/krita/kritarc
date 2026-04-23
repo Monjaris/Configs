@@ -162,6 +162,11 @@ ignoreHighFunctionKeys=true
 imageHeightDef=3508
 imageResolutionDef=300
 imageWidthDef=2480
+imagesizedlg_imsizeunit=px
+imagesizedlg_printSizeSeparatly=false
+imagesizedlg_ratioLock=false
+imagesizedlg_resunit=Pixels/Inch
+imagesizedlg_sizeunit=cm
 levelOfDetailEnabled=false
 logviewer_enabled=false
 longPressEnabled=false
@@ -287,7 +292,7 @@ zoomSteps=2
 [File Dialogs]
 DontUseNativeFileDialog=false
 OpenDocument=/home/ziya/Pictures/bg
-SaveAs=/home/ziya/Pictures/bg
+SaveAs=/home/ziya
 
 [GenericGradientEditor]
 global/compactGradientPresetChooserMode=false
@@ -628,6 +633,10 @@ yPosition=22
 pinControls=true
 
 [RecentFiles]
+File1[$e]=$HOME/Downloads/7d563b5d-5b69-4e16-b875-2a6ac7b96eff.webp
+File2[$e]=$HOME/aaa.kra
+Name1=7d563b5d-5b69-4e16-b875-2a6ac7b96eff.webp
+Name2=aaa.kra
 maxRecentFileItems=100
 
 [SelectedTags]

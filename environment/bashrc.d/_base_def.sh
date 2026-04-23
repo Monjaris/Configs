@@ -294,6 +294,10 @@ cf () {
 			bat "config.yaml"
         	;;
 #
+        -d|--directory)
+            cd $HOME/Documents/configs
+            lsa
+            ;;
         -u|--update)
             echo "Updating configurations and pushing to the repo"
             $HOME/Documents/configs/update.sh

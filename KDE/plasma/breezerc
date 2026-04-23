@@ -7,7 +7,7 @@ ShadowStrength=89
 [Style]
 DockWidgetDrawFrame=true
 MenuItemDrawStrongFocus=false
-MenuOpacity=44
+MenuOpacity=68
 MnemonicsMode=MN_ALWAYS
 SliderDrawTickMarks=false
 TabBarDrawCenteredTabs=true

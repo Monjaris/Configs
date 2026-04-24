@@ -326,7 +326,7 @@ activate widget 102=Ctrl+Alt+Shift+F1,none,Activate Panel Widget
 activate widget 108=,none,Activate Icons-and-Text Task Manager Widget
 activate widget 109=Meta+[,none,Activate Icons-Only Task Manager Widget
 activate widget 117=Meta,none,Activate Andromeda Launcher Widget
-activate widget 119=Meta+Ctrl+Alt+Up,none,Activate Sticky Note Widget
+activate widget 119=Meta+Ctrl+Alt+Down,none,Activate Sticky Note Widget
 activate widget 15=Meta+N,none,Activate Notifications Widget
 activate widget 2=Meta+Z,none,Activate Panel Widget
 activate widget 23=,none,Activate Lock Keys Status Widget
@@ -381,7 +381,9 @@ _launch=Meta+.
 
 [services][org.kde.spectacle.desktop]
 ActiveWindowScreenShot=none
+CurrentMonitorScreenShot=
 FullScreenScreenShot=none
+OpenWithoutScreenshot=
 RecordRegion=none
 RecordScreen=Meta+Shift+S
 RecordWindow=none

@@ -30,8 +30,8 @@ alias seqs='type seqs; bat "$HOME/.config/bashrc.d/_sequences.sh"'
 alias wget='wget -c'
 alias grep='grep --color=auto'
 alias ip='ip -color'
-alias jerrors='type jerrors; journalctl -p 3 -xb --pager-end'
 alias journal='type journal; journalctl --no-pager -l'
+alias jerrors='type jerrors; journalctl -p 3 -xb --pager-end'
 
 
 silent () {

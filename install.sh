@@ -144,7 +144,7 @@ mkdir -p "$CONFIGD/autostart"
 mkdir -p "$CONFIGD/bashrc.d"
 # Copy environment files to their corresponding places
 ENVD="environment"
-run sudo command cp -rav -- "$ENVD/bin"/*         "$HOME/bin"
+run  command cp -rav -- "$ENVD/bin"/*         "$HOME/bin"
 run command cp -rav -- "$ENVD/autostart/"*   "$CONFIGD/autostart/"
 run command cp -rav -- "$ENVD/bashrc.d/"*    "$CONFIGD/bashrc.d/"
 

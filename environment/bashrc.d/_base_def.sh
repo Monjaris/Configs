@@ -294,7 +294,7 @@ cf () {
 			bat "config.yaml"
         	;;
 #
-        -d|--directory)
+        -r|--repo)
             cd $HOME/Documents/configs
             lsa
             ;;

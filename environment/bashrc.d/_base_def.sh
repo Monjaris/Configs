@@ -89,11 +89,10 @@ new () {
 }
 #
 aunew () {
-	printf "${UYELLOW}:: yay${CLR0} — install new packages from AUR\n\n"
-    printf "${BWHITE}:: Install${CLR0} ${BYELLOW}%s${CLR0}\n" "$pkg"
-	for pkg in "$@"; do
-        yay -S --needed "$@"
-	done
+    printf "${UYELLOW}:: yay${CLR0} — install new packages from AUR\n\n"
+    printf "${BWHITE}:: Install${CLR0} ${BYELLOW}%s${CLR0}\n" "$*"
+    
+    yay -S --needed "$@"
 }
 #
 pacrem () {
@@ -238,11 +237,6 @@ wtf () {
 
 cf () {
     case "$1" in
-    	app)
-    		cd "$HOME/Documents/configs" && lsa
-    		printf "\n\n%sGIT STATUS:%s\n\n" "$UMAGENTA" "$CLR0"
-    		git status
-    		;;
         bash)
         	case "$2" in
 				def)
@@ -265,6 +259,13 @@ cf () {
             		;;
         	esac
         	;;
+        keyd)
+            cd "/etc/keyd" && lsa
+            sudo bat -n --paging=never "default.conf"
+            ;;
+        aur)
+            cd "$HOME/.config/yay" && lsa
+            ;;
         ed)
             cd "$HOME/.config/micro" && lsa
             ;;
@@ -276,10 +277,6 @@ cf () {
             ;;
         zed)
             cd "$HOME/.config/zed" && lsa
-            ;;
-        keyd)
-            cd "/etc/keyd" && lsa
-            sudo bat -n --paging=never "default.conf"
             ;;
         ff)
         	cd "$HOME/.config/fastfetch" && lsa
@@ -296,7 +293,7 @@ cf () {
 #
         -r|--repo)
             cd $HOME/Documents/configs
-            lsa
+            git status
             ;;
         -u|--update)
             echo "Updating configurations and pushing to the repo"

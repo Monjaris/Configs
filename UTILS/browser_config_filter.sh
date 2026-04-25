@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BRAVE_PREFS="$HOME/.config/BraveSoftware/Brave-Browser/Default/Preferences"
-REPO_PREFS="$(dirname "$0")/../brave/Default/Preferences"
+REPO_PREFS="$(dirname "$0")/../brave/Preferences"
 
 _filter='
 {
@@ -21,7 +21,7 @@ _filter='
 
 if [[ "$1" == "update" ]]; then
     mkdir -p "$(dirname "$REPO_PREFS")"
-    jq "$_filter" "$BRAVE_PREFS" > "$REPO_PREFS"
+    jq -c "$_filter" "$BRAVE_PREFS" > "$REPO_PREFS"   # update
     echo "Browser preferences saved to repo."
 
 
@@ -30,7 +30,7 @@ elif [[ "$1" == "install" ]]; then
         echo "Brave is running! Close it first."; exit 1
     fi
     mkdir -p "$(dirname "$BRAVE_PREFS")"
-    jq "$_filter" "$REPO_PREFS" > "$BRAVE_PREFS"
+    jq -c "$_filter" "$REPO_PREFS" > "$BRAVE_PREFS"   # install
     echo "Browser config installed."
 
 

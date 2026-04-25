@@ -237,8 +237,8 @@ wtf () {
 
 cf () {
     local help_text="Usage: cf [subcommand|flags]
-    Subcommands: bash, keyd, aur, ed, term, code, zed, ff, yazi, clangd
-    Flags: -r, -u, -p, -i (combinable: -upi)"
+    Subcommands:  bash, keyd, aur, ed, term, code, zed, ff, yazi, clangd
+    Flags:  -r, -u, -p, -i"
 
     if [[ "$1" == -* ]]; then
         local do_r=0 do_u=0 do_p=0 do_i=0
@@ -249,7 +249,7 @@ cf () {
                 u) do_u=1 ;;
                 p) do_p=1 ;;
                 i) do_i=1 ;;
-                h) echo help_text; return ;;
+                h) echo "$help_text"; return ;;
                 ?)
                     echo "Unknown flag: -$OPTARG" >&2
                     return 1 ;;
@@ -296,8 +296,6 @@ cf () {
             cd "$HOME/.config/yazi"; lsa; bat "yazi.toml" ;;
         clangd)
             cd "$HOME/.config/clangd"; lsa; bat "config.yaml" ;;
-        --help)
-            echo help_text ;;
         *)
             cd "$HOME/.config" && lsa ;;
     esac

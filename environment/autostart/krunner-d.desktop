@@ -1,2 +1,9 @@
-#!/bin/bash
-krunner -d
+[Desktop Entry]
+Name=krunner-daemon
+Comment=
+GenericName=Launcher
+Categories=
+Exec=krunner -d
+Icon=
+Terminal=False
+Type=Application

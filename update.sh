@@ -1,8 +1,7 @@
 #!/bin/bash
-# ==========================================
-# My personal configuration environment repo's update script
-# Copies configs FROM system TO this repo, then git pushes
-# ==========================================
+# ==============================================================
+# My personal configuration environment directory update script
+# ==============================================================
 
 set -o pipefail
 shopt -s nullglob
@@ -82,7 +81,7 @@ rcp -avu -- "$VSCODE_SETTINGS"                  "./vscode/settings.json"
 rcp -avu -- "$VSCODE_KEYMAP"                    "./vscode/keybindings.json"
 rcp -avu -- "$ZED_SETTINGS"                     "./zed/settings.json"
 rcp -avu -- "$ZED_KEYMAP"                       "./zed/keymap.json"
-run command cp -rav -- "$ZED_THEME_D"           "./zed/extensions/"
+run command cp -ravu -- "$ZED_THEME_D/"*        "./zed/extensions/one-dark-pro-clean/"
 rcp -avu -- "$KITTY_SETTINGS"                   "./kitty/kitty.conf"
 rcp -avu -- "$KITTY_KEYMAP"                     "./kitty/keymap.conf"
 rcp -avu -- "$AUR_HELPER"                     "./$AUR_H/config.json"
@@ -147,47 +146,3 @@ fi
 # Krita
 [ -f "$CONFIGD/kritarc" ]           && rcp -avu -- "$CONFIGD/kritarc"           "$KDE_CONF_D/applications/krita/kritarc"
 [ -f "$CONFIGD/kritashortcutsrc" ]  && rcp -avu -- "$CONFIGD/kritashortcutsrc"  "$KDE_CONF_D/applications/krita/kritashortcutsrc"
-
-
-
-
-# ==========================================
-# GIT PUSH
-# ==========================================
-REPO_URL="https://github.com/Monjaris/Configs.git"
-BRANCH="main"
-
-# init git if missing
-if [ ! -d ".git" ]; then
-    echo ":: [git] initializing repository"
-    run git init
-    run git branch -M "$BRANCH"
-fi
-
-# add remote if missing
-if ! git remote | grep -q "^origin$"; then
-    echo ":: [git] adding origin remote"
-    run git remote add origin "$REPO_URL"
-fi
-
-# update remote URL in case it's stale
-run git remote set-url origin "$REPO_URL"
-
-# stage all files
-echo ":: [git] staging files"
-run git add .
-
-# commit only if changes exist
-if ! git diff --cached --quiet; then
-    COMMIT_MSG="update configs: $(date '+%Y-%m-%d %H:%M')"
-    echo ":: [git] committing"
-    run git commit -m "$COMMIT_MSG"
-else
-    echo ":: [git] nothing to commit"
-fi
-
-# push
-echo ":: [git] pushing to $BRANCH"
-run git push -u origin "$BRANCH"
-
-echo -e "\nUpdate & push finished."

@@ -1,8 +1,0 @@
-id = "one-dark-pro-clean"
-name = "One Dark Pro Clean"
-version = "0.1.0"
-schema_version = 1
-authors = ["Monjaris"]
-description = "A minimal, refined dark theme inspired by One Dark Pro with improved syntax clarity."
-repository = "https://github.com/Monjaris/One-Dark-Pro-Clean"
-themes = ["themes/one-dark-pro-clean.json"]

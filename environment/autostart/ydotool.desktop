@@ -1,8 +1,9 @@
-#!/usr/bin/env xdg-open
 [Desktop Entry]
 Name=ydotool-daemon
+Comment=
+GenericName=Daemon
+Categories=Wayland
 Exec=ydotoold
 Icon=
-Path=
 Terminal=False
 Type=Application

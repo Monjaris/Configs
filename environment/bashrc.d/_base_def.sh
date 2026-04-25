@@ -236,81 +236,70 @@ wtf () {
 
 
 cf () {
+    local help_text="Usage: cf [subcommand|flags]
+    Subcommands: bash, keyd, aur, ed, term, code, zed, ff, yazi, clangd
+    Flags: -r, -u, -p, -i (combinable: -upi)"
+
+    if [[ "$1" == -* ]]; then
+        local do_r=0 do_u=0 do_p=0 do_i=0
+        local OPTIND=1
+        while getopts "rupih" opt "$@"; do
+            case "$opt" in
+                r) do_r=1 ;;
+                u) do_u=1 ;;
+                p) do_p=1 ;;
+                i) do_i=1 ;;
+                h) echo help_text; return ;;
+                ?)
+                    echo "Unknown flag: -$OPTARG" >&2
+                    return 1 ;;
+            esac
+        done
+
+        [[ $do_r == 1 ]] && \
+            cd "$HOME/Documents/configs/" && git status
+        [[ $do_u == 1 ]] && \
+            { echo "Updating configurations..."; "$HOME/Documents/configs/update.sh"; }
+        [[ $do_p == 1 ]] && \
+            { echo "Pushing to the repo..."; cd "$HOME/Documents/configs/"; ./push.sh; cd -; }
+        [[ $do_i == 1 ]] && \
+            { echo "Installing configurations..."; "$HOME/Documents/configs/install.sh"; }
+        return
+    fi
+
     case "$1" in
         bash)
-        	case "$2" in
-				def)
-					ed "$BASH_CONFIG_DIR/_base_def.sh"
-					;;
-				ini|init)
-					ed "$BASH_CONFIG_DIR/_start.sh"
-					;;
-				seq)
-					ed "$BASH_CONFIG_DIR/_sequences.sh"
-					;;
-				fn|func)
-					ed "$BASH_CONFIG_DIR/functions.sh"
-					;;
-				.)
-            		ed "$HOME/.bashrc"
-            		;;
-            	*)
-            		cd "$BASH_CONFIG_DIR/" && lsa
-            		;;
-        	esac
-        	;;
+            case "$2" in
+                def)      ed "$BASH_CONFIG_DIR/_base_def.sh" ;;
+                ini|init) ed "$BASH_CONFIG_DIR/_start.sh" ;;
+                seq)      ed "$BASH_CONFIG_DIR/_sequences.sh" ;;
+                fn|func)  ed "$BASH_CONFIG_DIR/functions.sh" ;;
+                rc|.)     ed "$HOME/.bashrc" ;;
+                *)        cd "$BASH_CONFIG_DIR/"; lsa ;;
+            esac
+            ;;
         keyd)
-            cd "/etc/keyd" && lsa
-            sudo bat -n --paging=never "default.conf"
-            ;;
+            cd "/etc/keyd"; lsa; sudo bat -n --paging=never "default.conf" ;;
         aur)
-            cd "$HOME/.config/yay" && lsa
-            ;;
+            cd "$HOME/.config/yay"; lsa ;;
         ed)
-            cd "$HOME/.config/micro" && lsa
-            ;;
+            cd "$HOME/.config/micro"; lsa ;;
         term)
-            cd "$HOME/.config/kitty" && lsa
-            ;;
+            cd "$HOME/.config/kitty"; lsa ;;
         code)
-            cd "$HOME/.config/Code/User" && lsa
-            ;;
+            cd "$HOME/.config/Code/User"; lsa ;;
         zed)
-            cd "$HOME/.config/zed" && lsa
-            ;;
+            cd "$HOME/.config/zed"; lsa ;;
         ff)
-        	cd "$HOME/.config/fastfetch" && lsa
-        	bat "config.jsonc"
-        	;;
+            cd "$HOME/.config/fastfetch"; lsa; bat "config.jsonc" ;;
         yazi)
-        	cd "$HOME/.config/yazi" && lsa
-        	bat "yazi.toml"
-        	;;
+            cd "$HOME/.config/yazi"; lsa; bat "yazi.toml" ;;
         clangd)
-        	cd "$HOME/.config/clangd" && lsa
-			bat "config.yaml"
-        	;;
-#
-        -r|--repo)
-            cd $HOME/Documents/configs
-            git status
-            ;;
-        -u|--update)
-            echo "Updating configurations and pushing to the repo"
-            $HOME/Documents/configs/update.sh
-            ;;
-        -i|--install)
-            echo "Updating configurations and pushing to the repo"
-            $HOME/Documents/configs/install.sh
-            ;;
-#
-        -h|--help)
-            echo "Usage: cf [option]"
-            echo "Options: sh, micro, kitty, code, zed, keymap, -h/--help"
-            ;;
+            cd "$HOME/.config/clangd"; lsa; bat "config.yaml" ;;
+        --help)
+            echo help_text ;;
         *)
-            cd "$HOME/.config" && lsa
-            ;;
+            cd "$HOME/.config" && lsa ;;
     esac
 }
 

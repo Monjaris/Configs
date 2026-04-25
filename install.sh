@@ -1,8 +1,8 @@
 #!/bin/bash
-# ==========================================
-# My personal configuration environment repo's installation script
+# ===============================================================
+# My personal configuration environment's installation script
 # Copies configs FROM this repo TO their proper system locations
-# ==========================================
+# ===============================================================
 
 set -o pipefail
 shopt -s nullglob
@@ -55,22 +55,22 @@ enable_service() {
 handle_finish () {
     local action
     while true; do
-        prompt "Press enter to log-out, 'r' to reboot or 'a' to abort: " action
+        prompt "Press enter to abort, 'r' to reboot or 'l' to log-out: " action
         case "$action" in
             "")
-                loginctl terminate-session "$XDG_SESSION_ID"
+                echo "Aborted."
                 break
                 ;;
             r)
                 systemctl reboot
                 break
                 ;;
-            a)
-                echo "Aborted."
+            l)
+                loginctl terminate-session "$XDG_SESSION_ID"
                 break
                 ;;
             *)
-                echo -e "${_BOLD_RED}Invalid input. Enter nothing, 'r', or 'a'.${_RESET}"
+                echo -e "${_BOLD_RED}Invalid input. Enter nothing, 'r', or 'l'.${_RESET}"
                 ;;
         esac
     done
@@ -103,32 +103,27 @@ if [[ "$preinstall_deps" =~ $validator_regex ]]; then
     sudo pacman -S --needed git base-devel man-db
     # install yay via chaotic-aur if not already present
     if ! command -v yay &>/dev/null; then
-        sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
-        sudo pacman-key --lsign-key 3056513887B78AEB
-        sudo pacman-key --populate
-        sudo pacman -U --noconfirm \
-            'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
-        sudo pacman -U --noconfirm \
-            'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-        # append chaotic-aur to pacman.conf if not already there
-        if ! grep -q '^\[chaotic-aur\]' /etc/pacman.conf; then
-            sudo tee -a /etc/pacman.conf > /dev/null <<'EOF'
-
-[chaotic-aur]
-Include = /etc/pacman.d/chaotic-mirrorlist
-EOF
-        fi
+        ./UTILS/enable-chaotic-aur.sh
         sudo pacman -Sy
         sudo pacman -S --needed yay
     fi
     # install other packages
     sudo pacman -S --needed \
-        bat eza yazi micro keyd \
-        kitty konsole code zed
+        ananicy-cpp keyd llvm lldb \
+        bat eza yazi fastfetch btop cava nvim-lazy micro fresh-editor \
+        kitty dolphin konsole haruna elisa code zed
     # install the ones from AUR
     yay -S --needed \
         ttf-jetbrains-mono ttf-fira-code ttf-comic-mono-git ttf-comic-neue \
         inter-font adobe-source-code-pro-fonts
+    # Install CachyOS kernel
+    sudo pacman -S --needed \
+        linux-cachyos linux-cachyos-headers
+        sudo mkinitcpio -P
+        ./UTILS/set-default-kernel.sh
+    # Remove packages based on desire
+    sudo pacman -Rns \
+        vim nano
 fi
 
 # ==========================================
@@ -144,30 +139,30 @@ mkdir -p "$CONFIGD/autostart"
 mkdir -p "$CONFIGD/bashrc.d"
 # Copy environment files to their corresponding places
 ENVD="environment"
-run  command cp -rav -- "$ENVD/bin"/*         "$HOME/bin"
-run command cp -rav -- "$ENVD/autostart/"*   "$CONFIGD/autostart/"
-run command cp -rav -- "$ENVD/bashrc.d/"*    "$CONFIGD/bashrc.d/"
+run  command cp -av -- "$ENVD/bin"/*         "$HOME/bin"
+run command cp -av -- "$ENVD/autostart/"*   "$CONFIGD/autostart/"
+run command cp -av -- "$ENVD/bashrc.d/"*    "$CONFIGD/bashrc.d/"
 
 
 # ABONDONED cpx -av -- "./xremap/config.yml"                  "$CONFIGD/xremap/config.yml"
-scpx -av -- "./keyd/default.conf"                    "/etc/keyd/default.conf"
-VSC="Code - OSS"; cpx -av -- "./vscode/settings.json" "$CONFIGD/$VSC/User/settings.json"
-cpx -av -- "./vscode/keybindings.json"                "$CONFIGD/$VSC/User/keybindings.json"
-cpx -av -- "./zed/settings.json"                      "$CONFIGD/zed/settings.json"
-cpx -av -- "./zed/keymap.json"                        "$CONFIGD/zed/keymap.json"
-cpx -rav -- "./zed/extensions/one-dark-pro-clean"     "$CONFIGD/zed/extensions/one-dark-pro-clean"
-cpx -av -- "./kitty/kitty.conf"                       "$CONFIGD/kitty/kitty.conf"
-cpx -av -- "./kitty/keymap.conf"                      "$CONFIGD/kitty/keymap.conf"
-AUR_HELPER="yay"; cpx -av -- "./$AUR_HELPER/config.json" "$CONFIGD/$AUR_HELPER/config.json"
-cpx -av -- "./fastfetch/config.jsonc"                 "$CONFIGD/fastfetch/config.jsonc"
-cpx -av -- "./fastfetch/default.jsonc"                "$CONFIGD/fastfetch/default.jsonc"
+scpx -av -- "./keyd/default.conf"                       "/etc/keyd/default.conf"
+VSC="Code - OSS"; cpx -av -- "./vscode/settings.json"   "$CONFIGD/$VSC/User/settings.json"
+cpx -av -- "./vscode/keybindings.json"                  "$CONFIGD/$VSC/User/keybindings.json"
+cpx -av -- "./zed/settings.json"                        "$CONFIGD/zed/settings.json"
+cpx -av -- "./zed/keymap.json"                          "$CONFIGD/zed/keymap.json"
+cpx -av -- "./zed/extensions/one-dark-pro-clean/"*      "$CONFIGD/zed/extensions/"
+cpx -av -- "./kitty/kitty.conf"                         "$CONFIGD/kitty/kitty.conf"
+cpx -av -- "./kitty/keymap.conf"                        "$CONFIGD/kitty/keymap.conf"
+AUR_HELPER="yay"; cpx -av -- "./$AUR_HELPER/config.json"    "$CONFIGD/$AUR_HELPER/config.json"
+cpx -av -- "./fastfetch/config.jsonc"                   "$CONFIGD/fastfetch/config.jsonc"
+cpx -av -- "./fastfetch/default.jsonc"                  "$CONFIGD/fastfetch/default.jsonc"
 # ABONDONED cpx -av -- "./lf/lfrc"                             "$CONFIGD/lf/lfrc"
-cpx -av -- "./yazi/yazi.toml"                         "$CONFIGD/yazi/yazi.toml"
-cpx -av -- "./micro/settings.json"                    "$CONFIGD/micro/settings.json"
-cpx -av -- "./micro/bindings.json"                    "$CONFIGD/micro/bindings.json"
-cpx -av -- "./bat/config"                             "$CONFIGD/bat/config"
+cpx -av -- "./yazi/yazi.toml"                           "$CONFIGD/yazi/yazi.toml"
+cpx -av -- "./micro/settings.json"                      "$CONFIGD/micro/settings.json"
+cpx -av -- "./micro/bindings.json"                      "$CONFIGD/micro/bindings.json"
+cpx -av -- "./bat/config"                               "$CONFIGD/bat/config"
 cpx -av -- "./brave/Default/Preferences" "$CONFIGD/BraveSoftware/Brave-Browser/Default/Preferences"
-cpx -av -- "./clangd/config.yaml"                     "$CONFIGD/clangd/config.yaml"
+cpx -av -- "./clangd/config.yaml"                       "$CONFIGD/clangd/config.yaml"
 
 
 # ==========================================
@@ -222,7 +217,7 @@ echo -e "\n${_GREEN}Installation finished!${_RESET}"
 let_override_bashrc=""
 prompt "Let override user bash config(~/.bashrc)? [y/N] " let_override_bashrc
 [[ "$let_override_bashrc" =~ $validator_regex ]] && \
-    run command cp -av -- "./MISC/.bashrc" "$HOME/.bashrc"
+    run command cp -av -- "./UTILS/.bashrc" "$HOME/.bashrc"
 
 postinstall_exec=""
 prompt "Run postinstall? [y/N] " postinstall_exec
@@ -248,4 +243,3 @@ fi
 echo -e "\n\n"; print_dots
 echo -e "\033[0;36mYour system is ready to reflect configurations.${_RESET}\n\n"
 handle_finish
-

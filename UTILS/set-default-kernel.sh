@@ -6,7 +6,7 @@ KERN="$1"
 
 
 # Filter and set $entry
-entry=$(grep -P "menuentry '.*Linux linux$KERN'" "$CFG" | head -n1 | cut -d"'" -f2)
+entry=$(sudo grep -P "menuentry '.*Linux linux$KERN'" "$CFG" | head -n1 | cut -d"'" -f2)
 if [[ -z "$entry" ]]; then
     echo "$KERN kernel entry not found!"
     exit 1

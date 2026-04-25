@@ -141,6 +141,15 @@ run  command cp -av -- "$ENVD/bin"/*         "$HOME/bin"
 run command cp -av -- "$ENVD/autostart/"*   "$CONFIGD/autostart/"
 run command cp -av -- "$ENVD/bashrc.d/"*    "$CONFIGD/bashrc.d/"
 
+# Copy browser config to properly (no browser instance should not run)
+tries=0
+while pgrep -x brave &>/dev/null; do
+    printf "Waiting for all brave processes to end...\r"; sleep 0.5; (( tries++ ))
+    # exit after many tries
+    [[ $tries -gt 100 ]] && { echo "Timed out waiting for Brave to close."; exit 1; }
+done
+./UTILS/browser_config_filter.sh install
+
 
 # ABONDONED cpx -av -- "./xremap/config.yml"                  "$CONFIGD/xremap/config.yml"
 scpx -av -- "./keyd/default.conf"                       "/etc/keyd/default.conf"
@@ -159,7 +168,6 @@ cpx -av -- "./yazi/yazi.toml"                           "$CONFIGD/yazi/yazi.toml
 cpx -av -- "./micro/settings.json"                      "$CONFIGD/micro/settings.json"
 cpx -av -- "./micro/bindings.json"                      "$CONFIGD/micro/bindings.json"
 cpx -av -- "./bat/config"                               "$CONFIGD/bat/config"
-cpx -av -- "./brave/Default/Preferences" "$CONFIGD/BraveSoftware/Brave-Browser/Default/Preferences"
 cpx -av -- "./clangd/config.yaml"                       "$CONFIGD/clangd/config.yaml"
 
 
@@ -235,7 +243,7 @@ echo -e "\n${_GREEN}Configurations installed!${_RESET}"
     # Install kernel and configuire system files via script
     if [[ $bad_name -eq 0 ]]; then
         sudo pacman -S --needed "linux$kernel_short" "linux$kernel_short-headers"
-        ./UTILS/set-default-kernel.sh $kernel_short
+        ./UTILS/set-default-kernel.sh "$kernel_short"
     fi
 }
 

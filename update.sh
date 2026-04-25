@@ -74,6 +74,8 @@ run command cp -avu -- "$HOME/bin/"*             "./$ENVD/bin/"
 run command cp -avu -- "$CONFIGD/autostart/"*    "./$ENVD/autostart/"
 run command cp -avu -- "$BASH_CONFIG_DIR/"*      "./$ENVD/bashrc.d/"
 
+# Install only needed configuration data from the browser
+./UTILS/browser_config_filter.sh update
 
 # ABONDONED rcp -avu -- "$XREMAP_CONFIG"                  "./xremap/config.yml"
 su_rcp -avu -- "$KEYD_CONFIG"                   "./keyd/default.conf"
@@ -92,7 +94,6 @@ rcp -avu -- "$YAZI_CONFIG"                      "./yazi/yazi.toml"
 rcp -avu -- "$MICRO_SETTINGS"                   "./micro/settings.json"
 rcp -avu -- "$MICRO_KEYMAP"                     "./micro/bindings.json"
 rcp -avu -- "$BAT_CONFIG"                       "./bat/config"
-rcp -avu -- "$BRAVE_PREFS"                      "./brave/Default/Preferences"
 rcp -avu -- "$CLANGD_CONFIG"                    "./clangd/config.yaml"
 
 

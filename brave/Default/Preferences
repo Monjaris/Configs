@@ -34,29 +34,25 @@
         "Control+Shift+KeyN"
       ],
       "34012": [
-        "Control+Shift+KeyW",
-        "Alt+F4"
+        "Control+Shift+KeyW"
       ],
       "34014": [
-        "Alt+KeyP",
         "AppNew",
-        "Control+KeyT"
+        "Control+KeyT",
+        "Alt+KeyP"
       ],
       "34015": [
-        "Alt+KeyO",
         "Control+KeyW",
-        "Control+F4",
-        "AppClose"
+        "AppClose",
+        "Alt+KeyO"
       ],
       "34016": [
-        "Alt+KeyL",
         "Control+Tab",
-        "Control+PageDown"
+        "Alt+KeyL"
       ],
       "34017": [
-        "Alt+KeyK",
         "Control+Shift+Tab",
-        "Control+PageUp"
+        "Alt+KeyK"
       ],
       "34018": [
         "Control+Digit1",
@@ -122,12 +118,10 @@
         "F11"
       ],
       "34032": [
-        "Control+Alt+ArrowRight",
-        "Control+Shift+PageDown"
+        "Control+Alt+ArrowRight"
       ],
       "34033": [
-        "Control+Alt+ArrowLeft",
-        "Control+Shift+PageUp"
+        "Control+Alt+ArrowLeft"
       ],
       "34035": [],
       "34055": [
@@ -151,9 +145,7 @@
       "35000": [
         "Control+KeyD"
       ],
-      "35001": [
-        "Control+Shift+KeyD"
-      ],
+      "35001": [],
       "35002": [
         "Control+KeyU"
       ],
@@ -166,9 +158,7 @@
       "35007": [
         "Control+Shift+KeyP"
       ],
-      "35031": [
-        "Control+Shift+KeyS"
-      ],
+      "35031": [],
       "37000": [
         "Control+KeyF"
       ],
@@ -201,19 +191,15 @@
         "Alt+Shift+KeyT"
       ],
       "39001": [
-        "Alt+Comma",
         "Control+KeyL",
-        "Alt+KeyD"
+        "Alt+KeyD",
+        "Alt+Comma"
       ],
-      "39002": [
-        "BrowserSearch",
-        "Control+KeyE",
-        "Control+KeyK"
-      ],
+      "39002": [],
       "39003": [
         "F10",
-        "Alt",
-        "AltGr"
+        "AltGr",
+        "Alt"
       ],
       "39004": [
         "F6"
@@ -222,8 +208,7 @@
         "Shift+F6"
       ],
       "39006": [
-        "Alt+KeyA",
-        "Alt+Shift+KeyB"
+        "Alt+KeyA"
       ],
       "39007": [
         "Alt+Shift+KeyA"
@@ -241,9 +226,8 @@
         "Control+Shift+KeyJ"
       ],
       "40009": [
-        "Alt+KeyS",
         "BrowserFavorites",
-        "Control+Shift+KeyB"
+        "Alt+KeyS"
       ],
       "40010": [
         "Control+KeyH"
@@ -274,14 +258,18 @@
       "40237": [
         "F12"
       ],
-      "40248": [],
+      "40248": [
+        "Control+Shift+KeyS"
+      ],
       "40260": [
         "F7"
       ],
       "40286": [
         "Shift+Escape"
       ],
-      "51006": [],
+      "51006": [
+        "Control+Shift+KeyD"
+      ],
       "52500": [
         "Control+Shift+KeyA"
       ],
@@ -310,14 +298,6 @@
       "56327": [
         "Control+Alt+Shift+KeyS"
       ]
-    }
-  },
-  "browser": {
-    "custom_chrome_frame": true,
-    "theme": {
-      "color_scheme2": 0,
-      "color_variant2": 1,
-      "user_color2": -1714692
     }
   },
   "default_search_provider_data": {
@@ -468,7 +448,7 @@
         "from_webstore": false,
         "incognito_content_settings": [],
         "incognito_preferences": {},
-        "last_update_time": "13421597680420569",
+        "last_update_time": "13421602881507522",
         "location": 5,
         "manifest": {
           "app": {
@@ -730,7 +710,9 @@
         },
         "content_settings": [],
         "creation_flags": 9,
-        "disable_reasons": [],
+        "disable_reasons": [
+          1024
+        ],
         "first_install_time": "13414189991238998",
         "from_webstore": true,
         "granted_permissions": {
@@ -859,9 +841,6 @@
         "path": "eimadpbcbfnmbkopoojfekhnkhdbieeh/4.9.124_0",
         "preferences": {},
         "regular_only_preferences": {},
-        "service_worker_registration_info": {
-          "version": "4.9.124"
-        },
         "serviceworkerevents": [
           "alarms.onAlarm",
           "commands.onCommand",
@@ -901,7 +880,9 @@
         },
         "content_settings": [],
         "creation_flags": 9,
-        "disable_reasons": [],
+        "disable_reasons": [
+          1024
+        ],
         "first_install_time": "13414510319317155",
         "from_webstore": true,
         "granted_permissions": {
@@ -994,9 +975,6 @@
         "path": "gebbhagfogifgggkldgodflihgfeippi/4.0.2_0",
         "preferences": {},
         "regular_only_preferences": {},
-        "service_worker_registration_info": {
-          "version": "4.0.2"
-        },
         "serviceworkerevents": [
           "runtime.onInstalled",
           "runtime.onStartup",
@@ -1111,7 +1089,7 @@
         "from_webstore": false,
         "incognito_content_settings": [],
         "incognito_preferences": {},
-        "last_update_time": "13421597680421332",
+        "last_update_time": "13421602881508095",
         "location": 5,
         "manifest": {
           "content_security_policy": "script-src 'self' blob: filesystem: chrome://brave-resources chrome://resources chrome://webui-test; object-src * blob: externalfile: file: filesystem: data:",
@@ -1189,7 +1167,7 @@
         "from_webstore": false,
         "incognito_content_settings": [],
         "incognito_preferences": {},
-        "last_update_time": "13421597680422625",
+        "last_update_time": "13421602881508922",
         "location": 5,
         "manifest": {
           "content_scripts": [

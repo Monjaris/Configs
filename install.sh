@@ -144,8 +144,11 @@ run command cp -av -- "$ENVD/bashrc.d/"*    "$CONFIGD/bashrc.d/"
 # Copy browser config to properly (no browser instance should not run)
 tries=0
 while pgrep -x brave &>/dev/null; do
-    printf "Waiting for all brave processes to end...\r"; sleep 0.5; (( tries++ ))
-    # exit after many tries
+    printf "\nWaiting for all brave processes to end...\r"; sleep 0.5; (( tries++ ))
+    [[ tried -eq 1 ]] && { notify-send -t 50000 -a install.sh " \
+        The installation script needs all browser instances \
+to be closed for proper installation!  (timeout: 50s)"
+    }
     [[ $tries -gt 100 ]] && { echo "Timed out waiting for Brave to close."; exit 1; }
 done
 ./UTILS/browser_config_filter.sh install

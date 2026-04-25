@@ -34,25 +34,29 @@
         "Control+Shift+KeyN"
       ],
       "34012": [
-        "Control+Shift+KeyW"
+        "Control+Shift+KeyW",
+        "Alt+F4"
       ],
       "34014": [
+        "Alt+KeyP",
         "AppNew",
-        "Control+KeyT",
-        "Alt+KeyP"
+        "Control+KeyT"
       ],
       "34015": [
+        "Alt+KeyO",
         "Control+KeyW",
-        "AppClose",
-        "Alt+KeyO"
+        "Control+F4",
+        "AppClose"
       ],
       "34016": [
+        "Alt+KeyL",
         "Control+Tab",
-        "Alt+KeyL"
+        "Control+PageDown"
       ],
       "34017": [
+        "Alt+KeyK",
         "Control+Shift+Tab",
-        "Alt+KeyK"
+        "Control+PageUp"
       ],
       "34018": [
         "Control+Digit1",
@@ -118,10 +122,12 @@
         "F11"
       ],
       "34032": [
-        "Control+Alt+ArrowRight"
+        "Control+Alt+ArrowRight",
+        "Control+Shift+PageDown"
       ],
       "34033": [
-        "Control+Alt+ArrowLeft"
+        "Control+Alt+ArrowLeft",
+        "Control+Shift+PageUp"
       ],
       "34035": [],
       "34055": [
@@ -145,7 +151,9 @@
       "35000": [
         "Control+KeyD"
       ],
-      "35001": [],
+      "35001": [
+        "Control+Shift+KeyD"
+      ],
       "35002": [
         "Control+KeyU"
       ],
@@ -158,7 +166,9 @@
       "35007": [
         "Control+Shift+KeyP"
       ],
-      "35031": [],
+      "35031": [
+        "Control+Shift+KeyS"
+      ],
       "37000": [
         "Control+KeyF"
       ],
@@ -191,15 +201,19 @@
         "Alt+Shift+KeyT"
       ],
       "39001": [
+        "Alt+Comma",
         "Control+KeyL",
-        "Alt+KeyD",
-        "Alt+Comma"
+        "Alt+KeyD"
       ],
-      "39002": [],
+      "39002": [
+        "BrowserSearch",
+        "Control+KeyE",
+        "Control+KeyK"
+      ],
       "39003": [
         "F10",
-        "AltGr",
-        "Alt"
+        "Alt",
+        "AltGr"
       ],
       "39004": [
         "F6"
@@ -208,7 +222,8 @@
         "Shift+F6"
       ],
       "39006": [
-        "Alt+KeyA"
+        "Alt+KeyA",
+        "Alt+Shift+KeyB"
       ],
       "39007": [
         "Alt+Shift+KeyA"
@@ -226,8 +241,9 @@
         "Control+Shift+KeyJ"
       ],
       "40009": [
+        "Alt+KeyS",
         "BrowserFavorites",
-        "Alt+KeyS"
+        "Control+Shift+KeyB"
       ],
       "40010": [
         "Control+KeyH"
@@ -258,18 +274,14 @@
       "40237": [
         "F12"
       ],
-      "40248": [
-        "Control+Shift+KeyS"
-      ],
+      "40248": [],
       "40260": [
         "F7"
       ],
       "40286": [
         "Shift+Escape"
       ],
-      "51006": [
-        "Control+Shift+KeyD"
-      ],
+      "51006": [],
       "52500": [
         "Control+Shift+KeyA"
       ],
@@ -303,7 +315,7 @@
   "browser": {
     "custom_chrome_frame": true,
     "theme": {
-      "color_scheme2": 2,
+      "color_scheme2": 0,
       "color_variant2": 1,
       "user_color2": -1714692
     }
@@ -456,7 +468,7 @@
         "from_webstore": false,
         "incognito_content_settings": [],
         "incognito_preferences": {},
-        "last_update_time": "13421583253701861",
+        "last_update_time": "13421597680420569",
         "location": 5,
         "manifest": {
           "app": {
@@ -1099,7 +1111,7 @@
         "from_webstore": false,
         "incognito_content_settings": [],
         "incognito_preferences": {},
-        "last_update_time": "13421583253705327",
+        "last_update_time": "13421597680421332",
         "location": 5,
         "manifest": {
           "content_security_policy": "script-src 'self' blob: filesystem: chrome://brave-resources chrome://resources chrome://webui-test; object-src * blob: externalfile: file: filesystem: data:",
@@ -1177,7 +1189,7 @@
         "from_webstore": false,
         "incognito_content_settings": [],
         "incognito_preferences": {},
-        "last_update_time": "13421583253711158",
+        "last_update_time": "13421597680422625",
         "location": 5,
         "manifest": {
           "content_scripts": [

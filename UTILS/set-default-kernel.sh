@@ -3,12 +3,13 @@
 set -e
 
 CFG="/boot/grub/grub.cfg"
+KERN="$1"
 
 # Find first cachyos entry
-entry=$(grep -P "menuentry '.*cachyos.*'" "$CFG" | head -n1 | cut -d"'" -f2)
+entry=$(grep -P "menuentry '.*$KERN.*'" "$CFG" | head -n1 | cut -d"'" -f2)
 
 if [[ -z "$entry" ]]; then
-    echo "CachyOS kernel entry not found!"
+    echo "$KERN kernel entry not found!"
     exit 1
 fi
 

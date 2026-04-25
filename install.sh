@@ -110,17 +110,13 @@ if [[ "$preinstall_deps" =~ $validator_regex ]]; then
     # install other packages
     sudo pacman -S --needed \
         ananicy-cpp keyd llvm lldb \
-        bat eza yazi fastfetch btop cava nvim-lazy micro fresh-editor \
+        bat eza yazi fastfetch btop cava micro fresh-editor \
         kitty dolphin konsole haruna elisa code zed
     # install the ones from AUR
     yay -S --needed \
+        nvim-lazy \
         ttf-jetbrains-mono ttf-fira-code ttf-comic-mono-git ttf-comic-neue \
         inter-font adobe-source-code-pro-fonts
-    # Install CachyOS kernel
-    sudo pacman -S --needed \
-        linux-cachyos linux-cachyos-headers
-        sudo mkinitcpio -P
-        ./UTILS/set-default-kernel.sh
     # Remove packages based on desire
     sudo pacman -Rns \
         vim nano
@@ -211,33 +207,58 @@ fi
 
 
 
-echo -e "\n${_GREEN}Installation finished!${_RESET}"
+echo -e "\n${_GREEN}Configurations installed!${_RESET}"
+
 
 # Adjust user bash config
-let_override_bashrc=""
-prompt "Let override user bash config(~/.bashrc)? [y/N] " let_override_bashrc
-[[ "$let_override_bashrc" =~ $validator_regex ]] && \
-    run command cp -av -- "./UTILS/.bashrc" "$HOME/.bashrc"
+{
+    let_override_bashrc=""
+    prompt "Let override user bash config(~/.bashrc)? [y/N] " let_override_bashrc
+    [[ "$let_override_bashrc" =~ $validator_regex ]] && \
+        run command cp -av -- "./UTILS/.bashrc" "$HOME/.bashrc"
+}
 
-postinstall_exec=""
-prompt "Run postinstall? [y/N] " postinstall_exec
+# Install main kernel
+{
+    kernels=(linux lts cachyos zen hardened)
+    kernel_short=""
+    bad_name=0
+    # Prompt and validate it
+    prompt "Enter kernel name(${kernels[*]}):\n\t" kernel_short
+    [[ " ${kernels[*]} " == *" $kernel_short "* ]] || \
+        { echo "Wrong kernel name!"; bad_name=1; }
+    [[ "$kernel_short" != "linux" ]] && \
+        kernel_short="-$kernel_short"
+
+    # Install kernel and configuire system files via script
+    if [[ $bad_name -eq 0 ]]; then
+        sudo pacman -S --needed "linux$kernel_short" "linux$kernel_short-headers"
+        ./UTILS/set-default-kernel.sh $kernel_short
+    fi
+}
+
 # postinstall execution
-if [[ "$postinstall_exec" =~ $validator_regex ]]; then
-    sudo mandb
-    enable_service keyd
-    enable_service man-db.timer
-    fc-cache -fv # for fonts to refresh
-    echo -e "${_GREEN}Optional post-install execution finished!${_RESET}\n"
-fi
+{
+    postinstall_exec=""
+    prompt "Run postinstall? [y/N] " postinstall_exec
+    if [[ "$postinstall_exec" =~ $validator_regex ]]; then
+        sudo mandb
+        enable_service keyd
+        enable_service man-db.timer
+        fc-cache -fv # for fonts to refresh
+        echo -e "${_GREEN}Optional post-install execution finished!${_RESET}\n"
+    fi
+}
 
-update_system=""
-prompt "Update system? [y/N] " update_system
-# update system too
-if [[ "$update_system" =~ $validator_regex ]]; then
-    sudo pacman -Syu
-    echo -e "${_GREEN}Refreshed databases and updated system!${_RESET}"
-fi
-
+# Update system
+{
+    update_system=""
+    prompt "Update system? [y/N] " update_system
+    if [[ "$update_system" =~ $validator_regex ]]; then
+        sudo pacman -Syu
+        echo -e "${_GREEN}Refreshed databases and updated system!${_RESET}"
+    fi
+}
 
 # Finish (RE-LOGIN, REBOOT, NOTHING)
 echo -e "\n\n"; print_dots

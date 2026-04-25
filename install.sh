@@ -117,9 +117,11 @@ if [[ "$preinstall_deps" =~ $validator_regex ]]; then
         nvim-lazy \
         ttf-jetbrains-mono ttf-fira-code ttf-comic-mono-git ttf-comic-neue \
         inter-font adobe-source-code-pro-fonts
-    # Remove packages based on desire
-    sudo pacman -Rns \
-        vim nano
+    # Remove existing packages based on desire
+    rm_pkgs=(vim nano); installed=()
+        for pkg in "${rm_pkgs[@]}"; do
+            pacman -Q "$pkg" &>/dev/null && installed+=("$pkg")
+        done; [[ ${#installed[@]} -gt 0 ]] && sudo pacman -Rns "${installed[@]}"
 fi
 
 # ==========================================

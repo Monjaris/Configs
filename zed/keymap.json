@@ -103,5 +103,17 @@
     "unbind": {
       "ctrl-q": "zed::Quit"
     }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "alt-r": "editor::FindAllReferences"
+    }
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "alt-shift-f12": "editor::FindAllReferences"
+    }
   }
 ]

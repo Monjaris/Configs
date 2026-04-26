@@ -75,7 +75,7 @@ run command cp -avu -- "$BASH_CONFIG_DIR/"*      "./$ENVD/bashrc.d/"
 
 # Install only needed configuration data from the browser
 # Note: The script below coded with heavy AI usage
-./UTILS/browser_config_filter.sh update "brave"
+./UTILS/browser_config_filter.sh update brave
 
 # ABONDONED rcp -avu -- "$XREMAP_CONFIG"                  "./xremap/config.yml"
 su_rcp -avu -- "$KEYD_CONFIG"                   "./keyd/default.conf"

@@ -19,7 +19,7 @@ REPO_BASE="$SCRIPT_DIR/.."  # repo root; browser configs live at $REPO_BASE/<nam
 # --- Logging helpers ---
 _log()  { printf '  [browser] %s\n'        "$*";      }
 _warn() { printf '  [browser] !! %s\n'     "$*" >&2;  }
-_die()  { printf '\033[1;31m  [browser] FATAL: %s\033[0m\n' "$*" >&2; exit 1; }
+_die()  { printf '  [browser] FATAL: %s\n' "$*" >&2; exit 1; }
 
 # =============================================================
 # BROWSER REGISTRY
@@ -33,13 +33,13 @@ _die()  { printf '\033[1;31m  [browser] FATAL: %s\033[0m\n' "$*" >&2; exit 1; }
 #                    (currently Brave-specific; absent = 0)
 # =============================================================
 MODE="$1"
-shift && BROWSER_NAMES=("$@")
-
+shift; BROWSER_NAMES=("$@")
 
 declare -A B_CONFIG_SUBDIR=(
     [brave]="BraveSoftware/Brave-Browser"
     [chrome]="google-chrome"
     [chromium]="chromium"
+    [edge]="microsoft-edge"
     [vivaldi]="vivaldi"
     [opera]="opera"
 )
@@ -47,13 +47,15 @@ declare -A B_PREFS_SUB=(
     [brave]="Default/Preferences"
     [chrome]="Default/Preferences"
     [chromium]="Default/Preferences"
+    [edge]="Default/Preferences"
     [vivaldi]="Default/Preferences"
-    [opera]="Preferences"          # Opera omits the Default/ level
+    [opera]="Preferences"
 )
 declare -A B_PROC=(
     [brave]="brave"
     [chrome]="google-chrome"
     [chromium]="chromium"
+    [edge]="microsoft-edge"
     [vivaldi]="vivaldi"
     [opera]="opera"
 )
@@ -63,8 +65,8 @@ declare -A B_HAS_ACCEL=(
 )
 
 # --- Path helpers ---
-live_prefs_path() { echo "$HOME/.config/${B_CONFIG_SUBDIR[$MODE]}/${B_PREFS_SUB[$MODE]}"; }
-repo_prefs_path() { echo "$REPO_BASE/$MODE/Preferences"; }
+live_prefs_path() { echo "$HOME/.config/${B_CONFIG_SUBDIR[$1]}/${B_PREFS_SUB[$1]}"; }
+repo_prefs_path() { echo "$REPO_BASE/$1/Preferences"; }
 
 # =============================================================
 # JQ FILTER BUILDER
@@ -78,8 +80,8 @@ repo_prefs_path() { echo "$REPO_BASE/$MODE/Preferences"; }
 # injected when the registry marks the browser as supporting them.
 # =============================================================
 build_filter() {
-    local name="$MODE"
-    local has_accel="${B_HAS_ACCEL[$MODE]:-0}"
+    local name="$1"
+    local has_accel="${B_HAS_ACCEL[$1]:-0}"
 
     _log "Building jq filter for '$name'"
     _log "  core fields: default_search_provider_data, devtools, extensions,"

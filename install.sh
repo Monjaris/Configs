@@ -144,7 +144,7 @@ run command cp -av -- "$ENVD/bashrc.d/"*    "$CONFIGD/bashrc.d/"
 # Copy browser config to proper paths
 # browser_config_filter.sh handles multi-browser detection too
 echo "Installing browser config(s)..."
-./UTILS/browser_config_filter.sh install "brave"
+./UTILS/browser_config_filter.sh install brave
 
 
 # ABONDONED cpx -av -- "./xremap/config.yml"                  "$CONFIGD/xremap/config.yml"

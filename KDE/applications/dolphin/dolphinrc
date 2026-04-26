@@ -56,4 +56,4 @@ Location=Everywhere
 Paths[$e]=/run/media/ziya/Ventoy
 
 [kuick-move]
-Paths[$e]=/run/media/ziya/Ventoy
+Paths[$e]=$HOME/Pictures/Screenshots/important/,/run/media/ziya/Ventoy

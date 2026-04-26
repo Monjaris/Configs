@@ -153,9 +153,9 @@ Switch to Desktop 6=Meta+Ctrl+Alt+6,,Switch to Desktop 6
 Switch to Desktop 7=none,,Switch to Desktop 7
 Switch to Desktop 8=none,,Switch to Desktop 8
 Switch to Desktop 9=none,,Switch to Desktop 9
-Switch to Next Desktop=none,,Switch to Next Desktop
+Switch to Next Desktop=Meta+Ctrl+Alt+',,Switch to Next Desktop
 Switch to Next Screen=none,,Switch to Next Screen
-Switch to Previous Desktop=none,,Switch to Previous Desktop
+Switch to Previous Desktop=Meta+Ctrl+Alt+;,,Switch to Previous Desktop
 Switch to Previous Screen=none,,Switch to Previous Screen
 Switch to Screen 0=none,,Switch to Screen 0
 Switch to Screen 1=none,,Switch to Screen 1
@@ -381,9 +381,7 @@ _launch=Meta+.
 
 [services][org.kde.spectacle.desktop]
 ActiveWindowScreenShot=none
-CurrentMonitorScreenShot=
 FullScreenScreenShot=none
-OpenWithoutScreenshot=
 RecordRegion=none
 RecordScreen=Meta+Shift+S
 RecordWindow=none

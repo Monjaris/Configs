@@ -33,6 +33,13 @@ alias ip='ip -color'
 alias journal='type journal; journalctl --no-pager -l'
 alias jerrors='type jerrors; journalctl -p 3 -xb --pager-end'
 
+# Code aliases
+alias gs='git status'
+alias gd='git fetch  &&  git diff main..origin/main'
+alias gup='git add .  &&  git commit -m "commit no: idk"  &&  git push'
+alias rmcmake='rm -f build/CMakeCache.txt'
+
+
 
 silent () {
     bash -c "$*" >/dev/null 2>&1 || true

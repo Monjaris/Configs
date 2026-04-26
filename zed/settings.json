@@ -111,10 +111,11 @@
   "when_closing_with_no_tabs": "platform_default",
 
   "terminal": {
+    "cursor_shape": "block",
     "minimum_contrast": 50.0,
     "dock": "right",
     "max_scroll_history_lines": 1500000,
-    "blinking": "terminal_controlled",
+    "blinking": "on",
     "font_family": "Cascadia Code",
     "font_size": 16.0,
   },

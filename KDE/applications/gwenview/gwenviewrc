@@ -17,26 +17,26 @@ ThumbnailSplitterSizes=718,205
 MenuBar=Disabled
 
 [Recent Files]
-File1[$e]=$HOME/Pictures/bg/pexels-sanat-anghan-25736600-6785277.jpg
-File10[$e]=$HOME/Downloads/zed.png
-File2[$e]=admin:///boot/efi/grub/themes/starfield/boot_menu_w.png
-File3[$e]=admin:///boot/efi/grub/themes/starfield/starfield.png
-File4[$e]=/run/user/1000/bb54623a39974a32b40c4e8c4d5caf4a/storage/emulated/0/mlkit_test.jpg
-File5[$e]=/run/user/1000/bb54623a39974a32b40c4e8c4d5caf4a/storage/emulated/0/.trashBin/IMG_20260328_191148_640.jpg
-File6[$e]=/run/user/1000/bb54623a39974a32b40c4e8c4d5caf4a/storage/emulated/0/.trashBin/Screenshot_20260328-232300.jpg
-File7[$e]=/run/user/1000/bb54623a39974a32b40c4e8c4d5caf4a/storage/emulated/0/.trashBin/IMG-20251003-WA0001.jpg
-File8[$e]=$HOME/Downloads/7d563b5d-5b69-4e16-b875-2a6ac7b96eff.webp
-File9[$e]=$HOME/Downloads/zeditor.png
-Name1[$e]=pexels-sanat-anghan-25736600-6785277.jpg
-Name10[$e]=zed.png
-Name2[$e]=boot_menu_w.png
-Name3[$e]=starfield.png
-Name4[$e]=mlkit_test.jpg
-Name5[$e]=IMG_20260328_191148_640.jpg
-Name6[$e]=Screenshot_20260328-232300.jpg
-Name7[$e]=IMG-20251003-WA0001.jpg
-Name8[$e]=7d563b5d-5b69-4e16-b875-2a6ac7b96eff.webp
-Name9[$e]=zeditor.png
+File1[$e]=$HOME/Downloads/7d563b5d-5b69-4e16-b875-2a6ac7b96eff.webp
+File10[$e]=$HOME/Pictures/Screenshots/ss-26.04.25_19:46.png
+File2[$e]=$HOME/Downloads/zeditor.png
+File3[$e]=$HOME/Downloads/zed.png
+File4[$e]=$HOME/Pictures/Screenshots/ss-26.04.26_00:30.png
+File5[$e]=$HOME/Pictures/Screenshots/ss-26.04.25_21:07.png
+File6[$e]=$HOME/Pictures/Screenshots/ss-26.04.25_20:47.png
+File7[$e]=$HOME/Pictures/Screenshots/ss-26.04.25_19:58.png
+File8[$e]=$HOME/Pictures/Screenshots/ss-26.04.25_19:57.png
+File9[$e]=$HOME/Pictures/Screenshots/ss-26.04.25_19:31.png
+Name1[$e]=7d563b5d-5b69-4e16-b875-2a6ac7b96eff.webp
+Name10[$e]=ss-26.04.25_19:46.png
+Name2[$e]=zeditor.png
+Name3[$e]=zed.png
+Name4[$e]=ss-26.04.26_00:30.png
+Name5[$e]=ss-26.04.25_21:07.png
+Name6[$e]=ss-26.04.25_20:47.png
+Name7[$e]=ss-26.04.25_19:58.png
+Name8[$e]=ss-26.04.25_19:57.png
+Name9[$e]=ss-26.04.25_19:31.png
 
 [SideBar]
 InformationSplitterSizes=218,257

@@ -8,7 +8,7 @@
 
     ///  Editor
     "editor.fontFamily": "JetBrainsMono Nerd Font Mono",
-    "editor.fontSize": 17.2,
+    "editor.fontSize": 16,
     "editor.fontWeight": "500",
     "editor.lineHeight": 1.4,
     "editor.cursorBlinking": "solid",

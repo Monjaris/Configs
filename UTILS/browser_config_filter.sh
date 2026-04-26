@@ -19,7 +19,7 @@ REPO_BASE="$SCRIPT_DIR/.."  # repo root; browser configs live at $REPO_BASE/<nam
 # --- Logging helpers ---
 _log()  { printf '  [browser] %s\n'        "$*";      }
 _warn() { printf '  [browser] !! %s\n'     "$*" >&2;  }
-_die()  { printf '  [browser] FATAL: %s\n' "$*" >&2; exit 1; }
+_die()  { printf '\033[1;31m  [browser] FATAL: %s\033[0m\n' "$*" >&2; exit 1; }
 
 # =============================================================
 # BROWSER REGISTRY

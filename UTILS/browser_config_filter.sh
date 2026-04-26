@@ -33,12 +33,11 @@ _die()  { printf '\033[1;31m  [browser] FATAL: %s\033[0m\n' "$*" >&2; exit 1; }
 #                    (currently Brave-specific; absent = 0)
 # =============================================================
 MODE="$1"
-shift; BROWSER_NAMES=("$@")
+shift && BROWSER_NAMES=("$@")
 
 
 declare -A B_CONFIG_SUBDIR=(
     [brave]="BraveSoftware/Brave-Browser"
-    [brave-origin]="BraveSoftware/"Brave-Origin*
     [chrome]="google-chrome"
     [chromium]="chromium"
     [vivaldi]="vivaldi"
@@ -46,7 +45,6 @@ declare -A B_CONFIG_SUBDIR=(
 )
 declare -A B_PREFS_SUB=(
     [brave]="Default/Preferences"
-    [brave-origin]="Default/Preferences"
     [chrome]="Default/Preferences"
     [chromium]="Default/Preferences"
     [vivaldi]="Default/Preferences"
@@ -54,7 +52,6 @@ declare -A B_PREFS_SUB=(
 )
 declare -A B_PROC=(
     [brave]="brave"
-    [brave-origin]="brave"
     [chrome]="google-chrome"
     [chromium]="chromium"
     [vivaldi]="vivaldi"
@@ -62,7 +59,6 @@ declare -A B_PROC=(
 )
 declare -A B_HAS_ACCEL=(
     [brave]=1
-    [brave-origin]=1
     # extend here if another browser gains an equivalent field
 )
 

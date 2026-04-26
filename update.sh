@@ -66,7 +66,6 @@ YAZI_CONFIG=$CONFIGD/yazi/yazi.toml
 MICRO_SETTINGS=$CONFIGD/micro/settings.json
 MICRO_KEYMAP=$CONFIGD/micro/bindings.json
 BAT_CONFIG=$CONFIGD/bat/config
-BRAVE_PREFS=$CONFIGD/BraveSoftware/Brave-Browser/Default/Preferences
 CLANGD_CONFIG=$CONFIGD/clangd/config.yaml
 
 ENVD="environment"
@@ -75,7 +74,8 @@ run command cp -avu -- "$CONFIGD/autostart/"*    "./$ENVD/autostart/"
 run command cp -avu -- "$BASH_CONFIG_DIR/"*      "./$ENVD/bashrc.d/"
 
 # Install only needed configuration data from the browser
-./UTILS/browser_config_filter.sh update
+# Note: The script below coded with heavy AI usage
+./UTILS/browser_config_filter.sh update "brave"
 
 # ABONDONED rcp -avu -- "$XREMAP_CONFIG"                  "./xremap/config.yml"
 su_rcp -avu -- "$KEYD_CONFIG"                   "./keyd/default.conf"
